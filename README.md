@@ -9,6 +9,7 @@ Website panduan gratifikasi untuk Pegawai Negeri dan Penyelenggara Negara. Situs
 - **Cek Gratifikasi.** Pengguna memilih situasi dari daftar (kado pernikahan, hadiah rekan kerja, parsel/THR, honor, voucher, pemberian dari vendor, dan lainnya), mengisi bentuk, nilai, dan tanggal terima, lalu menjawab 1–4 pertanyaan Ya/Tidak/Ragu. Hasilnya berupa label, alasan, dasar pasal, langkah berikutnya, dan tanggal batas lapor.
 - **Daftar Pengecualian.** Ke-16 penerimaan yang tidak wajib dilaporkan (Pasal 2 ayat 3 huruf a–p), termasuk batas nilai huruf l dan n.
 - **Hitung Tenggat.** Menghitung 30 hari kerja (batas lapor) atau 20 hari kerja (batas melengkapi laporan), tanpa Sabtu, Minggu, libur nasional, dan cuti bersama. Daftar libur bisa ditambah atau dihapus langsung di halaman.
+- **Tampilan responsif.** Di layar lebar menu ada di atas dan konten melebar hingga tiga kolom; di ponsel (≤ 720 px) menu pindah ke bilah bawah dengan ikon, seperti aplikasi.
 - **Cara Melapor.** Kanal resmi (GOL KPK, aplikasi GOL, email, UPG), aturan penyerahan objek gratifikasi, dan linimasa setelah melapor.
 
 ## Aturan yang dipakai
@@ -25,6 +26,8 @@ Website panduan gratifikasi untuk Pegawai Negeri dan Penyelenggara Negara. Situs
 | Pasal 17–19 | Penetapan status ≤ 30 hari kerja, SK disampaikan ≤ 7 hari kerja |
 
 Jawaban **Ragu** selalu diarahkan ke hasil yang lebih aman (lapor atau tolak).
+
+Hasil **Wajib lapor** tidak menyatakan pemberian boleh dimiliki; status kepemilikan (milik penerima atau milik negara) ditetapkan KPK. Untuk kado urunan (huruf l, batas Rp1.500.000 per pemberi; dan huruf n, batas Rp500.000 per pemberian per orang), nilai dibagi jumlah pemberi; bila rata-rata per pemberi masih dalam batas, hasilnya tidak wajib lapor dengan catatan agar tetap melapor bila ragu.
 
 ## Struktur
 

@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Cek apakah sebuah pemberian boleh diterima, wajib dilaporkan, atau wajib ditolak menurut Perkom KPK 2/2019 jo. Perkom KPK 1/2026.">
+<meta name="theme-color" content="#141414">
 <style>
 html{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 body{margin:0}
@@ -136,6 +137,30 @@ footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--mute
 footer p+p{margin-top:6px}
 .vis-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (prefers-reduced-motion:no-preference){.fade{animation:fade .25s ease-out}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+
+/* bottom nav for phones */
+.bottomnav{display:none}
+.bottomnav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px 9px;color:var(--head-muted);text-decoration:none;font-size:.72rem;font-weight:600;position:relative;min-width:0}
+.bottomnav a svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bottomnav a[aria-current="page"]{color:var(--head-fg)}
+.bottomnav a[aria-current="page"] svg{stroke:var(--accent)}
+.bottomnav a[aria-current="page"]::before{content:"";position:absolute;top:-3px;left:22%;right:22%;height:3px;background:var(--accent);border-radius:0 0 3px 3px}
+.bottomnav a:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+@media (max-width:720px){
+  nav.tabs{display:none}
+  .brandrow{padding-block:12px}
+  .bottomnav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--head-bg);border-top:3px solid var(--accent);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+  footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .answers{grid-template-columns:1fr 1fr 1fr}
+  .result{padding:18px}
+}
+/* wider canvas on desktop */
+@media (min-width:1100px){
+  .wrap{max-width:1040px}
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .list-exc{grid-template-columns:repeat(3,1fr)}
+  #s2 .panel,#s3 .panel{max-width:760px}
+}
 </style>
 </head>
 <body>
@@ -192,8 +217,13 @@ footer p+p{margin-top:6px}
           <input type="date" id="f-tgl">
         </div>
       </div>
+      <div class="field" id="wrap-pemberi" hidden>
+        <label for="f-pemberi">Jumlah pemberi</label>
+        <input type="number" id="f-pemberi" min="1" step="1" value="1" inputmode="numeric">
+        <span class="hint" id="pemberi-hint"></span>
+      </div>
       <div class="field" id="wrap-total" hidden>
-        <label for="f-total">Total pemberian dari orang yang sama tahun ini, termasuk yang ini</label>
+        <label for="f-total">Total pemberian dari orang yang sama tahun ini, termasuk yang ini <span class="hint">(bila urunan, isi bagian per orang)</span></label>
         <div class="money"><span>Rp</span><input type="text" inputmode="numeric" id="f-total" placeholder="0"></div>
       </div>
       <div class="btnrow"><button class="btn" id="to-q">Lanjut</button><span class="hint" id="s2-err" style="color:var(--tolak)"></span></div>
@@ -295,6 +325,13 @@ footer p+p{margin-top:6px}
   </div>
 </footer>
 
+<nav class="bottomnav" aria-label="Menu bawah">
+  <a href="#cek" data-tab="cek"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Cek</a>
+  <a href="#pengecualian" data-tab="pengecualian"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>Pengecualian</a>
+  <a href="#tenggat" data-tab="tenggat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Tenggat</a>
+  <a href="#lapor" data-tab="lapor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg>Lapor</a>
+</nav>
+
 <script>
 (function(){
 const fmt = n => n.toLocaleString('id-ID');
@@ -304,9 +341,9 @@ const $ = id => document.getElementById(id);
 /* ---------- data situasi ---------- */
 // q: {t, h, fail:'ya'|'tidak', why}
 const SIT = [
- {id:'nikah', t:'Kado/amplop pernikahan, kelahiran, akikah, khitanan, upacara adat/agama', s:'Dari tamu atau kenalan', huruf:'l', limit:1500000,
+ {id:'nikah', perGiver:true, t:'Kado/amplop pernikahan, kelahiran, akikah, khitanan, upacara adat/agama', s:'Dari tamu atau kenalan', huruf:'l', limit:1500000,
   why_limit:'Nilai melebihi Rp1.500.000 per pemberi untuk acara pernikahan/kelahiran/upacara (huruf l).'},
- {id:'rekan', t:'Hadiah dari rekan kerja', s:'Ulang tahun, pisah sambut, promosi, dll.', huruf:'n', noMoney:true, limit:500000, yearly:1500000,
+ {id:'rekan', perGiver:true, t:'Hadiah dari rekan kerja', s:'Ulang tahun, pisah sambut, promosi, dll.', huruf:'n', noMoney:true, limit:500000, yearly:1500000,
   why_limit:'Nilai melebihi Rp500.000 per pemberian dari rekan kerja (huruf n).',
   q:[{t:'Apakah ada konflik kepentingan, misalnya rekan ini sedang menunggu keputusan atau penilaian dari Anda?', fail:'ya', why:'Ada konflik kepentingan, sehingga huruf n tidak berlaku.'}]},
  {id:'parsel', t:'Parsel, bingkisan, atau THR hari raya', s:'Dari kenalan, mitra, atau pihak luar', huruf:null, always:'lapor',
@@ -396,7 +433,8 @@ const TABS = ['cek','pengecualian','tenggat','lapor'];
 function route(){
   const h = (location.hash||'').slice(1); const tab = TABS.includes(h) ? h : 'cek';
   TABS.forEach(t => { $('v-'+t).hidden = t!==tab; });
-  document.querySelectorAll('nav.tabs a').forEach(a => { if (a.dataset.tab===tab) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  document.querySelectorAll('a[data-tab]').forEach(a => { if (a.dataset.tab===tab) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  if (route.ready) window.scrollTo(0,0); route.ready = true;
 }
 window.addEventListener('hashchange', route);
 
@@ -424,7 +462,7 @@ $('f-unknown').addEventListener('change', e => { $('f-nilai').disabled = e.targe
 function goStep(n){
   [1,2,3,4].forEach(i => $('s'+i).hidden = i!==n);
   document.querySelectorAll('#steps li').forEach((li,i) => { li.className = i+1===n ? 'on' : (i+1<n ? 'done' : ''); });
-  if (n===2){ $('s2-name').textContent = st.sit.t; $('wrap-total').hidden = !st.sit.yearly; $('s2-err').textContent=''; }
+  if (n===2){ $('s2-name').textContent = st.sit.t; $('wrap-total').hidden = !st.sit.yearly; $('wrap-pemberi').hidden = !st.sit.perGiver; if (st.sit.perGiver) $('pemberi-hint').textContent = 'Untuk kado urunan (misalnya dari teman satu kantor saat perpisahan), isi jumlah orang yang ikut memberi. Batas Rp'+fmt(st.sit.limit)+' berlaku per pemberi.'; $('s2-err').textContent=''; }
   if (n===3){ $('s3-name').textContent = st.sit.t; showQ(); }
   if (n>1) $('steps').scrollIntoView({block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto':'smooth'});
 }
@@ -438,6 +476,7 @@ $('to-q').addEventListener('click', () => {
   if (!st.unknown && st.nilai===null && st.sit.limit){ $('s2-err').textContent = 'Isi nilainya, atau centang “tidak tahu nilainya”.'; return; }
   st.tgl = $('f-tgl').value || today; st.total = parseRp($('f-total').value);
   st.item = $('f-item').value.trim();
+  st.pemberi = st.sit.perGiver ? Math.max(1, parseInt($('f-pemberi').value,10)||1) : 1;
   // build question list
   const qs = [];
   if (!st.sit.always){
@@ -480,17 +519,20 @@ function evaluate(){
   if ((st.bentuk==='uang'||st.bentuk==='voucher') && s.onlyGoods){ status='lapor'; reasons.push('Berbentuk uang atau alat tukar, sehingga tidak termasuk huruf '+s.huruf+'.'); }
   if (s.limit){
     if (st.nilai===null){ status='lapor'; reasons.push('Nilainya belum diketahui, padahal huruf '+s.huruf+' punya batas nilai.'); }
-    else if (st.nilai > s.limit){ status='lapor'; reasons.push(s.why_limit+' Nilai yang Anda isi: Rp'+fmt(st.nilai)+'.'); }
+    else { const per = Math.round(st.nilai / (st.pemberi||1));
+      if (per > s.limit){ status='lapor'; reasons.push(s.why_limit+(st.pemberi>1 ? ' Rp'+fmt(st.nilai)+' dari '+st.pemberi+' pemberi = rata-rata Rp'+fmt(per)+' per pemberi.' : ' Nilai yang Anda isi: Rp'+fmt(st.nilai)+'.')); }
+      else if (st.pemberi>1){ reasons.push('Kado bersama Rp'+fmt(st.nilai)+' dari '+st.pemberi+' pemberi, rata-rata Rp'+fmt(per)+' per pemberi, masih dalam batas Rp'+fmt(s.limit)+' (huruf '+s.huruf+').'); reasons.push('Hitungan per pemberi hanya berlaku bila pemberian memang patungan dari orang-orang tersebut. Bila ragu, laporkan ke GOL KPK atau UPG.'); }
+    }
   }
   if (s.yearly && st.total!==null && st.total > s.yearly){ status='lapor'; reasons.push('Total dari pemberi yang sama tahun ini Rp'+fmt(st.total)+', melebihi Rp1.500.000 per tahun (huruf n).'); }
-  if (status==='aman') reasons.push('Memenuhi pengecualian Pasal 2 ayat (3) huruf '+s.huruf+(s.limit && st.nilai!==null ? ', nilai Rp'+fmt(st.nilai)+' masih dalam batas Rp'+fmt(s.limit)+'.' : '.'));
+  if (status==='aman') reasons.unshift('Memenuhi pengecualian Pasal 2 ayat (3) huruf '+s.huruf+(s.limit && st.nilai!==null && st.pemberi<=1 ? ', nilai Rp'+fmt(st.nilai)+' masih dalam batas Rp'+fmt(s.limit)+'.' : '.'));
   return {status, reasons};
 }
 
 const LABEL = {
   tolak:{stamp:'Wajib tolak', h:'Tolak pemberian ini', cls:'r-tolak'},
-  lapor:{stamp:'Wajib lapor', h:'Boleh diterima, tetapi wajib dilaporkan', cls:'r-lapor'},
-  aman:{stamp:'Tidak wajib lapor', h:'Boleh diterima, tidak perlu dilaporkan', cls:'r-aman'}
+  lapor:{stamp:'Wajib lapor', h:'Laporkan ke KPK', cls:'r-lapor'},
+  aman:{stamp:'Tidak wajib lapor', h:'Termasuk pengecualian, tidak wajib dilaporkan', cls:'r-aman'}
 };
 
 function showResult(){
@@ -502,11 +544,11 @@ function showResult(){
   } else if (r.status==='lapor'){
     const dl = addWorkDays(st.tgl, 30), sisa = workDaysBetween(today, iso(dl)), lewat = fromIso(today) > dl;
     extra = `<div class="deadline"><div><div class="lbl">Batas akhir lapor (30 hari kerja)</div><div class="d">${longDate(dl)}</div></div><div class="hint" style="color:var(--muted)">${lewat ? '<b style="color:var(--tolak)">Sudah lewat.</b> Tetap laporkan segera; status dapat ditetapkan milik negara (Pasal 17 ayat 3).' : 'Sisa '+sisa+' hari kerja dari hari ini.'}</div></div>`;
-    next = ['Laporkan lewat GOL KPK, aplikasi GOL, email pelaporan.gratifikasi@kpk.go.id, atau UPG instansi.','Gratifikasi yang dilaporkan dalam 30 hari kerja tidak dianggap suap (Pasal 12C UU Tipikor). Melapor membuat Anda aman.'];
+    next = ['Jangan anggap pemberian ini sudah sah menjadi milik Anda. KPK yang akan menetapkan statusnya, menjadi milik Anda atau milik negara, paling lama 30 hari kerja sejak laporan diterima (Pasal 17–18).','Laporkan lewat GOL KPK, aplikasi GOL, email pelaporan.gratifikasi@kpk.go.id, atau UPG instansi.','Gratifikasi yang dilaporkan dalam 30 hari kerja tidak dianggap suap (Pasal 12C UU Tipikor). Melapor membuat Anda aman.'];
     if (st.bentuk==='makanan') next.push('Makanan/minuman mudah rusak tidak wajib diserahkan dan boleh langsung disalurkan untuk kemanfaatan sosial (Pasal 5 ayat 2–3). Simpan fotonya.');
     else next.push('Simpan objeknya dalam kondisi baik; KPK dapat meminta objek disertakan untuk verifikasi (Pasal 5 ayat 1).');
   } else {
-    next = ['Tidak perlu dilaporkan. Simpan catatan singkat bila suatu saat ditanya.','Bila situasinya berubah (pemberi mulai berurusan dengan Anda), cek ulang.'];
+    next = ['Tidak perlu dilaporkan. Simpan catatan singkat bila suatu saat ditanya.','Bila masih ragu, Anda tetap boleh melaporkannya lewat GOL KPK atau UPG. KPK yang akan menetapkan statusnya.','Bila situasinya berubah (pemberi mulai berurusan dengan Anda), cek ulang.'];
   }
   st.last = {r, L, bentukL};
   $('result').innerHTML = `<div class="result ${L.cls} fade">
@@ -515,7 +557,7 @@ function showResult(){
     <ul class="why">${r.reasons.map(x => '<li>'+x+'</li>').join('')}</ul>
     ${extra}
     <ul class="next">${next.map(x => '<li>'+x+'</li>').join('')}</ul>
-    <p class="summary"><b>Situasi:</b> ${st.sit.t} · <b>Bentuk:</b> ${bentukL}${st.item ? ' ('+escapeHtml(st.item)+')' : ''} · <b>Nilai:</b> ${st.nilai!==null ? 'Rp'+fmt(st.nilai) : 'tidak diketahui'} · <b>Diterima:</b> ${longDate(fromIso(st.tgl))}</p>
+    <p class="summary"><b>Situasi:</b> ${st.sit.t} · <b>Bentuk:</b> ${bentukL}${st.item ? ' ('+escapeHtml(st.item)+')' : ''} · <b>Nilai:</b> ${st.nilai!==null ? 'Rp'+fmt(st.nilai) : 'tidak diketahui'}${st.pemberi>1 ? ' dari '+st.pemberi+' pemberi' : ''} · <b>Diterima:</b> ${longDate(fromIso(st.tgl))}</p>
     <p class="pasal">Dasar: Pasal 2 Perkom KPK 2/2019 jo. Perkom KPK 1/2026${st.sit.huruf ? ' · huruf '+st.sit.huruf : ''}</p>
   </div>`;
   goStep(4);
@@ -524,7 +566,7 @@ function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;
 
 $('restart').addEventListener('click', () => {
   st.sit=null; document.querySelectorAll('input[name=bentuk]').forEach(r=>r.checked=false);
-  $('f-nilai').value=''; $('f-total').value=''; $('f-item').value=''; $('f-unknown').checked=false; $('f-nilai').disabled=false; $('f-tgl').value=today;
+  $('f-nilai').value=''; $('f-total').value=''; $('f-item').value=''; $('f-pemberi').value='1'; $('f-unknown').checked=false; $('f-nilai').disabled=false; $('f-tgl').value=today;
   $('q-search').value=''; renderGrid(); $('copy-msg').textContent=''; goStep(1);
 });
 async function copyText(t, msgEl){
