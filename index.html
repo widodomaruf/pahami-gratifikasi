@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Cek apakah sebuah pemberian boleh diterima, wajib dilaporkan, atau wajib ditolak menurut Perkom KPK 2/2019 jo. Perkom KPK 1/2026.">
+<style>
+html{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Pahami Gratifikasi</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: one narrow working column, a sticky tab bar, the checker as a 4-step card flow */
+:root{
+  --bg:#f5f5f5; --surface:#ffffff; --ink:#1a1a1a; --muted:#5e5e5e; --line:#e2e2e2;
+  --accent:#d71920; --accent-soft:#fdeaea;
+  --head-bg:#141414; --head-fg:#ffffff; --head-muted:#b8b8b8;
+  --tolak:#a3161b; --tolak-soft:#fbe6e6;
+  --lapor:#a15c00; --lapor-soft:#fdf0dc;
+  --aman:#1d7a3a; --aman-soft:#e3f3e7;
+  --luar:#55606a; --luar-soft:#eceff1;
+  --f-display:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111111; --surface:#1b1b1b; --ink:#ededed; --muted:#a3a3a3; --line:#2e2e2e;
+  --accent:#ff4b52; --accent-soft:#3a1517; --head-bg:#000000; --head-fg:#ffffff; --head-muted:#9a9a9a;
+  --tolak:#ff8a80; --tolak-soft:#3a1d1b; --lapor:#ffbf5e; --lapor-soft:#3a2a12;
+  --aman:#7ad693; --aman-soft:#173323; --luar:#b0bcc5; --luar-soft:#252c31; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111111; --surface:#1b1b1b; --ink:#ededed; --muted:#a3a3a3; --line:#2e2e2e;
+  --accent:#ff4b52; --accent-soft:#3a1517; --head-bg:#000000; --head-fg:#ffffff; --head-muted:#9a9a9a;
+  --tolak:#ff8a80; --tolak-soft:#3a1d1b; --lapor:#ffbf5e; --lapor-soft:#3a2a12;
+  --aman:#7ad693; --aman-soft:#173323; --luar:#b0bcc5; --luar-soft:#252c31; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--head-bg)}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--head-bg);border-bottom:3px solid var(--accent);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.brandrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding-block:14px 6px}
+.brand{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:-.01em;color:var(--head-fg)}
+.brand span{color:var(--accent)}
+.reg{font-family:var(--f-mono);font-size:.72rem;color:var(--head-muted)}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:0}
+nav.tabs a{padding:10px 14px;color:var(--head-muted);text-decoration:none;font-weight:600;border-bottom:3px solid transparent;white-space:nowrap}
+nav.tabs a[aria-current="page"]{color:var(--head-fg);border-color:var(--accent)}
+nav.tabs a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding-block:24px 48px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.2;margin:0}
+h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;letter-spacing:-.015em}
+h2{font-size:1.3rem;font-weight:700}
+h3{font-size:1.05rem;font-weight:700}
+p{margin:0}
+.lead{color:var(--muted);max-width:62ch;margin-top:8px}
+.stack{display:flex;flex-direction:column;gap:16px}
+.steps{display:flex;gap:6px;margin:20px 0 16px;flex-wrap:wrap}
+.steps li{list-style:none;font-size:.8rem;font-weight:600;color:var(--muted);padding:4px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
+.steps li.on{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.steps li.done{color:var(--accent);border-color:var(--accent)}
+ol.steps{padding:0}
+.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:12px}
+.sit{display:flex;flex-direction:column;gap:4px;text-align:left;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;min-width:0}
+.sit:hover{border-color:var(--accent)}
+.sit b{font-weight:700;line-height:1.3}
+.sit small{color:var(--muted);font-size:.85rem;line-height:1.35}
+.sit .tag{font-family:var(--f-mono);font-size:.68rem;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+.sit.warn .tag{color:var(--tolak)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.chosen{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 14px;border-radius:10px;background:var(--accent-soft)}
+.chosen b{font-weight:700}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;font-weight:600;cursor:pointer;padding:0;text-decoration:underline}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label,.legend{font-weight:600}
+.field .hint{color:var(--muted);font-size:.85rem}
+.field input[type=text],.field input[type=date],.field input[type=number]{padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;width:100%}
+.money{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+.money span{padding:0 10px;color:var(--muted);font-family:var(--f-mono);font-size:.9rem}
+.money input{border:0!important;background:transparent!important;font-family:var(--f-mono)!important;font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0}
+.chip span{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:99px;cursor:pointer;background:var(--bg);font-weight:600;font-size:.92rem}
+.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
+.check{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:.92rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{padding:12px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--surface);font:inherit;font-weight:700;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.q{font-family:var(--f-display);font-size:1.25rem;font-weight:700;line-height:1.3;text-wrap:balance}
+.qmeta{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+.answers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.answers button{padding:14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.answers button:hover{border-color:var(--accent)}
+.result{border-radius:14px;padding:22px;border:2px solid var(--c);background:var(--cs)}
+.result .stamp{display:inline-block;font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c);border:1.5px solid var(--c);padding:3px 8px;border-radius:4px;transform:rotate(-1.5deg)}
+.result h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:800;margin-top:10px;color:var(--ink)}
+.r-tolak{--c:var(--tolak);--cs:var(--tolak-soft)} .r-lapor{--c:var(--lapor);--cs:var(--lapor-soft)}
+.r-aman{--c:var(--aman);--cs:var(--aman-soft)} .r-luar{--c:var(--luar);--cs:var(--luar-soft)}
+.why{margin:14px 0 0;padding-left:20px}
+.why li{margin:4px 0}
+.pasal{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);margin-top:12px}
+.deadline{margin-top:16px;padding:14px;border-radius:10px;background:var(--surface);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.deadline .d{font-family:var(--f-display);font-weight:800;font-size:1.4rem;font-variant-numeric:tabular-nums}
+.deadline .lbl{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.summary{font-size:.92rem;color:var(--muted);margin-top:14px}
+.summary b{color:var(--ink)}
+.next{margin-top:16px;padding-left:20px}
+.next li{margin:6px 0}
+.list-exc{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:16px}
+.exc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}
+.exc .letter{font-family:var(--f-display);font-weight:800;font-size:1.3rem;color:var(--accent);line-height:1}
+.exc p{font-size:.92rem;margin-top:6px}
+.exc .lim{font-family:var(--f-mono);font-size:.76rem;color:var(--lapor);margin-top:6px}
+.note{padding:12px 14px;border-radius:10px;background:var(--accent-soft);font-size:.92rem}
+.note.warn{background:var(--lapor-soft)}
+.timeline{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:0}
+.timeline li{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.timeline .when{font-family:var(--f-mono);font-size:.78rem;color:var(--accent);padding-top:2px}
+@media (max-width:480px){.timeline li{grid-template-columns:1fr;gap:2px}}
+.channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:12px}
+.chan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.chan code{font-family:var(--f-mono);font-size:.8rem;word-break:break-all}
+.chan a{color:var(--accent);font-weight:600}
+.hol{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.hol button{font-family:var(--f-mono);font-size:.75rem;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.hol button:hover{border-color:var(--tolak);text-decoration:line-through}
+footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--muted);font-size:.85rem}
+footer p+p{margin-top:6px}
+.vis-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:no-preference){.fade{animation:fade .25s ease-out}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="brandrow">
+      <div class="brand">Pahami <span>Gratifikasi</span></div>
+      <div class="reg">Perkom KPK 2/2019 jo. Perkom KPK 1/2026</div>
+    </div>
+    <nav class="tabs" aria-label="Menu">
+      <a href="#cek" data-tab="cek">Cek Gratifikasi</a>
+      <a href="#pengecualian" data-tab="pengecualian">Daftar Pengecualian</a>
+      <a href="#tenggat" data-tab="tenggat">Hitung Tenggat</a>
+      <a href="#lapor" data-tab="lapor">Cara Melapor</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ===== CEK ===== -->
+<section id="v-cek" class="view">
+  <h1>Saya menerima pemberian. Boleh diterima atau harus dilaporkan?</h1>
+  <p class="lead">Pilih situasinya, isi bentuk dan nilainya, jawab beberapa pertanyaan singkat. Hasilnya muncul beserta pasal dasarnya.</p>
+  <ol class="steps" id="steps">
+    <li>1 Situasi</li><li>2 Bentuk &amp; nilai</li><li>3 Pertanyaan</li><li>4 Hasil</li>
+  </ol>
+
+  <div id="s1" class="stack">
+    <label class="vis-hidden" for="q-search">Cari situasi</label>
+    <input class="search" id="q-search" type="text" placeholder="Cari: kado nikah, parsel, honor, voucher…">
+    <div class="grid" id="sit-grid"></div>
+  </div>
+
+  <div id="s2" class="stack" hidden>
+    <div class="chosen"><div>Situasi: <b id="s2-name"></b></div><button class="linkbtn" data-back="1">Ganti situasi</button></div>
+    <div class="panel stack">
+      <div class="field">
+        <span class="legend" id="lg-bentuk">Bentuk pemberian</span>
+        <div class="chips" role="radiogroup" aria-labelledby="lg-bentuk" id="bentuk"></div>
+      </div>
+      <div class="field">
+        <label for="f-item">Apa yang diterima? <span class="hint">(opsional)</span></label>
+        <input type="text" id="f-item" placeholder="contoh: amplop, tas, parsel kue, voucher belanja">
+      </div>
+      <div class="two">
+        <div class="field">
+          <label for="f-nilai">Nilai atau taksiran harga</label>
+          <div class="money"><span>Rp</span><input type="text" inputmode="numeric" id="f-nilai" placeholder="0"></div>
+          <label class="check"><input type="checkbox" id="f-unknown"> Saya tidak tahu nilainya</label>
+        </div>
+        <div class="field">
+          <label for="f-tgl">Tanggal diterima</label>
+          <input type="date" id="f-tgl">
+        </div>
+      </div>
+      <div class="field" id="wrap-total" hidden>
+        <label for="f-total">Total pemberian dari orang yang sama tahun ini, termasuk yang ini</label>
+        <div class="money"><span>Rp</span><input type="text" inputmode="numeric" id="f-total" placeholder="0"></div>
+      </div>
+      <div class="btnrow"><button class="btn" id="to-q">Lanjut</button><span class="hint" id="s2-err" style="color:var(--tolak)"></span></div>
+    </div>
+  </div>
+
+  <div id="s3" class="stack" hidden>
+    <div class="chosen"><div>Situasi: <b id="s3-name"></b></div><button class="linkbtn" data-back="2">Ubah bentuk &amp; nilai</button></div>
+    <div class="panel stack fade" id="qbox">
+      <div class="qmeta" id="q-meta"></div>
+      <div class="q" id="q-text"></div>
+      <p class="hint" id="q-hint" style="color:var(--muted)"></p>
+      <div class="answers">
+        <button data-a="ya">Ya</button><button data-a="tidak">Tidak</button><button data-a="ragu">Ragu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="s4" class="stack" hidden>
+    <div id="result"></div>
+    <div class="btnrow">
+      <button class="btn" id="restart">Cek pemberian lain</button>
+      <button class="btn ghost" id="copy-res">Salin ringkasan hasil</button>
+      <span class="hint" id="copy-msg" style="color:var(--muted)"></span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PENGECUALIAN ===== -->
+<section id="v-pengecualian" class="view" hidden>
+  <h1>16 penerimaan yang tidak wajib dilaporkan</h1>
+  <p class="lead">Pasal 2 ayat (3) Perkom KPK 2/2019 sebagaimana diubah Perkom KPK 1/2026. Semua pengecualian gugur bila penerimaan itu dilarang oleh aturan instansi Anda (ayat 4).</p>
+  <div class="list-exc" id="exc-list"></div>
+</section>
+
+<!-- ===== TENGGAT ===== -->
+<section id="v-tenggat" class="view" hidden>
+  <h1>Kapan batas akhir melapor?</h1>
+  <p class="lead">Laporan wajib disampaikan paling lama 30 hari kerja sejak gratifikasi diterima. Sabtu, Minggu, libur nasional, dan cuti bersama tidak dihitung.</p>
+  <div class="panel stack" style="margin-top:20px">
+    <div class="two">
+      <div class="field"><label for="t-tgl">Tanggal mulai</label><input type="date" id="t-tgl"></div>
+      <div class="field">
+        <span class="legend" id="lg-mode">Yang dihitung</span>
+        <div class="chips" role="radiogroup" aria-labelledby="lg-mode">
+          <label class="chip"><input type="radio" name="tmode" value="30" checked><span>30 hari kerja · batas lapor</span></label>
+          <label class="chip"><input type="radio" name="tmode" value="20"><span>20 hari kerja · lengkapi laporan</span></label>
+        </div>
+      </div>
+    </div>
+    <div class="deadline" id="t-out"></div>
+    <div class="field">
+      <span class="legend">Libur nasional &amp; cuti bersama yang dikecualikan</span>
+      <span class="hint">Daftar awal adalah perkiraan. Cocokkan dengan SKB 3 Menteri yang berlaku; ketuk tanggal untuk menghapus.</span>
+      <div class="hol" id="hol"></div>
+      <div class="btnrow" style="margin-top:6px">
+        <label class="vis-hidden" for="h-add">Tambah tanggal libur</label>
+        <input type="date" id="h-add" style="padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit">
+        <button class="btn ghost" id="h-btn" style="padding:8px 14px">Tambah libur</button>
+      </div>
+    </div>
+  </div>
+  <div class="note warn" style="margin-top:16px">Laporan yang lewat 30 hari kerja tetap boleh disampaikan, tetapi status gratifikasinya dapat ditetapkan menjadi milik negara dan ketentuan Pasal 12B UU Tipikor tetap berlaku (Pasal 17 ayat 3–4).</div>
+</section>
+
+<!-- ===== LAPOR ===== -->
+<section id="v-lapor" class="view" hidden>
+  <h1>Cara melapor gratifikasi</h1>
+  <p class="lead">Pilih salah satu kanal resmi berikut. Laporan penolakan gratifikasi juga dapat disampaikan lewat kanal yang sama (Pasal 4A).</p>
+  <div class="channels">
+    <div class="chan"><h3>GOL KPK (web)</h3><p>Formulir pelaporan daring.</p><a href="https://gol.kpk.go.id/" target="_blank" rel="noopener">gol.kpk.go.id</a></div>
+    <div class="chan"><h3>Aplikasi GOL KPK</h3><p>Aplikasi ponsel resmi KPK untuk pelaporan gratifikasi.</p></div>
+    <div class="chan"><h3>Email</h3><code id="mail">pelaporan.gratifikasi@kpk.go.id</code><button class="linkbtn" id="copy-mail" style="text-align:left">Salin alamat</button></div>
+    <div class="chan"><h3>UPG instansi</h3><p>Unit Pengendali Gratifikasi di kantor Anda meneruskan laporan ke KPK.</p></div>
+  </div>
+
+  <h2 style="margin-top:32px">Objek gratifikasi: perlu diserahkan atau tidak?</h2>
+  <div class="stack" style="margin-top:12px">
+    <div class="note">Objek wajib disertakan bila KPK perlu menguji keasliannya atau untuk verifikasi dan analisis (Pasal 5 ayat 1).</div>
+    <div class="note">Makanan/minuman yang mudah rusak tidak wajib disertakan dan dapat langsung disalurkan untuk kemanfaatan sosial, misalnya ke panti asuhan (Pasal 5 ayat 2–3). Simpan foto dan bukti penyalurannya untuk laporan.</div>
+  </div>
+
+  <h2 style="margin-top:32px">Setelah melapor</h2>
+  <ol class="timeline">
+    <li><span class="when">Hari 0</span><div><b>Laporan masuk.</b> Diverifikasi oleh UPG (lalu diteruskan ke KPK) atau langsung oleh pegawai KPK.</div></li>
+    <li><span class="when">≤ 20 hari kerja</span><div><b>Bila laporan tidak lengkap,</b> laporan dikembalikan untuk dilengkapi. Tidak dilengkapi dalam 20 hari kerja → tidak ditindaklanjuti (Pasal 9).</div></li>
+    <li><span class="when">≤ 30 hari kerja</span><div><b>Penetapan status</b> sejak laporan diterima: milik penerima atau milik negara, dengan Keputusan Pimpinan (Pasal 17–18).</div></li>
+    <li><span class="when">≤ 7 hari kerja</span><div><b>SK disampaikan</b> kepada pelapor, dapat ditandatangani elektronik (Pasal 19).</div></li>
+    <li><span class="when">Setelah SK</span><div><b>Milik negara:</b> disetor ke Kas Negara atau diserahkan ke DJKN. <b>Milik penerima:</b> objek yang dititipkan dikembalikan dan harus diambil dalam 1 tahun, atau diserahkan ke negara (Pasal 20).</div></li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Alat bantu edukasi, bukan layanan resmi KPK. Bila ragu, laporkan melalui UPG instansi Anda atau GOL KPK. Data aturan: Perkom KPK No. 1 Tahun 2026 (diundangkan 20 Januari 2026, BN 2026 No. 43).</p>
+    <p>Disusun oleh Muhammad Widodo Ma'ruf - Penyuluh Antikorupsi Utama</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+const fmt = n => n.toLocaleString('id-ID');
+const parseRp = s => { const d = String(s||'').replace(/\D/g,''); return d ? Number(d) : null; };
+const $ = id => document.getElementById(id);
+
+/* ---------- data situasi ---------- */
+// q: {t, h, fail:'ya'|'tidak', why}
+const SIT = [
+ {id:'nikah', t:'Kado/amplop pernikahan, kelahiran, akikah, khitanan, upacara adat/agama', s:'Dari tamu atau kenalan', huruf:'l', limit:1500000,
+  why_limit:'Nilai melebihi Rp1.500.000 per pemberi untuk acara pernikahan/kelahiran/upacara (huruf l).'},
+ {id:'rekan', t:'Hadiah dari rekan kerja', s:'Ulang tahun, pisah sambut, promosi, dll.', huruf:'n', noMoney:true, limit:500000, yearly:1500000,
+  why_limit:'Nilai melebihi Rp500.000 per pemberian dari rekan kerja (huruf n).',
+  q:[{t:'Apakah ada konflik kepentingan, misalnya rekan ini sedang menunggu keputusan atau penilaian dari Anda?', fail:'ya', why:'Ada konflik kepentingan, sehingga huruf n tidak berlaku.'}]},
+ {id:'parsel', t:'Parsel, bingkisan, atau THR hari raya', s:'Dari kenalan, mitra, atau pihak luar', huruf:null, always:'lapor',
+  why_always:'Parsel atau THR hari raya tidak termasuk 16 pengecualian Pasal 2 ayat (3).'},
+ {id:'keluarga', t:'Pemberian dari keluarga', s:'Orang tua, saudara, sepupu, dll.', huruf:'a',
+  q:[{t:'Apakah pemberi termasuk kakek/nenek, orang tua/mertua, suami/istri, anak/menantu, anak angkat/wali, cucu, besan, paman/bibi, kakak/adik/ipar, sepupu, atau keponakan?', fail:'tidak', why:'Hubungan pemberi tidak termasuk daftar keluarga huruf a.'},
+     {t:'Apakah pemberi sedang punya urusan yang terkait jabatan Anda (konflik kepentingan)?', fail:'ya', why:'Ada konflik kepentingan, sehingga huruf a tidak berlaku.'}]},
+ {id:'musibah', t:'Bantuan musibah atau bencana', s:'Sakit, kecelakaan, kematian, bencana', huruf:'m',
+  q:[{t:'Apakah musibah dialami Anda sendiri, suami/istri, anak, orang tua, mertua, atau menantu?', fail:'tidak', why:'Musibah tidak dialami pihak yang disebut huruf m.'},
+     {t:'Apakah nilainya wajar dan patut, dan pemberi tidak punya urusan dengan jabatan Anda?', fail:'tidak', why:'Nilai tidak wajar atau ada konflik kepentingan (huruf m).'}]},
+ {id:'bunga', t:'Karangan bunga ucapan', s:'Pernikahan, duka, pisah sambut, promosi jabatan', huruf:'k', onlyGoods:true},
+ {id:'seminar', t:'Perlengkapan peserta seminar/pelatihan dinas', s:'Tas, buku, seminar kit', huruf:'d',
+  q:[{t:'Apakah perlengkapan yang sama diberikan kepada semua peserta?', fail:'tidak', why:'Tidak Berlaku Umum untuk semua peserta (huruf d).'}]},
+ {id:'promosi', t:'Suvenir atau merchandise promosi berlogo', s:'Kaus, kalender, mug, pulpen', huruf:'e', noMoney:true,
+  q:[{t:'Apakah suvenir ini berlogo/berisi pesan sosialisasi dan dibagikan sama kepada umum?', fail:'tidak', why:'Bukan alat promosi yang Berlaku Umum (huruf e).'}]},
+ {id:'honordinas', t:'Honor, transport, atau akomodasi kegiatan dinas', s:'Narasumber, panitia, perjalanan dinas', huruf:'j',
+  q:[{t:'Apakah besarannya sesuai standar biaya yang berlaku di instansi Anda?', fail:'tidak', why:'Di luar standar biaya instansi (huruf j).'},
+     {t:'Apakah biaya yang sama juga sudah ditanggung pihak lain (pembiayaan ganda)?', fail:'ya', why:'Terdapat pembiayaan ganda (huruf j).'}]},
+ {id:'profesi', t:'Honor profesi di luar kedinasan', s:'Mengajar, menulis, konsultan pribadi', huruf:'i',
+  q:[{t:'Apakah kegiatan ini sama sekali tidak terkait tugas dan jabatan Anda?', fail:'tidak', why:'Kegiatan terkait tugas atau jabatan (huruf i).'},
+     {t:'Apakah kegiatan ini melanggar kode etik atau aturan instansi Anda?', fail:'ya', why:'Melanggar kode etik/aturan instansi (huruf i).'}]},
+ {id:'lomba', t:'Hadiah lomba atau kompetisi', s:'Juara lomba lari, karya tulis, dll.', huruf:'f',
+  q:[{t:'Apakah Anda ikut dengan biaya sendiri?', fail:'tidak', why:'Tidak diikuti dengan biaya sendiri (huruf f).'},
+     {t:'Apakah lomba ini terkait kedinasan?', fail:'ya', why:'Lomba terkait kedinasan (huruf f).'}]},
+ {id:'penghargaan', t:'Penghargaan prestasi kerja dari pemerintah', s:'Uang atau barang', huruf:'g',
+  q:[{t:'Apakah diberikan oleh pemerintah sesuai peraturan perundang-undangan, terkait prestasi kerja?', fail:'tidak', why:'Bukan penghargaan pemerintah sesuai peraturan (huruf g).'}]},
+ {id:'diskon', t:'Diskon, voucher, poin, undian, atau hadiah langsung', s:'Dari toko, bank, aplikasi', huruf:'h',
+  q:[{t:'Apakah promo ini berlaku untuk umum, siapa pun bisa mendapatkannya?', fail:'tidak', why:'Tidak Berlaku Umum (huruf h).'},
+     {t:'Apakah Anda mendapatkannya karena kedinasan atau jabatan?', fail:'ya', why:'Terkait kedinasan (huruf h).'}]},
+ {id:'hidangan', t:'Jamuan makan atau hidangan', s:'Di acara, rapat, kunjungan', huruf:'o', onlyGoods:true,
+  q:[{t:'Apakah hidangan disajikan untuk semua hadirin, bukan khusus untuk Anda?', fail:'tidak', why:'Hidangan tidak Berlaku Umum (huruf o).'}]},
+ {id:'investasi', t:'Bunga atau keuntungan investasi pribadi', s:'Deposito, saham, reksa dana', huruf:'b',
+  q:[{t:'Apakah bunga/keuntungannya sama dengan yang diterima nasabah atau investor lain?', fail:'tidak', why:'Tidak Berlaku Umum (huruf b).'}]},
+ {id:'koperasi', t:'Manfaat koperasi atau organisasi pegawai', s:'SHU, bingkisan anggota', huruf:'c',
+  q:[{t:'Apakah manfaat ini diberikan kepada semua anggota sesuai keanggotaan?', fail:'tidak', why:'Tidak Berlaku Umum bagi anggota (huruf c).'}]},
+ {id:'plakat', t:'Plakat atau cendera mata kunjungan dinas', s:'Dalam/luar negeri', huruf:'p',
+  q:[{t:'Apakah ditujukan untuk instansi, bukan untuk Anda pribadi?', fail:'tidak', why:'Ditujukan untuk pribadi, bukan instansi (huruf p).'}]},
+ {id:'urusan', t:'Dari vendor, rekanan, wajib pajak, atau pemohon layanan', s:'Pihak yang sedang/akan berurusan dengan Anda', huruf:null, always:'tolak', warn:true},
+ {id:'lain', t:'Tidak ada di daftar', s:'Situasi lain', huruf:null, always:'lapor',
+  why_always:'Situasi ini tidak termasuk 16 pengecualian Pasal 2 ayat (3).'}
+];
+
+const EXC = [
+ ['a','Pemberian dalam keluarga (kakek/nenek sampai keponakan), sepanjang tidak ada konflik kepentingan.'],
+ ['b','Keuntungan/bunga penempatan dana, investasi, atau saham pribadi yang Berlaku Umum.'],
+ ['c','Manfaat koperasi atau organisasi kepegawaian berdasarkan keanggotaan, Berlaku Umum.'],
+ ['d','Perangkat/perlengkapan peserta seminar, lokakarya, pelatihan kedinasan, Berlaku Umum.'],
+ ['e','Hadiah bukan uang untuk promosi/sosialisasi berlogo, tanpa konflik kepentingan, Berlaku Umum.'],
+ ['f','Hadiah lomba yang diikuti dengan biaya sendiri dan tidak terkait kedinasan.'],
+ ['g','Penghargaan uang/barang terkait prestasi kerja dari pemerintah sesuai peraturan.'],
+ ['h','Hadiah langsung/undian, diskon, voucher, poin, suvenir yang Berlaku Umum dan tidak terkait kedinasan.'],
+ ['i','Honor profesi di luar kedinasan yang tidak terkait tugas, tanpa konflik kepentingan dan tidak melanggar kode etik.'],
+ ['j','Honor, transport, akomodasi kedinasan sesuai standar biaya instansi, tanpa pembiayaan ganda dan konflik kepentingan.'],
+ ['k','Karangan bunga ucapan untuk pernikahan, kelahiran, kematian, upacara adat/agama, pisah sambut, pensiun, promosi.'],
+ ['l','Pemberian terkait pertunangan, pernikahan, kelahiran, akikah, baptis, khitanan, potong gigi, upacara adat/agama.','Maks. Rp1.500.000 per pemberi'],
+ ['m','Pemberian terkait musibah/bencana yang dialami diri, pasangan, anak, orang tua, mertua, atau menantu; wajar dan tanpa konflik kepentingan.'],
+ ['n','Pemberian sesama rekan kerja, bukan uang/alat tukar, tanpa konflik kepentingan.','Maks. Rp500.000 per pemberian · Rp1.500.000 per tahun dari pemberi yang sama'],
+ ['o','Hidangan atau sajian yang Berlaku Umum.'],
+ ['p','Cendera mata/plakat untuk instansi dalam hubungan kedinasan, tidak untuk individu.']
+];
+
+const BENTUK = [['uang','Uang / transfer'],['voucher','Voucher / alat tukar'],['makanan','Makanan/minuman mudah rusak'],['barang','Barang lain']];
+
+/* ---------- libur (perkiraan) ---------- */
+const DEFAULT_HOL = ['2026-01-01','2026-01-16','2026-02-16','2026-02-17','2026-03-18','2026-03-19','2026-03-20','2026-03-23','2026-03-24','2026-04-03','2026-05-01','2026-05-14','2026-05-15','2026-05-27','2026-05-28','2026-06-01','2026-06-16','2026-08-17','2026-08-25','2026-12-24','2026-12-25'];
+let HOL = DEFAULT_HOL.slice();
+try { const s = localStorage.getItem('pg-hol'); if (s) HOL = JSON.parse(s); } catch(e){}
+const saveHol = () => { try { localStorage.setItem('pg-hol', JSON.stringify(HOL)); } catch(e){} };
+
+const iso = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const fromIso = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+function addWorkDays(startIso, n){
+  const d = fromIso(startIso); let c = 0;
+  while (c < n){ d.setDate(d.getDate()+1); const w = d.getDay(); if (w===0||w===6) continue; if (HOL.includes(iso(d))) continue; c++; }
+  return d;
+}
+function workDaysBetween(startIso, endIso){
+  const d = fromIso(startIso), e = fromIso(endIso); let c = 0;
+  while (d < e){ d.setDate(d.getDate()+1); const w = d.getDay(); if (w===0||w===6||HOL.includes(iso(d))) continue; c++; }
+  return c;
+}
+const longDate = d => d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const today = iso(new Date());
+
+/* ---------- routing ---------- */
+const TABS = ['cek','pengecualian','tenggat','lapor'];
+function route(){
+  const h = (location.hash||'').slice(1); const tab = TABS.includes(h) ? h : 'cek';
+  TABS.forEach(t => { $('v-'+t).hidden = t!==tab; });
+  document.querySelectorAll('nav.tabs a').forEach(a => { if (a.dataset.tab===tab) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+}
+window.addEventListener('hashchange', route);
+
+/* ---------- checker ---------- */
+const st = {sit:null, bentuk:null, nilai:null, unknown:false, tgl:today, total:null, qs:[], qi:0, answers:[]};
+
+function renderGrid(filter=''){
+  const f = filter.trim().toLowerCase();
+  $('sit-grid').innerHTML = SIT.filter(s => !f || (s.t+' '+s.s).toLowerCase().includes(f)).map(s =>
+    `<button class="sit${s.warn?' warn':''}" data-id="${s.id}"><span class="tag">${s.huruf ? 'Pengecualian huruf '+s.huruf : (s.always==='tolak'?'Pasal 2 ayat 2':'Bukan pengecualian')}</span><b>${s.t}</b><small>${s.s}</small></button>`).join('')
+    || '<p class="hint" style="color:var(--muted)">Tidak ditemukan. Pilih “Tidak ada di daftar”.</p>';
+}
+$('q-search').addEventListener('input', e => renderGrid(e.target.value));
+$('sit-grid').addEventListener('click', e => {
+  const b = e.target.closest('.sit'); if (!b) return;
+  st.sit = SIT.find(s => s.id===b.dataset.id); goStep(2);
+});
+
+$('bentuk').innerHTML = BENTUK.map(([v,l],i) => `<label class="chip"><input type="radio" name="bentuk" value="${v}" id="b-${v}"><span>${l}</span></label>`).join('');
+$('f-tgl').value = today; $('f-tgl').max = today;
+$('f-nilai').addEventListener('input', e => { const n = parseRp(e.target.value); e.target.value = n===null ? '' : fmt(n); });
+$('f-total').addEventListener('input', e => { const n = parseRp(e.target.value); e.target.value = n===null ? '' : fmt(n); });
+$('f-unknown').addEventListener('change', e => { $('f-nilai').disabled = e.target.checked; });
+
+function goStep(n){
+  [1,2,3,4].forEach(i => $('s'+i).hidden = i!==n);
+  document.querySelectorAll('#steps li').forEach((li,i) => { li.className = i+1===n ? 'on' : (i+1<n ? 'done' : ''); });
+  if (n===2){ $('s2-name').textContent = st.sit.t; $('wrap-total').hidden = !st.sit.yearly; $('s2-err').textContent=''; }
+  if (n===3){ $('s3-name').textContent = st.sit.t; showQ(); }
+  if (n>1) $('steps').scrollIntoView({block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto':'smooth'});
+}
+document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => goStep(Number(b.dataset.back))));
+
+$('to-q').addEventListener('click', () => {
+  const r = document.querySelector('input[name=bentuk]:checked');
+  if (!r){ $('s2-err').textContent = 'Pilih bentuk pemberian dulu.'; return; }
+  st.bentuk = r.value; st.unknown = $('f-unknown').checked;
+  st.nilai = st.unknown ? null : parseRp($('f-nilai').value);
+  if (!st.unknown && st.nilai===null && st.sit.limit){ $('s2-err').textContent = 'Isi nilainya, atau centang “tidak tahu nilainya”.'; return; }
+  st.tgl = $('f-tgl').value || today; st.total = parseRp($('f-total').value);
+  st.item = $('f-item').value.trim();
+  // build question list
+  const qs = [];
+  if (!st.sit.always){
+    qs.push({t:'Apakah pemberi sedang atau akan punya urusan dinas dengan Anda, dan pemberian ini berlawanan dengan tugas Anda?', h:'Contoh: rekanan pengadaan, wajib pajak yang Anda periksa, pemohon izin yang Anda layani.', fail:'ya', kind:'tolak', why:'Pemberian berhubungan dengan jabatan dan berlawanan dengan tugas (Pasal 2 ayat 2).'});
+    qs.push({t:'Apakah instansi Anda melarang penerimaan seperti ini?', h:'Misalnya kode etik atau peraturan pengendalian gratifikasi di kantor Anda. Bila tidak tahu, pilih Ragu.', fail:'ya', kind:'instansi', why:'Dilarang aturan instansi, sehingga pengecualian Pasal 2 ayat (3) tidak berlaku (ayat 4).'});
+    (st.sit.q||[]).forEach(q => qs.push(Object.assign({kind:'syarat'}, q)));
+  }
+  st.qs = qs; st.qi = 0; st.answers = [];
+  if (!qs.length) return showResult();
+  goStep(3);
+});
+
+function showQ(){
+  const q = st.qs[st.qi];
+  $('q-meta').textContent = 'Pertanyaan '+(st.qi+1)+' dari '+st.qs.length;
+  $('q-text').textContent = q.t; $('q-hint').textContent = q.h || '';
+  const box = $('qbox'); box.classList.remove('fade'); void box.offsetWidth; box.classList.add('fade');
+}
+document.querySelectorAll('.answers button').forEach(b => b.addEventListener('click', () => {
+  const a = b.dataset.a, q = st.qs[st.qi];
+  st.answers.push({q, a});
+  const failed = a==='ragu' || a===q.fail;
+  if (failed && q.kind==='tolak') return showResult();
+  st.qi++;
+  if (st.qi < st.qs.length) showQ(); else showResult();
+}));
+
+function evaluate(){
+  const s = st.sit, reasons = []; let status = 'aman';
+  if (s.always==='tolak'){ return {status:'tolak', reasons:['Pemberi sedang atau akan berurusan dengan jabatan Anda. Pemberian seperti ini dianggap berhubungan dengan jabatan dan berlawanan dengan tugas (Pasal 2 ayat 2).']}; }
+  if (s.always==='lapor'){ return {status:'lapor', reasons:[s.why_always]}; }
+  for (const {q,a} of st.answers){
+    const failed = a===q.fail || a==='ragu';
+    if (!failed) continue;
+    if (q.kind==='tolak') return {status:'tolak', reasons:[a==='ragu' ? 'Anda ragu apakah pemberi berurusan dengan jabatan Anda. Lebih aman menolak; bila tidak bisa menolak, laporkan.' : q.why]};
+    status = 'lapor';
+    reasons.push(a==='ragu' ? 'Anda ragu: “'+q.t+'” Saat ragu, pilihan aman adalah melapor.' : q.why);
+  }
+  if ((st.bentuk==='uang'||st.bentuk==='voucher') && s.noMoney){ status='lapor'; reasons.push('Berbentuk uang atau alat tukar, padahal pengecualian huruf '+s.huruf+' hanya untuk pemberian bukan uang.'); }
+  if ((st.bentuk==='uang'||st.bentuk==='voucher') && s.onlyGoods){ status='lapor'; reasons.push('Berbentuk uang atau alat tukar, sehingga tidak termasuk huruf '+s.huruf+'.'); }
+  if (s.limit){
+    if (st.nilai===null){ status='lapor'; reasons.push('Nilainya belum diketahui, padahal huruf '+s.huruf+' punya batas nilai.'); }
+    else if (st.nilai > s.limit){ status='lapor'; reasons.push(s.why_limit+' Nilai yang Anda isi: Rp'+fmt(st.nilai)+'.'); }
+  }
+  if (s.yearly && st.total!==null && st.total > s.yearly){ status='lapor'; reasons.push('Total dari pemberi yang sama tahun ini Rp'+fmt(st.total)+', melebihi Rp1.500.000 per tahun (huruf n).'); }
+  if (status==='aman') reasons.push('Memenuhi pengecualian Pasal 2 ayat (3) huruf '+s.huruf+(s.limit && st.nilai!==null ? ', nilai Rp'+fmt(st.nilai)+' masih dalam batas Rp'+fmt(s.limit)+'.' : '.'));
+  return {status, reasons};
+}
+
+const LABEL = {
+  tolak:{stamp:'Wajib tolak', h:'Tolak pemberian ini', cls:'r-tolak'},
+  lapor:{stamp:'Wajib lapor', h:'Boleh diterima, tetapi wajib dilaporkan', cls:'r-lapor'},
+  aman:{stamp:'Tidak wajib lapor', h:'Boleh diterima, tidak perlu dilaporkan', cls:'r-aman'}
+};
+
+function showResult(){
+  const r = evaluate(), L = LABEL[r.status];
+  const bentukL = (BENTUK.find(b => b[0]===st.bentuk)||[,'-'])[1];
+  let next = [], extra = '';
+  if (r.status==='tolak'){
+    next = ['Tolak dengan sopan dan jelaskan bahwa Anda terikat aturan gratifikasi.','Penolakan dapat dilaporkan ke KPK atau UPG (Pasal 4A), mekanismenya sama dengan laporan penerimaan.','Bila tidak mungkin menolak (dikirim tanpa sepengetahuan Anda, atau menolak tidak patut), terima lalu laporkan paling lama 30 hari kerja.'];
+  } else if (r.status==='lapor'){
+    const dl = addWorkDays(st.tgl, 30), sisa = workDaysBetween(today, iso(dl)), lewat = fromIso(today) > dl;
+    extra = `<div class="deadline"><div><div class="lbl">Batas akhir lapor (30 hari kerja)</div><div class="d">${longDate(dl)}</div></div><div class="hint" style="color:var(--muted)">${lewat ? '<b style="color:var(--tolak)">Sudah lewat.</b> Tetap laporkan segera; status dapat ditetapkan milik negara (Pasal 17 ayat 3).' : 'Sisa '+sisa+' hari kerja dari hari ini.'}</div></div>`;
+    next = ['Laporkan lewat GOL KPK, aplikasi GOL, email pelaporan.gratifikasi@kpk.go.id, atau UPG instansi.','Gratifikasi yang dilaporkan dalam 30 hari kerja tidak dianggap suap (Pasal 12C UU Tipikor). Melapor membuat Anda aman.'];
+    if (st.bentuk==='makanan') next.push('Makanan/minuman mudah rusak tidak wajib diserahkan dan boleh langsung disalurkan untuk kemanfaatan sosial (Pasal 5 ayat 2–3). Simpan fotonya.');
+    else next.push('Simpan objeknya dalam kondisi baik; KPK dapat meminta objek disertakan untuk verifikasi (Pasal 5 ayat 1).');
+  } else {
+    next = ['Tidak perlu dilaporkan. Simpan catatan singkat bila suatu saat ditanya.','Bila situasinya berubah (pemberi mulai berurusan dengan Anda), cek ulang.'];
+  }
+  st.last = {r, L, bentukL};
+  $('result').innerHTML = `<div class="result ${L.cls} fade">
+    <span class="stamp">${L.stamp}</span>
+    <h2>${L.h}</h2>
+    <ul class="why">${r.reasons.map(x => '<li>'+x+'</li>').join('')}</ul>
+    ${extra}
+    <ul class="next">${next.map(x => '<li>'+x+'</li>').join('')}</ul>
+    <p class="summary"><b>Situasi:</b> ${st.sit.t} · <b>Bentuk:</b> ${bentukL}${st.item ? ' ('+escapeHtml(st.item)+')' : ''} · <b>Nilai:</b> ${st.nilai!==null ? 'Rp'+fmt(st.nilai) : 'tidak diketahui'} · <b>Diterima:</b> ${longDate(fromIso(st.tgl))}</p>
+    <p class="pasal">Dasar: Pasal 2 Perkom KPK 2/2019 jo. Perkom KPK 1/2026${st.sit.huruf ? ' · huruf '+st.sit.huruf : ''}</p>
+  </div>`;
+  goStep(4);
+}
+function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+$('restart').addEventListener('click', () => {
+  st.sit=null; document.querySelectorAll('input[name=bentuk]').forEach(r=>r.checked=false);
+  $('f-nilai').value=''; $('f-total').value=''; $('f-item').value=''; $('f-unknown').checked=false; $('f-nilai').disabled=false; $('f-tgl').value=today;
+  $('q-search').value=''; renderGrid(); $('copy-msg').textContent=''; goStep(1);
+});
+async function copyText(t, msgEl){
+  try { await navigator.clipboard.writeText(t); msgEl.textContent='Tersalin.'; }
+  catch(e){ msgEl.textContent='Tidak bisa menyalin otomatis. Blok teks hasil lalu salin manual.'; }
+}
+$('copy-res').addEventListener('click', () => {
+  const box = $('result').querySelector('.result'); copyText(box ? box.innerText : '', $('copy-msg'));
+});
+$('copy-mail').addEventListener('click', e => copyText('pelaporan.gratifikasi@kpk.go.id', e.target).then(()=>{}));
+
+/* ---------- pengecualian list ---------- */
+$('exc-list').innerHTML = EXC.map(([l,t,lim]) => `<div class="exc"><div class="letter">${l}</div><p>${t}</p>${lim?'<div class="lim">'+lim+'</div>':''}</div>`).join('');
+
+/* ---------- tenggat ---------- */
+$('t-tgl').value = today;
+function renderHol(){
+  HOL.sort();
+  $('hol').innerHTML = HOL.map(d => `<button data-d="${d}" title="Hapus">${d}</button>`).join('');
+}
+function renderTenggat(){
+  const s = $('t-tgl').value || today, n = Number(document.querySelector('input[name=tmode]:checked').value);
+  const dl = addWorkDays(s, n), sisa = workDaysBetween(today, iso(dl)), lewat = fromIso(today) > dl;
+  $('t-out').innerHTML = `<div><div class="lbl">${n===30?'Batas akhir lapor':'Batas melengkapi laporan'}</div><div class="d">${longDate(dl)}</div></div><div class="hint" style="color:var(--muted)">${lewat ? '<b style="color:var(--tolak)">Sudah lewat dari hari ini.</b>' : 'Sisa '+sisa+' hari kerja dari hari ini.'}</div>`;
+}
+$('t-tgl').addEventListener('change', renderTenggat);
+document.querySelectorAll('input[name=tmode]').forEach(r => r.addEventListener('change', renderTenggat));
+$('hol').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; HOL = HOL.filter(d => d!==b.dataset.d); saveHol(); renderHol(); renderTenggat(); });
+$('h-btn').addEventListener('click', () => { const v = $('h-add').value; if (v && !HOL.includes(v)){ HOL.push(v); saveHol(); renderHol(); renderTenggat(); } });
+
+renderGrid(); renderHol(); renderTenggat(); goStep(1); route();
+})();
+</script>
+</body>
+</html>
