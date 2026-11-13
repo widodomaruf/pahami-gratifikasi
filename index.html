@@ -44,13 +44,13 @@
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
 .wrap{max-width:920px;margin:0 auto;padding-inline:16px}
 
-/* Header */
+/* Header & Logo Konsep 1 (Perisai Integritas) */
 header.top{background:var(--head-bg);border-bottom:3px solid var(--accent);position:sticky;top:0;z-index:15}
 .brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 6px}
-.brandleft{display:flex;align-items:center;gap:10px}
-.logo-mark{width:38px;height:38px;border-radius:9px;background:#ffffff;display:grid;place-items:center;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.35)}
-.logo-mark svg{width:28px;height:28px}
-.brand{font-family:var(--f-display);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;color:var(--head-fg);line-height:1.1}
+.brandleft{display:flex;align-items:center;gap:11px}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:#ffffff;display:grid;place-items:center;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.logo-mark svg{width:30px;height:30px;display:block}
+.brand{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em;color:var(--head-fg);line-height:1.1}
 .brand span{color:var(--accent)}
 .reg{font-size:.7rem;color:var(--head-muted);margin-top:2px}
 .head-actions{display:flex;align-items:center;gap:8px}
@@ -118,7 +118,6 @@ p{margin:0}
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .btn{padding:12px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#fff;font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .btn.ghost{background:transparent;color:var(--accent)}
-.btn.dark{background:var(--head-bg);border-color:var(--head-bg);color:#fff}
 
 .q{font-size:1.18rem;font-weight:700;line-height:1.35}
 .qmeta{font-size:.76rem;color:var(--muted)}
@@ -135,10 +134,9 @@ p{margin:0}
 .deadline .d{font-weight:800;font-size:1.3rem}
 .deadline .lbl{font-size:.76rem;color:var(--muted);text-transform:uppercase;font-weight:600}
 .field-tip{border-left:4px solid var(--c);font-size:.92rem}
-.summary{font-size:.9rem;color:var(--muted);margin-top:14px}
 .pasal{font-size:.78rem;color:var(--muted);margin-top:12px}
 
-/* Form Generator Section (Di dalam Cara Melapor) */
+/* Form Generator Section */
 .form-sec-title{background:var(--head-bg);color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;font-size:.95rem;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center}
 .form-sec-title span{font-size:.75rem;font-weight:500;color:var(--head-muted)}
 .radio-list{display:flex;flex-direction:column;gap:8px}
@@ -151,7 +149,6 @@ p{margin:0}
 .exc p{font-size:.9rem;margin-top:6px}
 .exc .lim{font-size:.76rem;color:var(--lapor);margin-top:6px;font-weight:600}
 .note{padding:12px 14px;border-radius:10px;background:var(--accent-soft);font-size:.92rem}
-.note.warn{background:var(--lapor-soft)}
 .channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:12px}
 .chan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}
 .chan code{font-size:.8rem;word-break:break-all}
@@ -163,8 +160,12 @@ p{margin:0}
 .hol button{font-size:.75rem;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
 
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--head-bg);color:#fff;padding:12px 18px;border-radius:10px;border:1px solid var(--accent);font-size:.9rem;z-index:50;max-width:90vw;text-align:center}
-footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--muted);font-size:.85rem}
-footer p+p{margin-top:6px}
+footer{border-top:1px solid var(--line);padding-block:24px 36px;color:var(--muted);font-size:.85rem}
+footer p+p{margin-top:8px}
+footer a{color:var(--accent);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+.footer-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:10px}
+.ver-badge{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-size:.75rem;font-weight:700;color:var(--ink)}
 
 .bottomnav{display:none}
 .bottomnav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;color:var(--head-muted);text-decoration:none;font-size:.7rem;font-weight:600;position:relative}
@@ -220,10 +221,11 @@ footer p+p{margin-top:6px}
     <div class="brandbar">
       <div class="brandleft">
         <div class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 100 100">
-            <path d="M50 8 L86 22 V48 C86 71 70 86 50 94 C30 86 14 71 14 48 V22 Z" fill="#d71920"/>
-            <path d="M50 16 L78 27 V48 C78 66 65 79 50 86 C35 79 22 66 22 48 V27 Z" fill="#b31017"/>
-            <path d="M35 50 L46 61 L67 39" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg viewBox="0 0 64 64">
+            <path d="M32 6 L54 14 L54 31 C54 45 44 55 32 60 C20 55 10 45 10 31 L10 14 Z" fill="#d71920"/>
+            <path d="M32 10 L50 17 L50 31 C50 42.5 41.5 51.5 32 55.8 C22.5 51.5 14 42.5 14 31 L14 17 Z" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+            <path d="M32 10 L50 17 L50 31 C50 42.5 41.5 51.5 32 55.8 Z" fill="#b31217"/>
+            <path d="M23 32 L29.5 38.5 L42 25" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div>
@@ -667,7 +669,13 @@ footer p+p{margin-top:6px}
 <footer>
   <div class="wrap">
     <p><b>GratiCek</b> adalah alat bantu edukasi mandiri bagi pelayan publik, bukan layanan resmi KPK. Dasar hukum: Perkom KPK No. 2 Tahun 2019 jo. Perkom KPK No. 1 Tahun 2026.</p>
-    <p>Disusun oleh Muhammad Widodo Ma'ruf — Penyuluh Antikorupsi Utama</p>
+    <p>Disusun oleh <b>Muhammad Widodo Ma'ruf</b> — Penyuluh Antikorupsi Utama</p>
+    <div class="footer-meta">
+      <span class="ver-badge">Versi 1.2</span>
+      <span>Saran &amp; masukan: <a href="mailto:hi.widodomaruf@gmail.com">hi.widodomaruf@gmail.com</a></span>
+      <span>&bull;</span>
+      <span>Instagram: <a href="https://www.instagram.com/widodomaruf/" target="_blank" rel="noopener">@widodomaruf</a></span>
+    </div>
   </div>
 </footer>
 
@@ -689,7 +697,7 @@ const longDate = d => d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric'
 const shortDate = d => d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
 const today = iso(new Date());
 
-/* ---------- ICON & MANIFEST (KONSEP 1: PERISAI INTEGRITAS) ---------- */
+/* ---------- GENERATOR IKON KONSEP 1: PERISAI INTEGRITAS ---------- */
 function generateAppIcons(){
   function drawLogo(size){
     const c = document.createElement('canvas'); c.width = size; c.height = size;
@@ -698,19 +706,22 @@ function generateAppIcons(){
     ctx.beginPath(); ctx.moveTo(r,0); ctx.lineTo(size-r,0); ctx.quadraticCurveTo(size,0,size,r);
     ctx.lineTo(size,size-r); ctx.quadraticCurveTo(size,size,size-r,size); ctx.lineTo(r,size);
     ctx.quadraticCurveTo(0,size,0,size-r); ctx.lineTo(0,r); ctx.quadraticCurveTo(0,0,r,0); ctx.fill();
-    
-    ctx.save(); ctx.scale(size/100, size/100);
-    // Perisai Luar
+
+    ctx.save(); ctx.scale(size/64, size/64);
     ctx.fillStyle = '#d71920';
-    ctx.beginPath(); ctx.moveTo(50,8); ctx.lineTo(86,22); ctx.lineTo(86,48);
-    ctx.bezierCurveTo(86,71,70,86,50,94); ctx.bezierCurveTo(30,86,14,71,14,48); ctx.lineTo(14,22); ctx.closePath(); ctx.fill();
-    // Perisai Dalam
-    ctx.fillStyle = '#b31017';
-    ctx.beginPath(); ctx.moveTo(50,16); ctx.lineTo(78,27); ctx.lineTo(78,48);
-    ctx.bezierCurveTo(78,66,65,79,50,86); ctx.bezierCurveTo(35,79,22,66,22,48); ctx.lineTo(22,27); ctx.closePath(); ctx.fill();
-    // Centang Putih
-    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 9; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    ctx.beginPath(); ctx.moveTo(35,50); ctx.lineTo(46,61); ctx.lineTo(67,39); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(32,6); ctx.lineTo(54,14); ctx.lineTo(54,31);
+    ctx.bezierCurveTo(54,45,44,55,32,60); ctx.bezierCurveTo(20,55,10,45,10,31); ctx.lineTo(10,14); ctx.closePath(); ctx.fill();
+
+    ctx.fillStyle = '#b31217';
+    ctx.beginPath(); ctx.moveTo(32,10); ctx.lineTo(50,17); ctx.lineTo(50,31);
+    ctx.bezierCurveTo(50,42.5,41.5,51.5,32,55.8); ctx.closePath(); ctx.fill();
+
+    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(32,10); ctx.lineTo(50,17); ctx.lineTo(50,31);
+    ctx.bezierCurveTo(50,42.5,41.5,51.5,32,55.8); ctx.bezierCurveTo(22.5,51.5,14,42.5,14,31); ctx.lineTo(14,17); ctx.closePath(); ctx.stroke();
+
+    ctx.lineWidth = 4.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(23,32); ctx.lineTo(29.5,38.5); ctx.lineTo(42,25); ctx.stroke();
     ctx.restore();
     return c.toDataURL('image/png');
   }

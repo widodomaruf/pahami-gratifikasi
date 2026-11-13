@@ -26,15 +26,15 @@ Panduan praktis dan generator formulir pelaporan gratifikasi bagi ASN, Pegawai N
 
 ## Dasar Hukum & Ketentuan
 
-| Ketentuan | Ringkasan Aturan |
-| --- | --- |
-| **Pasal 2 ayat (2)** | Pemberian terkait jabatan dan berlawanan dengan kewajiban/tugas wajib ditolak. |
-| **Pasal 2 ayat (3) huruf l** | Pemberian acara pernikahan, kelahiran, akikah, khitanan, dan upacara adat/agama maks. Rp1.500.000 per pemberi. |
-| **Pasal 2 ayat (3) huruf n** | Pemberian sesama rekan kerja (bukan uang/alat tukar) maks. Rp500.000 per pemberian dan Rp1.500.000 per tahun dari pemberi yang sama. |
-| **Pasal 2 ayat (4)** | Seluruh pengecualian gugur apabila dilarang oleh ketentuan internal instansi. |
-| **Pasal 4A** | Penolakan gratifikasi dapat dilaporkan melalui kanal pelaporan resmi. |
-| **Pasal 5 ayat (2)–(3)** | Makanan/minuman mudah rusak dapat langsung disalurkan untuk kemanfaatan sosial dan dilampirkan dokumentasinya. |
-| **Pasal 9 & 17–19** | Batas melengkapi dokumen ≤ 20 hari kerja; penetapan status KPK ≤ 30 hari kerja; penyampaian SK ≤ 7 hari kerja. |
+| Ketentuan | Ringkasan Aturan | 
+| ----- | ----- | 
+| **Pasal 2 ayat (2)** | Pemberian terkait jabatan dan berlawanan dengan kewajiban/tugas wajib ditolak. | 
+| **Pasal 2 ayat (3) huruf l** | Pemberian acara pernikahan, kelahiran, akikah, khitanan, dan upacara adat/agama maks. Rp1.500.000 per pemberi. | 
+| **Pasal 2 ayat (3) huruf n** | Pemberian sesama rekan kerja (bukan uang/alat tukar) maks. Rp500.000 per pemberian dan Rp1.500.000 per tahun dari pemberi yang sama. | 
+| **Pasal 2 ayat (4)** | Seluruh pengecualian gugur apabila dilarang oleh ketentuan internal instansi. | 
+| **Pasal 4A** | Penolakan gratifikasi dapat dilaporkan melalui kanal pelaporan resmi. | 
+| **Pasal 5 ayat (2)–(3)** | Makanan/minuman mudah rusak dapat langsung disalurkan untuk kemanfaatan sosial dan dilampirkan dokumentasinya. | 
+| **Pasal 9 & 17–19** | Batas melengkapi dokumen ≤ 20 hari kerja; penetapan status KPK ≤ 30 hari kerja; penyampaian SK ≤ 7 hari kerja. | 
 
 ## Struktur Berkas
 
@@ -49,6 +49,9 @@ README.md    # Dokumentasi aplikasi
 * Keputusan Pimpinan KPK Nomor 1461 Tahun 2020 tentang Pedoman Pelaporan Gratifikasi.
 * Portal Pelaporan Daring: [GOL KPK](https://gol.kpk.go.id/)
 
-## Penyusun
+## Penyusun & Kontak
 
 Disusun oleh **Muhammad Widodo Ma'ruf — Penyuluh Antikorupsi Utama**.
+
+* **Saran & Masukan:** [hi.widodomaruf@gmail.com](mailto:hi.widodomaruf@gmail.com)
+* **Instagram:** [@widodomaruf](https://www.instagram.com/widodomaruf/)
