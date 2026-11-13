@@ -3,18 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Cek apakah sebuah pemberian boleh diterima, wajib dilaporkan, atau wajib ditolak menurut Perkom KPK 2/2019 jo. Perkom KPK 1/2026.">
-<meta name="theme-color" content="#141414">
-<style>
-html{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-body{margin:0}
-img{max-width:100%}
-[hidden]{display:none!important}
-</style>
-<title>Pahami Gratifikasi</title>
+<title>GratiCek — Panduan & Formulir Pelaporan Gratifikasi</title>
+<meta name="description" content="Panduan praktis bagi ASN dan pelayan publik untuk mengecek gratifikasi serta mengisi formulir laporan gratifikasi siap cetak ke PDF sesuai Perkom KPK 2/2019 jo. Perkom KPK 1/2026.">
+<meta name="theme-color" content="#141414" id="meta-theme">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="GratiCek — Cek & Buat Formulir Laporan Gratifikasi">
+<meta property="og:description" content="Cek aturan gratifikasi dalam 1 menit dan buat formulir pelaporan siap cetak ke PDF untuk dikirim via email KPK atau UPG.">
+<meta property="og:image" id="meta-og-img" content="">
+
+<link rel="icon" type="image/png" id="link-favicon" href="">
+<link rel="apple-touch-icon" id="link-apple-icon" href="">
+<link rel="manifest" id="link-manifest" href="">
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <style>
-/* Layout: one narrow working column, a sticky tab bar, the checker as a 4-step card flow */
 :root{
   --bg:#f5f5f5; --surface:#ffffff; --ink:#1a1a1a; --muted:#5e5e5e; --line:#e2e2e2;
   --accent:#d71920; --accent-soft:#fdeaea;
@@ -22,7 +25,6 @@ img{max-width:100%}
   --tolak:#a3161b; --tolak-soft:#fbe6e6;
   --lapor:#a15c00; --lapor-soft:#fdf0dc;
   --aman:#1d7a3a; --aman-soft:#e3f3e7;
-  --luar:#55606a; --luar-soft:#eceff1;
   --f-display:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-body:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --f-mono:"Plus Jakarta Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -31,153 +33,219 @@ img{max-width:100%}
   --bg:#111111; --surface:#1b1b1b; --ink:#ededed; --muted:#a3a3a3; --line:#2e2e2e;
   --accent:#ff4b52; --accent-soft:#3a1517; --head-bg:#000000; --head-fg:#ffffff; --head-muted:#9a9a9a;
   --tolak:#ff8a80; --tolak-soft:#3a1d1b; --lapor:#ffbf5e; --lapor-soft:#3a2a12;
-  --aman:#7ad693; --aman-soft:#173323; --luar:#b0bcc5; --luar-soft:#252c31; color-scheme:dark}}
+  --aman:#7ad693; --aman-soft:#173323; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#111111; --surface:#1b1b1b; --ink:#ededed; --muted:#a3a3a3; --line:#2e2e2e;
   --accent:#ff4b52; --accent-soft:#3a1517; --head-bg:#000000; --head-fg:#ffffff; --head-muted:#9a9a9a;
   --tolak:#ff8a80; --tolak-soft:#3a1d1b; --lapor:#ffbf5e; --lapor-soft:#3a2a12;
-  --aman:#7ad693; --aman-soft:#173323; --luar:#b0bcc5; --luar-soft:#252c31; color-scheme:dark}
+  --aman:#7ad693; --aman-soft:#173323; color-scheme:dark}
 *{box-sizing:border-box}
-body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
-body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--head-bg)}
-.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-header.top{background:var(--head-bg);border-bottom:3px solid var(--accent);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
-.brandrow{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding-block:14px 6px}
-.brand{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:-.01em;color:var(--head-fg)}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
+.wrap{max-width:920px;margin:0 auto;padding-inline:16px}
+
+/* Header & Logo Konsep 1 (Perisai Integritas) */
+header.top{background:var(--head-bg);border-bottom:3px solid var(--accent);position:sticky;top:0;z-index:15}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 6px}
+.brandleft{display:flex;align-items:center;gap:11px}
+.logo-mark{width:38px;height:38px;border-radius:10px;background:#ffffff;display:grid;place-items:center;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.logo-mark svg{width:30px;height:30px;display:block}
+.brand{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em;color:var(--head-fg);line-height:1.1}
 .brand span{color:var(--accent)}
-.reg{font-family:var(--f-mono);font-size:.72rem;color:var(--head-muted)}
-nav.tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:0}
-nav.tabs a{padding:10px 14px;color:var(--head-muted);text-decoration:none;font-weight:600;border-bottom:3px solid transparent;white-space:nowrap}
+.reg{font-size:.7rem;color:var(--head-muted);margin-top:2px}
+.head-actions{display:flex;align-items:center;gap:8px}
+.icon-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:8px;border:1px solid #333;background:#222;color:#fff;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer}
+.icon-btn:hover{border-color:var(--accent)}
+.icon-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon-btn.install{background:var(--accent);border-color:var(--accent)}
+
+nav.tabs{display:flex;gap:4px;overflow-x:auto}
+nav.tabs a{padding:10px 14px;color:var(--head-muted);text-decoration:none;font-weight:600;border-bottom:3px solid transparent;white-space:nowrap;font-size:.92rem}
 nav.tabs a[aria-current="page"]{color:var(--head-fg);border-color:var(--accent)}
-nav.tabs a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-main{padding-block:24px 48px}
-h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.2;margin:0}
-h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:800;letter-spacing:-.015em}
-h2{font-size:1.3rem;font-weight:700}
-h3{font-size:1.05rem;font-weight:700}
+
+main{padding-block:24px 60px}
+h1{font-size:clamp(1.45rem,4vw,2rem);font-weight:800;line-height:1.25;margin:0}
+h2{font-size:1.2rem;font-weight:700;margin:0}
+h3{font-size:1.02rem;font-weight:700;margin:0}
 p{margin:0}
-.lead{color:var(--muted);max-width:62ch;margin-top:8px}
+.lead{color:var(--muted);max-width:66ch;margin-top:8px}
 .stack{display:flex;flex-direction:column;gap:16px}
-.steps{display:flex;gap:6px;margin:20px 0 16px;flex-wrap:wrap}
+
+/* Steps & Checker */
+.steps{display:flex;gap:6px;margin:20px 0 16px;flex-wrap:wrap;padding:0}
 .steps li{list-style:none;font-size:.8rem;font-weight:600;color:var(--muted);padding:4px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
-.steps li.on{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+.steps li.on{background:var(--accent);border-color:var(--accent);color:#fff}
 .steps li.done{color:var(--accent);border-color:var(--accent)}
-ol.steps{padding:0}
-.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px;margin-top:12px}
-.sit{display:flex;flex-direction:column;gap:4px;text-align:left;padding:14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer;min-width:0}
+.search{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit}
+.quick-lbl{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:8px;display:block}
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px}
+.qcard{display:flex;flex-direction:column;gap:2px;text-align:left;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
+.qcard:hover{border-color:var(--accent)}
+.qcard b{font-size:.9rem}
+.qcard small{font-size:.78rem;color:var(--muted)}
+.cat-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.cat-btn{padding:7px 13px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:.83rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.cat-btn.active{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:8px}
+.sit{display:flex;flex-direction:column;gap:5px;text-align:left;padding:15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
 .sit:hover{border-color:var(--accent)}
-.sit b{font-weight:700;line-height:1.3}
-.sit small{color:var(--muted);font-size:.85rem;line-height:1.35}
-.sit .tag{font-family:var(--f-mono);font-size:.68rem;color:var(--accent);letter-spacing:.04em;text-transform:uppercase}
+.sit b{font-size:.95rem;line-height:1.35}
+.sit small{color:var(--muted);font-size:.83rem}
+.sit .tag{font-size:.68rem;color:var(--accent);font-weight:700;text-transform:uppercase}
 .sit.warn .tag{color:var(--tolak)}
+
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
 .chosen{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 14px;border-radius:10px;background:var(--accent-soft)}
-.chosen b{font-weight:700}
 .linkbtn{background:none;border:0;color:var(--accent);font:inherit;font-weight:600;cursor:pointer;padding:0;text-decoration:underline}
 .field{display:flex;flex-direction:column;gap:6px}
-.field label,.legend{font-weight:600}
-.field .hint{color:var(--muted);font-size:.85rem}
-.field input[type=text],.field input[type=date],.field input[type=number]{padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;width:100%}
+.field label,.legend{font-weight:600;font-size:.93rem}
+.field .hint{color:var(--muted);font-size:.83rem;font-weight:400}
+.field input[type=text],.field input[type=date],.field input[type=number],.field select,.field textarea{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;width:100%}
+.field textarea{min-height:84px;resize:vertical}
 .money{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
-.money span{padding:0 10px;color:var(--muted);font-family:var(--f-mono);font-size:.9rem}
-.money input{border:0!important;background:transparent!important;font-family:var(--f-mono)!important;font-variant-numeric:tabular-nums}
+.money span{padding:0 10px;color:var(--muted);font-size:.9rem}
+.money input{border:0!important;background:transparent!important}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{position:relative}
 .chip input{position:absolute;opacity:0;inset:0}
-.chip span{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:99px;cursor:pointer;background:var(--bg);font-weight:600;font-size:.92rem}
-.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--surface)}
-.chip input:focus-visible+span{outline:2px solid var(--accent);outline-offset:2px}
-.check{display:flex;gap:8px;align-items:center;color:var(--muted);font-size:.92rem}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media (max-width:560px){.two{grid-template-columns:1fr}}
+.chip span{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:99px;cursor:pointer;background:var(--bg);font-weight:600;font-size:.88rem}
+.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:#fff}
+.check{display:flex;gap:8px;align-items:flex-start;color:var(--ink);font-size:.9rem;cursor:pointer}
+.check input{margin-top:4px;accent-color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media (max-width:640px){.two,.three{grid-template-columns:1fr}}
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.btn{padding:12px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--surface);font:inherit;font-weight:700;cursor:pointer}
+.btn{padding:12px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#fff;font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .btn.ghost{background:transparent;color:var(--accent)}
-.btn[disabled]{opacity:.45;cursor:not-allowed}
-.q{font-family:var(--f-display);font-size:1.25rem;font-weight:700;line-height:1.3;text-wrap:balance}
-.qmeta{font-family:var(--f-mono);font-size:.75rem;color:var(--muted)}
+
+.q{font-size:1.18rem;font-weight:700;line-height:1.35}
+.qmeta{font-size:.76rem;color:var(--muted)}
 .answers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .answers button{padding:14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
 .answers button:hover{border-color:var(--accent)}
 .result{border-radius:14px;padding:22px;border:2px solid var(--c);background:var(--cs)}
-.result .stamp{display:inline-block;font-family:var(--f-mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--c);border:1.5px solid var(--c);padding:3px 8px;border-radius:4px;transform:rotate(-1.5deg)}
-.result h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:800;margin-top:10px;color:var(--ink)}
-.r-tolak{--c:var(--tolak);--cs:var(--tolak-soft)} .r-lapor{--c:var(--lapor);--cs:var(--lapor-soft)}
-.r-aman{--c:var(--aman);--cs:var(--aman-soft)} .r-luar{--c:var(--luar);--cs:var(--luar-soft)}
-.why{margin:14px 0 0;padding-left:20px}
-.why li{margin:4px 0}
-.pasal{font-family:var(--f-mono);font-size:.78rem;color:var(--muted);margin-top:12px}
-.deadline{margin-top:16px;padding:14px;border-radius:10px;background:var(--surface);display:flex;gap:16px;align-items:center;flex-wrap:wrap}
-.deadline .d{font-family:var(--f-display);font-weight:800;font-size:1.4rem;font-variant-numeric:tabular-nums}
-.deadline .lbl{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.summary{font-size:.92rem;color:var(--muted);margin-top:14px}
-.summary b{color:var(--ink)}
-.next{margin-top:16px;padding-left:20px}
-.next li{margin:6px 0}
+.result .stamp{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c);border:1.5px solid var(--c);padding:3px 9px;border-radius:5px}
+.result h2{font-size:clamp(1.4rem,4vw,1.85rem);font-weight:800;margin-top:10px}
+.r-tolak{--c:var(--tolak);--cs:var(--tolak-soft)} .r-lapor{--c:var(--lapor);--cs:var(--lapor-soft)} .r-aman{--c:var(--aman);--cs:var(--aman-soft)}
+.why,.next{margin:14px 0 0;padding-left:20px}
+.why li,.next li{margin:5px 0}
+.deadline,.field-tip{margin-top:16px;padding:14px;border-radius:10px;background:var(--surface)}
+.deadline .d{font-weight:800;font-size:1.3rem}
+.deadline .lbl{font-size:.76rem;color:var(--muted);text-transform:uppercase;font-weight:600}
+.field-tip{border-left:4px solid var(--c);font-size:.92rem}
+.pasal{font-size:.78rem;color:var(--muted);margin-top:12px}
+
+/* Form Generator Section */
+.form-sec-title{background:var(--head-bg);color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;font-size:.95rem;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center}
+.form-sec-title span{font-size:.75rem;font-weight:500;color:var(--head-muted)}
+.radio-list{display:flex;flex-direction:column;gap:8px}
+.inline-other{margin-top:6px;margin-left:24px}
+
+/* Other tabs */
 .list-exc{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:16px}
-.exc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}
-.exc .letter{font-family:var(--f-display);font-weight:800;font-size:1.3rem;color:var(--accent);line-height:1}
-.exc p{font-size:.92rem;margin-top:6px}
-.exc .lim{font-family:var(--f-mono);font-size:.76rem;color:var(--lapor);margin-top:6px}
+.exc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
+.exc .letter{font-weight:800;font-size:1.25rem;color:var(--accent)}
+.exc p{font-size:.9rem;margin-top:6px}
+.exc .lim{font-size:.76rem;color:var(--lapor);margin-top:6px;font-weight:600}
 .note{padding:12px 14px;border-radius:10px;background:var(--accent-soft);font-size:.92rem}
-.note.warn{background:var(--lapor-soft)}
-.timeline{list-style:none;padding:0;margin:16px 0 0;display:flex;flex-direction:column;gap:0}
-.timeline li{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
-.timeline .when{font-family:var(--f-mono);font-size:.78rem;color:var(--accent);padding-top:2px}
-@media (max-width:480px){.timeline li{grid-template-columns:1fr;gap:2px}}
 .channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:12px}
-.chan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:6px}
-.chan code{font-family:var(--f-mono);font-size:.8rem;word-break:break-all}
+.chan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.chan code{font-size:.8rem;word-break:break-all}
 .chan a{color:var(--accent);font-weight:600}
+.timeline{list-style:none;padding:0;margin:16px 0 0}
+.timeline li{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
+.timeline .when{font-size:.78rem;color:var(--accent);font-weight:700}
 .hol{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.hol button{font-family:var(--f-mono);font-size:.75rem;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
-.hol button:hover{border-color:var(--tolak);text-decoration:line-through}
+.hol button{font-size:.75rem;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--head-bg);color:#fff;padding:12px 18px;border-radius:10px;border:1px solid var(--accent);font-size:.9rem;z-index:50;max-width:90vw;text-align:center}
 footer{border-top:1px solid var(--line);padding-block:20px 32px;color:var(--muted);font-size:.85rem}
 footer p+p{margin-top:6px}
-.vis-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@media (prefers-reduced-motion:no-preference){.fade{animation:fade .25s ease-out}@keyframes fade{from{opacity:.4;transform:translateY(4px)}to{opacity:1;transform:none}}}
 
-/* bottom nav for phones */
 .bottomnav{display:none}
-.bottomnav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px 9px;color:var(--head-muted);text-decoration:none;font-size:.72rem;font-weight:600;position:relative;min-width:0}
-.bottomnav a svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bottomnav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;color:var(--head-muted);text-decoration:none;font-size:.7rem;font-weight:600;position:relative}
+.bottomnav a svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .bottomnav a[aria-current="page"]{color:var(--head-fg)}
 .bottomnav a[aria-current="page"] svg{stroke:var(--accent)}
-.bottomnav a[aria-current="page"]::before{content:"";position:absolute;top:-3px;left:22%;right:22%;height:3px;background:var(--accent);border-radius:0 0 3px 3px}
-.bottomnav a:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
-@media (max-width:720px){
+@media (max-width:760px){
   nav.tabs{display:none}
-  .brandrow{padding-block:12px}
-  .bottomnav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--head-bg);border-top:3px solid var(--accent);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
-  footer{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
-  .answers{grid-template-columns:1fr 1fr 1fr}
-  .result{padding:18px}
+  .bottomnav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--head-bg);border-top:3px solid var(--accent)}
+  footer{padding-bottom:96px}
+  .icon-btn span{display:none}
 }
-/* wider canvas on desktop */
-@media (min-width:1100px){
-  .wrap{max-width:1040px}
-  .grid{grid-template-columns:repeat(3,1fr)}
-  .list-exc{grid-template-columns:repeat(3,1fr)}
-  #s2 .panel,#s3 .panel{max-width:760px}
+
+/* ==================== PRINT STYLESHEET (FORMULIR RESMI KPK) ==================== */
+#print-sheet{display:none}
+@media print {
+  @page { size: A4 portrait; margin: 12mm 14mm; }
+  body { background:#fff!important; color:#000!important; font-family: Arial, Helvetica, sans-serif!important; font-size: 9.5pt!important; line-height: 1.35!important; }
+  header.top, main, footer, .bottomnav, .toast { display:none!important; }
+  #print-sheet { display:block!important; width:100%; }
+  .p-page { page-break-after: always; }
+  .p-page:last-child { page-break-after: auto; }
+  .p-header { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #000; padding-bottom:6px; margin-bottom:8px; }
+  .p-kpk { font-weight:800; font-size:15pt; letter-spacing:1px; }
+  .p-kpk small { display:block; font-size:8pt; font-weight:600; letter-spacing:0; }
+  .p-title-box { text-align:right; }
+  .p-title-box h1 { font-size:13pt; font-weight:800; margin:0; text-transform:uppercase; }
+  .p-secret { border:1px solid #000; padding:2px 6px; font-size:7.5pt; font-weight:700; display:inline-block; margin-top:3px; }
+  .p-sk { font-size:7.5pt; color:#333; margin-top:2px; }
+  .p-legal { border:1px solid #000; padding:6px 8px; font-size:7.5pt; margin-bottom:8px; background:#f9f9f9; }
+  .p-legal b { display:block; font-size:8pt; margin-bottom:2px; text-transform:uppercase; }
+  .p-legal ul { margin:2px 0 4px; padding-left:16px; }
+  .p-legal li { margin:1px 0; }
+  .p-grid2 { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:8px; }
+  .p-box { border:1px solid #000; padding:6px 8px; font-size:8pt; }
+  .p-box-title { font-weight:700; border-bottom:1px solid #000; padding-bottom:2px; margin-bottom:4px; text-transform:uppercase; font-size:8pt; }
+  .p-sec { background:#e6e6e6; border:1px solid #000; padding:4px 8px; font-weight:700; font-size:8.5pt; text-transform:uppercase; margin-top:8px; display:flex; justify-content:space-between; }
+  table.p-tbl { width:100%; border-collapse:collapse; font-size:8.5pt; }
+  table.p-tbl td { border:1px solid #000; padding:4px 6px; vertical-align:top; }
+  table.p-tbl td.no { width:22px; text-align:center; }
+  table.p-tbl td.lbl { width:34%; font-weight:600; }
+  table.p-tbl td.val { width:63%; }
+  .p-sign { margin-top:12px; border:1px solid #000; padding:8px; font-size:8pt; }
+  .p-sign-row { display:flex; justify-content:flex-end; margin-top:10px; }
+  .p-sign-box { width:220px; text-align:center; }
+  .p-sign-space { height:48px; }
 }
 </style>
-<!-- Vercel Speed Insights (aktif hanya saat situs di-deploy di Vercel) -->
-<script>
-  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 <header class="top">
   <div class="wrap">
-    <div class="brandrow">
-      <div class="brand">Pahami <span>Gratifikasi</span></div>
-      <div class="reg">Perkom KPK 2/2019 jo. Perkom KPK 1/2026</div>
+    <div class="brandbar">
+      <div class="brandleft">
+        <!-- Logo Konsep 1: Perisai Integritas -->
+        <div class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64">
+            <path d="M32 6 L54 14 L54 31 C54 45 44 55 32 60 C20 55 10 45 10 31 L10 14 Z" fill="#d71920"/>
+            <path d="M32 10 L50 17 L50 31 C50 42.5 41.5 51.5 32 55.8 C22.5 51.5 14 42.5 14 31 L14 17 Z" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+            <path d="M32 10 L50 17 L50 31 C50 42.5 41.5 51.5 32 55.8 Z" fill="#b31217"/>
+            <path d="M23 32 L29.5 38.5 L42 25" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="brand">Grati<span>Cek</span></div>
+          <div class="reg">Acuan: Perkom KPK 2/2019 jo. Perkom KPK 1/2026</div>
+        </div>
+      </div>
+      <div class="head-actions">
+        <button class="icon-btn install" id="btn-install" hidden>
+          <svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          <span>Pasang Aplikasi</span>
+        </button>
+        <button class="icon-btn" id="btn-theme">
+          <svg id="ico-sun" viewBox="0 0 24 24" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg id="ico-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <span id="lbl-theme">Gelap</span>
+        </button>
+      </div>
     </div>
     <nav class="tabs" aria-label="Menu">
-      <a href="#cek" data-tab="cek">Cek Gratifikasi</a>
-      <a href="#pengecualian" data-tab="pengecualian">Daftar Pengecualian</a>
+      <a href="#cek" data-tab="cek">1. Cek Status</a>
+      <a href="#formulir" data-tab="formulir">2. Buat Formulir PDF</a>
+      <a href="#pengecualian" data-tab="pengecualian">16 Pengecualian</a>
       <a href="#tenggat" data-tab="tenggat">Hitung Tenggat</a>
       <a href="#lapor" data-tab="lapor">Cara Melapor</a>
     </nav>
@@ -186,49 +254,66 @@ footer p+p{margin-top:6px}
 
 <main class="wrap">
 
-<!-- ===== CEK ===== -->
+<!-- ===== TAB 1: CEK STATUS ===== -->
 <section id="v-cek" class="view">
-  <h1>Saya menerima pemberian. Boleh diterima atau harus dilaporkan?</h1>
-  <p class="lead">Pilih situasinya, isi bentuk dan nilainya, jawab beberapa pertanyaan singkat. Hasilnya muncul beserta pasal dasarnya.</p>
+  <h1>Dapat pemberian saat bertugas atau di luar jam kantor?</h1>
+  <p class="lead">Panduan praktis bagi ASN dan pelayan publik. Cek status pemberian dalam 1 menit, lalu isi otomatis ke formulir laporan siap cetak jika wajib dilaporkan.</p>
   <ol class="steps" id="steps">
-    <li>1 Situasi</li><li>2 Bentuk &amp; nilai</li><li>3 Pertanyaan</li><li>4 Hasil</li>
+    <li>1 Kondisi</li><li>2 Bentuk &amp; nilai</li><li>3 Pertanyaan</li><li>4 Hasil</li>
   </ol>
 
   <div id="s1" class="stack">
-    <label class="vis-hidden" for="q-search">Cari situasi</label>
-    <input class="search" id="q-search" type="text" placeholder="Cari: kado nikah, parsel, honor, voucher…">
-    <div class="grid" id="sit-grid"></div>
+    <input class="search" id="q-search" type="text" placeholder="Ketik kata kunci: uang bensin, amplop nikah, parsel, ditinggal di meja, kado teman…">
+    <div id="quick-wrap">
+      <span class="quick-lbl">Kondisi Paling Sering Dialami Pelayan Publik</span>
+      <div class="quick-grid">
+        <button class="qcard" data-jump="urusan"><b>Uang lelah / bingkisan pemohon</b><small>Saat layanan, survei, atau pemeriksaan</small></button>
+        <button class="qcard" data-jump="parsel"><b>Parsel atau THR hari raya</b><small>Dikirim mitra, rekanan, atau pihak luar</small></button>
+        <button class="qcard" data-jump="nikah"><b>Amplop / kado acara pribadi</b><small>Pernikahan, kelahiran, akikah, khitanan</small></button>
+        <button class="qcard" data-jump="rekan"><b>Kado patungan teman kantor</b><small>Ulang tahun, pisah sambut, promosi</small></button>
+      </div>
+    </div>
+    <div>
+      <div class="cat-tabs" id="cat-tabs">
+        <button class="cat-btn active" data-cat="semua">Semua Kondisi</button>
+        <button class="cat-btn" data-cat="layanan">Layanan &amp; Lapangan</button>
+        <button class="cat-btn" data-cat="kantor">Internal Kantor &amp; Rekan</button>
+        <button class="cat-btn" data-cat="pribadi">Keluarga &amp; Hajatan</button>
+        <button class="cat-btn" data-cat="umum">Kegiatan Luar &amp; Umum</button>
+      </div>
+      <div class="grid" id="sit-grid"></div>
+    </div>
   </div>
 
   <div id="s2" class="stack" hidden>
-    <div class="chosen"><div>Situasi: <b id="s2-name"></b></div><button class="linkbtn" data-back="1">Ganti situasi</button></div>
+    <div class="chosen"><div>Kondisi: <b id="s2-name"></b></div><button class="linkbtn" data-back="1">Ganti kondisi</button></div>
     <div class="panel stack">
       <div class="field">
-        <span class="legend" id="lg-bentuk">Bentuk pemberian</span>
-        <div class="chips" role="radiogroup" aria-labelledby="lg-bentuk" id="bentuk"></div>
+        <span class="legend">Bentuk pemberian yang diterima</span>
+        <div class="chips" id="bentuk"></div>
       </div>
       <div class="field">
-        <label for="f-item">Apa yang diterima? <span class="hint">(opsional)</span></label>
-        <input type="text" id="f-item" placeholder="contoh: amplop, tas, parsel kue, voucher belanja">
+        <label for="f-item">Nama barang atau keterangan singkat <span class="hint">(opsional)</span></label>
+        <input type="text" id="f-item" placeholder="contoh: amplop putih di meja, parsel kue kering, voucher belanja">
       </div>
       <div class="two">
         <div class="field">
-          <label for="f-nilai">Nilai atau taksiran harga</label>
+          <label for="f-nilai">Nilai atau taksiran harga <span class="hint" id="nilai-opt-lbl"></span></label>
           <div class="money"><span>Rp</span><input type="text" inputmode="numeric" id="f-nilai" placeholder="0"></div>
-          <label class="check"><input type="checkbox" id="f-unknown"> Saya tidak tahu nilainya</label>
+          <label class="check"><input type="checkbox" id="f-unknown"> Saya tidak tahu / belum dibuka</label>
         </div>
         <div class="field">
-          <label for="f-tgl">Tanggal diterima</label>
+          <label for="f-tgl">Tanggal diterima / ditemukan</label>
           <input type="date" id="f-tgl">
         </div>
       </div>
       <div class="field" id="wrap-pemberi" hidden>
-        <label for="f-pemberi">Jumlah pemberi</label>
+        <label for="f-pemberi">Jumlah orang yang ikut memberi (jika patungan/urunan)</label>
         <input type="number" id="f-pemberi" min="1" step="1" value="1" inputmode="numeric">
         <span class="hint" id="pemberi-hint"></span>
       </div>
       <div class="field" id="wrap-total" hidden>
-        <label for="f-total">Total pemberian dari orang yang sama tahun ini, termasuk yang ini <span class="hint">(bila urunan, isi bagian per orang)</span></label>
+        <label for="f-total">Total pemberian dari rekan yang sama tahun ini <span class="hint">(jika urunan, isi bagian per orang)</span></label>
         <div class="money"><span>Rp</span><input type="text" inputmode="numeric" id="f-total" placeholder="0"></div>
       </div>
       <div class="btnrow"><button class="btn" id="to-q">Lanjut</button><span class="hint" id="s2-err" style="color:var(--tolak)"></span></div>
@@ -236,11 +321,11 @@ footer p+p{margin-top:6px}
   </div>
 
   <div id="s3" class="stack" hidden>
-    <div class="chosen"><div>Situasi: <b id="s3-name"></b></div><button class="linkbtn" data-back="2">Ubah bentuk &amp; nilai</button></div>
-    <div class="panel stack fade" id="qbox">
+    <div class="chosen"><div>Kondisi: <b id="s3-name"></b></div><button class="linkbtn" data-back="2">Ubah bentuk &amp; nilai</button></div>
+    <div class="panel stack" id="qbox">
       <div class="qmeta" id="q-meta"></div>
       <div class="q" id="q-text"></div>
-      <p class="hint" id="q-hint" style="color:var(--muted)"></p>
+      <p class="hint" id="q-hint"></p>
       <div class="answers">
         <button data-a="ya">Ya</button><button data-a="tidak">Tidak</button><button data-a="ragu">Ragu</button>
       </div>
@@ -250,30 +335,186 @@ footer p+p{margin-top:6px}
   <div id="s4" class="stack" hidden>
     <div id="result"></div>
     <div class="btnrow">
-      <button class="btn" id="restart">Cek pemberian lain</button>
-      <button class="btn ghost" id="copy-res">Salin ringkasan hasil</button>
-      <span class="hint" id="copy-msg" style="color:var(--muted)"></span>
+      <button class="btn" id="btn-to-form">Isi Formulir Laporan &amp; Cetak PDF</button>
+      <button class="btn ghost" id="restart">Cek pemberian lain</button>
+      <button class="btn ghost" id="copy-res">Salin ringkasan</button>
+      <span class="hint" id="copy-msg"></span>
     </div>
   </div>
 </section>
 
-<!-- ===== PENGECUALIAN ===== -->
+<!-- ===== TAB 2: FORMULIR MANUAL & CETAK PDF ===== -->
+<section id="v-formulir" class="view" hidden>
+  <h1>Formulir Laporan Gratifikasi (Siap Cetak PDF)</h1>
+  <p class="lead">Mengacu pada format Formulir Laporan Gratifikasi KPK (SK Pimpinan KPK No. 1461 Tahun 2020 jo. Perkom KPK 1/2026). Lengkapi kolom di bawah, lalu klik <b>Cetak / Simpan sebagai PDF</b> untuk dikirim lewat email <code>pelaporan.gratifikasi@kpk.go.id</code> atau diserahkan ke UPG kantor.</p>
+
+  <div class="note" style="margin-top:14px"><b>Privasi Terjaga:</b> Seluruh isian formulir ini hanya diproses di peramban perangkat Anda dan tidak dikirim ke server mana pun.</div>
+
+  <form id="grat-form" class="stack" style="margin-top:20px" onsubmit="return false;">
+
+    <div class="panel stack">
+      <div class="form-sec-title">Jenis &amp; Kerahasiaan Laporan <span>Wajib dipilih</span></div>
+      <div class="two">
+        <div class="field">
+          <span class="legend">Jenis Laporan</span>
+          <div class="radio-list">
+            <label class="check"><input type="radio" name="f_jenis_lap" value="Laporan Penerimaan" checked> Laporan Penerimaan Gratifikasi</label>
+            <label class="check"><input type="radio" name="f_jenis_lap" value="Laporan Penolakan"> Laporan Penolakan Gratifikasi</label>
+          </div>
+        </div>
+        <div class="field">
+          <span class="legend">Kerahasiaan Laporan</span>
+          <div class="radio-list">
+            <label class="check"><input type="radio" name="f_rahasia" value="Pribadi & Rahasia (Pelapor dirahasiakan dari UPG)" checked> Pribadi &amp; Rahasia (dirahasiakan dari UPG)</label>
+            <label class="check"><input type="radio" name="f_rahasia" value="Tembuskan ke UPG"> Tembuskan ke UPG Instansi</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel stack">
+      <div class="form-sec-title">A. Identitas Pelapor <span>Seluruhnya wajib diisi</span></div>
+      <div class="two">
+        <div class="field"><label for="fa_nama">1. Nama Lengkap (tanpa gelar)</label><input type="text" id="fa_nama" placeholder="Sesuai KTP"></div>
+        <div class="field"><label for="fa_nik">2. Nomor Induk Kependudukan (NIK)</label><input type="text" id="fa_nik" inputmode="numeric" maxlength="16" placeholder="16 digit NIK"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="fa_tmplahir">3. Tempat Lahir</label><input type="text" id="fa_tmplahir" placeholder="Kota/Kabupaten kelahiran"></div>
+        <div class="field"><label for="fa_tgllahir">4. Tanggal Lahir</label><input type="date" id="fa_tgllahir"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="fa_instansi">5. Nama Instansi dan Unit Kerja</label><input type="text" id="fa_instansi" placeholder="Contoh: Kementerian Keuangan / KPP Pratama..."></div>
+        <div class="field"><label for="fa_jabatan">6. Jabatan / Pangkat / Golongan</label><input type="text" id="fa_jabatan" placeholder="Contoh: Penyuluh Pajak / Penata / III/c"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="fa_email">7. Alamat Email Penerima</label><input type="text" id="fa_email" placeholder="Dokumen SK KPK akan dikirim ke email ini"></div>
+        <div class="field"><label for="fa_hp">9. Nomor HP / WhatsApp</label><input type="text" id="fa_hp" placeholder="08xxxxxxxxxx"></div>
+      </div>
+      <div class="field"><label for="fa_alamat">8. Alamat Lengkap Penerima (sesuai KTP)</label><input type="text" id="fa_alamat" placeholder="Jalan, RT/RW, Kelurahan/Desa"></div>
+      <div class="three">
+        <div class="field"><label for="fa_kec">Kecamatan</label><input type="text" id="fa_kec"></div>
+        <div class="field"><label for="fa_kota">Kabupaten / Kota</label><input type="text" id="fa_kota"></div>
+        <div class="field"><label for="fa_prov">Provinsi</label><input type="text" id="fa_prov"></div>
+      </div>
+      <div class="field"><label for="fa_kontak">10. Nama dan Nomor HP Pihak Lain yang Dapat Dihubungi <span class="hint">(keluarga/rekan dekat)</span></label><input type="text" id="fa_kontak" placeholder="Contoh: Ikrima (Istri) - 0812xxxxxxxx"></div>
+    </div>
+
+    <div class="panel stack">
+      <div class="form-sec-title">B. Data Pemberi Gratifikasi <span>Wajib diisi</span></div>
+      <div class="two">
+        <div class="field"><label for="fb_nama">1. Nama Lengkap Pemberi</label><input type="text" id="fb_nama" placeholder="Isi 'Tidak diketahui' jika dikirim anonim"></div>
+        <div class="field"><label for="fb_instansi">2. Instansi / Perusahaan Pemberi</label><input type="text" id="fb_instansi" placeholder="Nama PT/CV/Instansi atau perorangan"></div>
+      </div>
+      <div class="field"><label for="fb_alamat">3. Alamat Lengkap Pemberi</label><input type="text" id="fb_alamat" placeholder="Alamat kantor atau rumah pemberi (jika diketahui)"></div>
+      <div class="field">
+        <span class="legend">4. Hubungan Pemberi - Penerima Gratifikasi (pilih salah satu)</span>
+        <div class="radio-list">
+          <label class="check"><input type="radio" name="fb_hub" value="Penyedia Barang & Jasa/Penerima Layanan/terkait Pengawasan/Pemeriksaan" checked> Penyedia Barang &amp; Jasa / Penerima Layanan / terkait Pengawasan / Pemeriksaan</label>
+          <label class="check"><input type="radio" name="fb_hub" value="Antara sesama Pegawai di lingkungan internal instansi"> Antara sesama Pegawai di lingkungan internal instansi</label>
+          <label class="check"><input type="radio" name="fb_hub" value="Merupakan pemberian dalam keluarga"> Merupakan pemberian dalam keluarga</label>
+          <label class="check"><input type="radio" name="fb_hub" value="Identitas Pemberi tidak diketahui"> Identitas Pemberi tidak diketahui</label>
+          <label class="check"><input type="radio" name="fb_hub" value="Lainnya"> Lainnya, sebutkan:</label>
+          <input type="text" id="fb_hub_lain" class="inline-other" placeholder="Sebutkan hubungan lainnya...">
+        </div>
+      </div>
+      <div class="field"><label for="fb_alasan">5. Alasan Pemberian</label><input type="text" id="fb_alasan" placeholder="Contoh: Ucapan terima kasih atas pelayanan, parsel hari raya, kado pernikahan"></div>
+    </div>
+
+    <div class="panel stack">
+      <div class="form-sec-title">C. Data Penerimaan / Penolakan Gratifikasi <span>Wajib diisi</span></div>
+      <div class="field">
+        <span class="legend">1. Peristiwa Terkait Gratifikasi (pilih salah satu)</span>
+        <div class="radio-list">
+          <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)" checked> Pemberian terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)</label>
+          <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian tidak terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)"> Pemberian tidak terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)</label>
+          <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian dalam rangka pisah sambut/pensiun/mutasi jabatan/ulang tahun"> Pemberian dalam rangka pisah sambut / pensiun / mutasi jabatan / ulang tahun</label>
+          <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian terkait dengan pernikahan/upacara adat/agama lainnya atau terkait musibah/bencana"> Pemberian terkait pernikahan / upacara adat / agama atau musibah / bencana</label>
+          <label class="check"><input type="radio" name="fc_peristiwa" value="Keuntungan Investasi/Manfaat dari Koperasi/Hadiah Undian atau Langsung"> Keuntungan Investasi / Manfaat Koperasi / Hadiah Undian atau Langsung</label>
+          <label class="check"><input type="radio" name="fc_peristiwa" value="Lainnya"> Lainnya, sebutkan:</label>
+          <input type="text" id="fc_peristiwa_lain" class="inline-other" placeholder="Sebutkan peristiwa lainnya...">
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="legend">2. Lokasi Objek Gratifikasi Saat Ini</span>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="fc_lokasi" value="Disimpan Pelapor" checked><span>Disimpan Pelapor</span></label>
+          <label class="chip"><input type="radio" name="fc_lokasi" value="Dititipkan di UPG"><span>Dititipkan di UPG</span></label>
+          <label class="chip"><input type="radio" name="fc_lokasi" value="Dititipkan di KPK"><span>Dititipkan di KPK</span></label>
+          <label class="chip"><input type="radio" name="fc_lokasi" value="Disalurkan Sosial (Makanan/Mudah Rusak)"><span>Disalurkan Sosial</span></label>
+          <label class="chip"><input type="radio" name="fc_lokasi" value="Ditolak / Dikembalikan ke Pemberi"><span>Ditolak di Tempat</span></label>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="legend">3. Jenis / Objek Gratifikasi</span>
+        <div class="radio-list">
+          <label class="check"><input type="radio" name="fc_jenis" value="Uang/Alat tukar lainnya" checked> Uang / Voucher / Cek / Alat tukar lainnya</label>
+          <label class="check"><input type="radio" name="fc_jenis" value="Hidangan/Oleh-oleh/Makanan/Minuman kemasan dengan masa berlaku"> Hidangan / Oleh-oleh / Makanan / Minuman kemasan</label>
+          <label class="check"><input type="radio" name="fc_jenis" value="Karangan Bunga/Cindera mata/Plakat/Barang dengan logo instansi Pemberi"> Karangan Bunga / Cindera mata / Plakat / Barang berlogo</label>
+          <label class="check"><input type="radio" name="fc_jenis" value="Tiket perjalanan/Fasilitas penginapan/Fasilitas lainnya"> Tiket perjalanan / Fasilitas penginapan / Fasilitas lainnya</label>
+          <label class="check"><input type="radio" name="fc_jenis" value="Barang lainnya"> Barang lainnya (elektronik, tas, jam, logam mulia, dll.)</label>
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="field"><label for="fc_uraian">4. Uraian Detail Objek Gratifikasi</label><input type="text" id="fc_uraian" placeholder="Jenis, jumlah, merek, warna, pecahan uang, dll."></div>
+        <div class="field"><label for="fc_nilai">5. Nilai Nominal / Taksiran Harga (Rp)</label><input type="text" id="fc_nilai" placeholder="Contoh: Rp1.500.000"></div>
+      </div>
+    </div>
+
+    <div class="panel stack">
+      <div class="form-sec-title">D. Kronologi &amp; E. Permohonan Kompensasi <span>Wajib diisi</span></div>
+      <div class="three">
+        <div class="field"><label for="fd_tgl_terima">1. Tanggal Penerimaan / Penolakan</label><input type="date" id="fd_tgl_terima"></div>
+        <div class="field"><label for="fd_tgl_upg">2. Tanggal Lapor UPG <span class="hint">(opsional)</span></label><input type="date" id="fd_tgl_upg"></div>
+        <div class="field"><label for="fd_tempat">3. Tempat Penerimaan</label><input type="text" id="fd_tempat" placeholder="Contoh: Ruang Pelayanan KPP / Rumah"></div>
+      </div>
+      <div class="field">
+        <label for="fd_kronologi">4. Uraian Proses Terjadinya Penerimaan / Penolakan Gratifikasi</label>
+        <textarea id="fd_kronologi" placeholder="Jelaskan secara singkat: kapan, di mana, dengan siapa, bagaimana prosesnya, dan dalam rangka apa pemberian terjadi..."></textarea>
+      </div>
+      <div class="field">
+        <span class="legend">E. Permohonan Kompensasi Objek Gratifikasi</span>
+        <span class="hint">Apakah Anda bersedia menyerahkan uang sebesar nilai SK KPK jika ingin memiliki barang gratifikasi tersebut?</span>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="fe_kompensasi" value="Tidak" checked><span>Tidak (Serahkan barang jika milik negara)</span></label>
+          <label class="chip"><input type="radio" name="fe_kompensasi" value="Ya"><span>Ya (Bersedia kompensasi uang)</span></label>
+        </div>
+      </div>
+      <div class="two">
+        <div class="field"><label for="fe_kota_ttd">Kota Penandatanganan</label><input type="text" id="fe_kota_ttd" placeholder="Contoh: Tangerang"></div>
+        <div class="field"><label for="fe_tgl_ttd">Tanggal Penandatanganan</label><input type="date" id="fe_tgl_ttd"></div>
+      </div>
+    </div>
+
+    <div class="btnrow">
+      <button type="button" class="btn" id="btn-print-pdf">
+        <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Cetak / Simpan sebagai PDF
+      </button>
+      <button type="button" class="btn ghost" id="btn-reset-form">Kosongkan Formulir</button>
+    </div>
+  </form>
+</section>
+
+<!-- ===== TAB 3: PENGECUALIAN ===== -->
 <section id="v-pengecualian" class="view" hidden>
   <h1>16 penerimaan yang tidak wajib dilaporkan</h1>
-  <p class="lead">Pasal 2 ayat (3) Perkom KPK 2/2019 sebagaimana diubah Perkom KPK 1/2026. Semua pengecualian gugur bila penerimaan itu dilarang oleh aturan instansi Anda (ayat 4).</p>
+  <p class="lead">Pasal 2 ayat (3) Perkom KPK 2/2019 sebagaimana diubah Perkom KPK 1/2026. Semua pengecualian gugur bila penerimaan itu dilarang oleh aturan internal instansi Anda (ayat 4).</p>
   <div class="list-exc" id="exc-list"></div>
 </section>
 
-<!-- ===== TENGGAT ===== -->
+<!-- ===== TAB 4: TENGGAT ===== -->
 <section id="v-tenggat" class="view" hidden>
   <h1>Kapan batas akhir melapor?</h1>
   <p class="lead">Laporan wajib disampaikan paling lama 30 hari kerja sejak gratifikasi diterima. Sabtu, Minggu, libur nasional, dan cuti bersama tidak dihitung.</p>
   <div class="panel stack" style="margin-top:20px">
     <div class="two">
-      <div class="field"><label for="t-tgl">Tanggal mulai</label><input type="date" id="t-tgl"></div>
+      <div class="field"><label for="t-tgl">Tanggal diterima / ditemukan</label><input type="date" id="t-tgl"></div>
       <div class="field">
-        <span class="legend" id="lg-mode">Yang dihitung</span>
-        <div class="chips" role="radiogroup" aria-labelledby="lg-mode">
+        <span class="legend">Yang dihitung</span>
+        <div class="chips">
           <label class="chip"><input type="radio" name="tmode" value="30" checked><span>30 hari kerja · batas lapor</span></label>
           <label class="chip"><input type="radio" name="tmode" value="20"><span>20 hari kerja · lengkapi laporan</span></label>
         </div>
@@ -281,148 +522,323 @@ footer p+p{margin-top:6px}
     </div>
     <div class="deadline" id="t-out"></div>
     <div class="field">
-      <span class="legend">Libur nasional &amp; cuti bersama yang dikecualikan</span>
-      <span class="hint">Daftar awal adalah perkiraan. Cocokkan dengan SKB 3 Menteri yang berlaku; ketuk tanggal untuk menghapus.</span>
+      <span class="legend">Libur nasional &amp; cuti bersama tahun 2026 yang dikecualikan</span>
+      <span class="hint">Ketuk tanggal untuk menghapus, atau tambahkan tanggal libur baru di bawah.</span>
       <div class="hol" id="hol"></div>
       <div class="btnrow" style="margin-top:6px">
-        <label class="vis-hidden" for="h-add">Tambah tanggal libur</label>
         <input type="date" id="h-add" style="padding:8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit">
         <button class="btn ghost" id="h-btn" style="padding:8px 14px">Tambah libur</button>
       </div>
     </div>
   </div>
-  <div class="note warn" style="margin-top:16px">Laporan yang lewat 30 hari kerja tetap boleh disampaikan, tetapi status gratifikasinya dapat ditetapkan menjadi milik negara dan ketentuan Pasal 12B UU Tipikor tetap berlaku (Pasal 17 ayat 3–4).</div>
 </section>
 
-<!-- ===== LAPOR ===== -->
+<!-- ===== TAB 5: CARA LAPOR ===== -->
 <section id="v-lapor" class="view" hidden>
   <h1>Cara melapor gratifikasi</h1>
   <p class="lead">Pilih salah satu kanal resmi berikut. Laporan penolakan gratifikasi juga dapat disampaikan lewat kanal yang sama (Pasal 4A).</p>
   <div class="channels">
-    <div class="chan"><h3>GOL KPK (web)</h3><p>Formulir pelaporan daring.</p><a href="https://gol.kpk.go.id/" target="_blank" rel="noopener">gol.kpk.go.id</a></div>
-    <div class="chan"><h3>Aplikasi GOL KPK</h3><p>Aplikasi ponsel resmi KPK untuk pelaporan gratifikasi.</p></div>
-    <div class="chan"><h3>Email</h3><code id="mail">pelaporan.gratifikasi@kpk.go.id</code><button class="linkbtn" id="copy-mail" style="text-align:left">Salin alamat</button></div>
-    <div class="chan"><h3>UPG instansi</h3><p>Unit Pengendali Gratifikasi di kantor Anda meneruskan laporan ke KPK.</p></div>
+    <div class="chan"><h3>GOL KPK (web)</h3><p>Formulir pelaporan daring resmi KPK.</p><a href="https://gol.kpk.go.id/" target="_blank" rel="noopener">gol.kpk.go.id</a></div>
+    <div class="chan"><h3>Email KPK (PDF Manual)</h3><code id="mail">pelaporan.gratifikasi@kpk.go.id</code><button class="linkbtn" id="copy-mail" style="text-align:left">Salin alamat email</button></div>
+    <div class="chan"><h3>UPG Instansi</h3><p>Unit Pengendali Gratifikasi di kantor Anda siap meneruskan laporan ke KPK.</p></div>
+    <div class="chan"><h3>Surat / Pos ke KPK</h3><p>Direktorat Gratifikasi KPK, Gedung Merah Putih, Jl. Kuningan Persada Kav. 4, Jakarta Selatan 12950.</p></div>
   </div>
-
-  <h2 style="margin-top:32px">Objek gratifikasi: perlu diserahkan atau tidak?</h2>
-  <div class="stack" style="margin-top:12px">
-    <div class="note">Objek wajib disertakan bila KPK perlu menguji keasliannya atau untuk verifikasi dan analisis (Pasal 5 ayat 1).</div>
-    <div class="note">Makanan/minuman yang mudah rusak tidak wajib disertakan dan dapat langsung disalurkan untuk kemanfaatan sosial, misalnya ke panti asuhan (Pasal 5 ayat 2–3). Simpan foto dan bukti penyalurannya untuk laporan.</div>
-  </div>
-
-  <h2 style="margin-top:32px">Setelah melapor</h2>
+  <h2 style="margin-top:32px">Alur setelah melapor</h2>
   <ol class="timeline">
-    <li><span class="when">Hari 0</span><div><b>Laporan masuk.</b> Diverifikasi oleh UPG (lalu diteruskan ke KPK) atau langsung oleh pegawai KPK.</div></li>
-    <li><span class="when">≤ 20 hari kerja</span><div><b>Bila laporan tidak lengkap,</b> laporan dikembalikan untuk dilengkapi. Tidak dilengkapi dalam 20 hari kerja → tidak ditindaklanjuti (Pasal 9).</div></li>
-    <li><span class="when">≤ 30 hari kerja</span><div><b>Penetapan status</b> sejak laporan diterima: milik penerima atau milik negara, dengan Keputusan Pimpinan (Pasal 17–18).</div></li>
-    <li><span class="when">≤ 7 hari kerja</span><div><b>SK disampaikan</b> kepada pelapor, dapat ditandatangani elektronik (Pasal 19).</div></li>
-    <li><span class="when">Setelah SK</span><div><b>Milik negara:</b> disetor ke Kas Negara atau diserahkan ke DJKN. <b>Milik penerima:</b> objek yang dititipkan dikembalikan dan harus diambil dalam 1 tahun, atau diserahkan ke negara (Pasal 20).</div></li>
+    <li><span class="when">Hari 0</span><div><b>Laporan masuk.</b> Diverifikasi oleh UPG kantor Anda atau langsung oleh tim KPK.</div></li>
+    <li><span class="when">≤ 20 hari kerja</span><div><b>Kelengkapan dokumen.</b> Bila belum lengkap, pelapor diberi waktu 20 hari kerja untuk melengkapi (Pasal 9).</div></li>
+    <li><span class="when">≤ 30 hari kerja</span><div><b>Penetapan status</b> oleh Pimpinan KPK: milik penerima atau milik negara (Pasal 17–18).</div></li>
+    <li><span class="when">≤ 7 hari kerja</span><div><b>SK disampaikan</b> kepada pelapor secara elektronik (Pasal 19).</div></li>
   </ol>
 </section>
 
 </main>
 
+<!-- ==================== TEMPLATE CETAK PDF (2 HALAMAN RESMI) ==================== -->
+<div id="print-sheet" aria-hidden="true">
+  <!-- HALAMAN 1 -->
+  <div class="p-page">
+    <div class="p-header">
+      <div class="p-kpk">KPK<small>Komisi Pemberantasan Korupsi</small></div>
+      <div class="p-title-box">
+        <h1>LAPORAN GRATIFIKASI</h1>
+        <div class="p-secret">Dokumen ini adalah rahasia negara. Dilarang membuka tanpa izin KPK</div>
+        <div class="p-sk">Mengacu SK Pimpinan KPK No. 1461 Tahun 2020 &amp; Perkom KPK No. 1 Tahun 2026</div>
+      </div>
+    </div>
+
+    <div class="p-legal">
+      <b>Pengertian &amp; Tata Cara Pelaporan Gratifikasi</b>
+      <ul>
+        <li><b>Pasal 12B ayat (1) UU No. 20 Tahun 2001:</b> Setiap gratifikasi kepada pegawai negeri atau penyelenggara negara dianggap pemberian suap, apabila berhubungan dengan jabatannya dan berlawanan dengan kewajiban atau tugasnya.</li>
+        <li><b>Batas Waktu (Pasal 12C UU 20/2001 &amp; Pasal 16 UU 30/2002):</b> Laporan wajib disampaikan paling lambat 30 (tiga puluh) hari kerja terhitung sejak tanggal gratifikasi diterima dengan melampirkan dokumen pendukung.</li>
+        <li><b>Penyampaian Laporan:</b> Online via <b>gol.kpk.go.id</b>, Email <b>pelaporan.gratifikasi@kpk.go.id</b>, atau Surat ke Direktorat Gratifikasi KPK, Gedung Merah Putih, Jl. Kuningan Persada Kav. 4, Jakarta Selatan 12950.</li>
+      </ul>
+    </div>
+
+    <div class="p-grid2">
+      <div class="p-box">
+        <div class="p-box-title">Dokumen Pendukung yang Dilampirkan</div>
+        <div>&#9744; Foto / Scan Objek Gratifikasi (Wajib)</div>
+        <div>&#9744; Surat Tugas / Undangan / Rundown Kegiatan</div>
+        <div>&#9744; Bukti Perjalanan / Tanda Terima / Bukti Penyaluran Sosial</div>
+        <div>&#9744; Rekapitulasi / Undangan (Khusus pernikahan/upacara adat)</div>
+      </div>
+      <div class="p-box">
+        <div class="p-box-title">Status Jenis &amp; Kerahasiaan Laporan</div>
+        <div><b>Jenis Laporan:</b> <span id="p_jenis_lap"></span></div>
+        <div style="margin-top:4px"><b>Kerahasiaan:</b> <span id="p_rahasia"></span></div>
+      </div>
+    </div>
+
+    <div class="p-sec"><span>A. IDENTITAS PELAPOR</span><span>Seluruhnya wajib diisi</span></div>
+    <table class="p-tbl">
+      <tr><td class="no">1.</td><td class="lbl">Nama Lengkap</td><td class="val" id="p_nama"></td></tr>
+      <tr><td class="no">2.</td><td class="lbl">Nomor Induk Kependudukan (NIK)</td><td class="val" id="p_nik"></td></tr>
+      <tr><td class="no">3.</td><td class="lbl">Tempat Lahir</td><td class="val" id="p_tmplahir"></td></tr>
+      <tr><td class="no">4.</td><td class="lbl">Tanggal Lahir</td><td class="val" id="p_tgllahir"></td></tr>
+      <tr><td class="no">5.</td><td class="lbl">Nama Instansi dan Unit Kerja</td><td class="val" id="p_instansi"></td></tr>
+      <tr><td class="no">6.</td><td class="lbl">Jabatan / Pangkat / Golongan</td><td class="val" id="p_jabatan"></td></tr>
+      <tr><td class="no">7.</td><td class="lbl">Alamat Email Penerima</td><td class="val" id="p_email"></td></tr>
+      <tr><td class="no">8.</td><td class="lbl">Alamat Lengkap Penerima (sesuai KTP)</td><td class="val" id="p_alamat"></td></tr>
+      <tr><td class="no">9.</td><td class="lbl">Nomor HP</td><td class="val" id="p_hp"></td></tr>
+      <tr><td class="no">10.</td><td class="lbl">Nama &amp; No. HP Pihak yang Dapat Dihubungi</td><td class="val" id="p_kontak"></td></tr>
+    </table>
+  </div>
+
+  <!-- HALAMAN 2 -->
+  <div class="p-page">
+    <div class="p-header">
+      <div class="p-kpk">KPK<small>Komisi Pemberantasan Korupsi</small></div>
+      <div class="p-title-box">
+        <h1>URAIAN LAPORAN GRATIFIKASI</h1>
+        <div class="p-sk">Lembar lanjutan — Wajib ditandatangani oleh Pelapor</div>
+      </div>
+    </div>
+
+    <div class="p-sec"><span>B. DATA PEMBERI GRATIFIKASI</span><span>Wajib diisi</span></div>
+    <table class="p-tbl">
+      <tr><td class="no">1.</td><td class="lbl">Nama Lengkap Pemberi</td><td class="val" id="pb_nama"></td></tr>
+      <tr><td class="no">2.</td><td class="lbl">Instansi Pemberi</td><td class="val" id="pb_instansi"></td></tr>
+      <tr><td class="no">3.</td><td class="lbl">Alamat Lengkap Pemberi</td><td class="val" id="pb_alamat"></td></tr>
+      <tr><td class="no">4.</td><td class="lbl">Hubungan Pemberi - Penerima</td><td class="val" id="pb_hub"></td></tr>
+      <tr><td class="no">5.</td><td class="lbl">Alasan Pemberian</td><td class="val" id="pb_alasan"></td></tr>
+    </table>
+
+    <div class="p-sec"><span>C. DATA PENERIMAAN GRATIFIKASI</span><span>Wajib diisi</span></div>
+    <table class="p-tbl">
+      <tr><td class="no">1.</td><td class="lbl">Peristiwa Terkait Gratifikasi</td><td class="val" id="pc_peristiwa"></td></tr>
+      <tr><td class="no">2.</td><td class="lbl">Lokasi Objek Gratifikasi</td><td class="val" id="pc_lokasi"></td></tr>
+      <tr><td class="no">3.</td><td class="lbl">Jenis / Objek Gratifikasi</td><td class="val" id="pc_jenis"></td></tr>
+      <tr><td class="no">4.</td><td class="lbl">Uraian Detail Objek Gratifikasi</td><td class="val" id="pc_uraian"></td></tr>
+      <tr><td class="no">5.</td><td class="lbl">Nilai Nominal / Taksiran</td><td class="val" id="pc_nilai"></td></tr>
+    </table>
+
+    <div class="p-sec"><span>D. KRONOLOGI PENERIMAAN GRATIFIKASI</span><span>Wajib diisi</span></div>
+    <table class="p-tbl">
+      <tr><td class="no">1.</td><td class="lbl">Tanggal Penerimaan / Penolakan</td><td class="val" id="pd_tgl_terima"></td></tr>
+      <tr><td class="no">2.</td><td class="lbl">Tanggal Lapor UPG (jika melalui UPG)</td><td class="val" id="pd_tgl_upg"></td></tr>
+      <tr><td class="no">3.</td><td class="lbl">Tempat Penerimaan Gratifikasi</td><td class="val" id="pd_tempat"></td></tr>
+      <tr><td class="no">4.</td><td class="lbl">Uraian Proses Terjadinya Gratifikasi</td><td class="val" style="min-height:48px" id="pd_kronologi"></td></tr>
+    </table>
+
+    <div class="p-sec"><span>E. PERMOHONAN KOMPENSASI OBJEK GRATIFIKASI</span><span>Pilih salah satu</span></div>
+    <div class="p-sign">
+      <div>Pelapor gratifikasi bersedia untuk menyerahkan uang sebagai kompensasi atas barang yang diterimanya sebesar nilai yang tercantum dalam Surat Keputusan Pimpinan KPK. Permintaan kompensasi yang telah mendapatkan persetujuan KPK tidak dapat dibatalkan sepihak oleh pelapor: <b id="pe_kompensasi"></b></div>
+      <div style="margin-top:8px;text-align:justify">Laporan gratifikasi ini saya sampaikan dengan sebenar-benarnya. Saya bersedia menyerahkan objek gratifikasi kepada KPK untuk proses analisa lebih lanjut atau apabila status kepemilikan gratifikasi telah ditetapkan menjadi milik negara. Apabila ada yang sengaja tidak saya laporkan atau saya laporkan kepada KPK secara tidak benar, maka saya bersedia mempertanggungjawabkannya secara hukum sesuai dengan peraturan perundang-undangan yang berlaku dan bersedia memberikan keterangan lebih lanjut.</div>
+      <div class="p-sign-row">
+        <div class="p-sign-box">
+          <div id="pe_tempat_tgl"></div>
+          <div>Pelapor,</div>
+          <div class="p-sign-space"></div>
+          <div>(<b id="pe_nama_ttd"></b>)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
 <footer>
   <div class="wrap">
-    <p>Alat bantu edukasi, bukan layanan resmi KPK. Bila ragu, laporkan melalui UPG instansi Anda atau GOL KPK. Data aturan: Perkom KPK No. 1 Tahun 2026 (diundangkan 20 Januari 2026, BN 2026 No. 43).</p>
-    <p>Disusun oleh Muhammad Widodo Ma'ruf - Penyuluh Antikorupsi Utama</p>
+    <p><b>GratiCek</b> adalah alat bantu edukasi mandiri bagi pelayan publik, bukan layanan resmi KPK. Dasar hukum: Perkom KPK No. 2 Tahun 2019 jo. Perkom KPK No. 1 Tahun 2026.</p>
+    <p>Disusun oleh Muhammad Widodo Ma'ruf — Penyuluh Antikorupsi Utama</p>
   </div>
 </footer>
 
 <nav class="bottomnav" aria-label="Menu bawah">
-  <a href="#cek" data-tab="cek"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Cek</a>
-  <a href="#pengecualian" data-tab="pengecualian"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>Pengecualian</a>
-  <a href="#tenggat" data-tab="tenggat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Tenggat</a>
-  <a href="#lapor" data-tab="lapor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg>Lapor</a>
+  <a href="#cek" data-tab="cek"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Cek</a>
+  <a href="#formulir" data-tab="formulir"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>Formulir</a>
+  <a href="#pengecualian" data-tab="pengecualian"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>Aturan</a>
+  <a href="#tenggat" data-tab="tenggat"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Tenggat</a>
+  <a href="#lapor" data-tab="lapor"><svg viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg>Lapor</a>
 </nav>
 
 <script>
 (function(){
+const $ = id => document.getElementById(id);
 const fmt = n => n.toLocaleString('id-ID');
 const parseRp = s => { const d = String(s||'').replace(/\D/g,''); return d ? Number(d) : null; };
-const $ = id => document.getElementById(id);
+const iso = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const fromIso = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const longDate = d => d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const shortDate = d => d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
+const today = iso(new Date());
 
-/* ---------- data situasi ---------- */
-// q: {t, h, fail:'ya'|'tidak', why}
+/* ---------- GENERATOR IKON KONSEP 1: PERISAI INTEGRITAS ---------- */
+function generateAppIcons(){
+  function drawLogo(size){
+    const c = document.createElement('canvas'); c.width = size; c.height = size;
+    const ctx = c.getContext('2d'), r = size * 0.22;
+    // Latar putih membulat
+    ctx.fillStyle = '#ffffff';
+    ctx.beginPath(); ctx.moveTo(r,0); ctx.lineTo(size-r,0); ctx.quadraticCurveTo(size,0,size,r);
+    ctx.lineTo(size,size-r); ctx.quadraticCurveTo(size,size,size-r,size); ctx.lineTo(r,size);
+    ctx.quadraticCurveTo(0,size,0,size-r); ctx.lineTo(0,r); ctx.quadraticCurveTo(0,0,r,0); ctx.fill();
+
+    ctx.save(); ctx.scale(size/64, size/64);
+    // Perisai merah utama
+    ctx.fillStyle = '#d71920';
+    ctx.beginPath(); ctx.moveTo(32,6); ctx.lineTo(54,14); ctx.lineTo(54,31);
+    ctx.bezierCurveTo(54,45,44,55,32,60); ctx.bezierCurveTo(20,55,10,45,10,31); ctx.lineTo(10,14); ctx.closePath(); ctx.fill();
+
+    // Sisi kanan perisai lebih gelap untuk efek dimensi
+    ctx.fillStyle = '#b31217';
+    ctx.beginPath(); ctx.moveTo(32,10); ctx.lineTo(50,17); ctx.lineTo(50,31);
+    ctx.bezierCurveTo(50,42.5,41.5,51.5,32,55.8); ctx.closePath(); ctx.fill();
+
+    // Garis tepi putih dalam
+    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(32,10); ctx.lineTo(50,17); ctx.lineTo(50,31);
+    ctx.bezierCurveTo(50,42.5,41.5,51.5,32,55.8); ctx.bezierCurveTo(22.5,51.5,14,42.5,14,31); ctx.lineTo(14,17); ctx.closePath(); ctx.stroke();
+
+    // Tanda centang putih
+    ctx.lineWidth = 4.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(23,32); ctx.lineTo(29.5,38.5); ctx.lineTo(42,25); ctx.stroke();
+    ctx.restore();
+    return c.toDataURL('image/png');
+  }
+  const i192 = drawLogo(192), i512 = drawLogo(512);
+  $('link-favicon').href = i192; $('link-apple-icon').href = i192; $('meta-og-img').content = i512;
+  const manifest = {name:'GratiCek — Panduan & Formulir Gratifikasi', short_name:'GratiCek', start_url:location.href.split('#')[0], display:'standalone', background_color:'#141414', theme_color:'#d71920', icons:[{src:i192,sizes:'192x192',type:'image/png'},{src:i512,sizes:'512x512',type:'image/png'}]};
+  $('link-manifest').href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type:'application/manifest+json'}));
+}
+generateAppIcons();
+
+/* ---------- THEME & INSTALL ---------- */
+const rootEl = document.documentElement;
+function applyTheme(t){
+  if (t==='dark'||t==='light'){ rootEl.setAttribute('data-theme',t); localStorage.setItem('gc-theme',t); }
+  const isDark = rootEl.getAttribute('data-theme')==='dark' || (!rootEl.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+  $('ico-sun').hidden = !isDark; $('ico-moon').hidden = isDark; $('lbl-theme').textContent = isDark ? 'Terang' : 'Gelap';
+}
+applyTheme(localStorage.getItem('gc-theme'));
+$('btn-theme').addEventListener('click', () => {
+  const isDark = rootEl.getAttribute('data-theme')==='dark' || (!rootEl.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+  applyTheme(isDark ? 'light' : 'dark');
+});
+
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; $('btn-install').hidden = false; });
+$('btn-install').addEventListener('click', async () => {
+  if (deferredPrompt){ deferredPrompt.prompt(); await deferredPrompt.userChoice; deferredPrompt = null; $('btn-install').hidden = true; }
+});
+
+/* ---------- DATA CHECKER ---------- */
 const SIT = [
- {id:'nikah', perGiver:true, t:'Kado/amplop pernikahan, kelahiran, akikah, khitanan, upacara adat/agama', s:'Dari tamu atau kenalan', huruf:'l', limit:1500000,
-  why_limit:'Nilai melebihi Rp1.500.000 per pemberi untuk acara pernikahan/kelahiran/upacara (huruf l).'},
- {id:'rekan', perGiver:true, t:'Hadiah dari rekan kerja', s:'Ulang tahun, pisah sambut, promosi, dll.', huruf:'n', noMoney:true, limit:500000, yearly:1500000,
-  why_limit:'Nilai melebihi Rp500.000 per pemberian dari rekan kerja (huruf n).',
-  q:[{t:'Apakah ada konflik kepentingan, misalnya rekan ini sedang menunggu keputusan atau penilaian dari Anda?', fail:'ya', why:'Ada konflik kepentingan, sehingga huruf n tidak berlaku.'}]},
- {id:'parsel', t:'Parsel, bingkisan, atau THR hari raya', s:'Dari kenalan, mitra, atau pihak luar', huruf:null, always:'lapor',
-  why_always:'Parsel atau THR hari raya tidak termasuk 16 pengecualian Pasal 2 ayat (3).'},
- {id:'keluarga', t:'Pemberian dari keluarga', s:'Orang tua, saudara, sepupu, dll.', huruf:'a',
-  q:[{t:'Apakah pemberi termasuk kakek/nenek, orang tua/mertua, suami/istri, anak/menantu, anak angkat/wali, cucu, besan, paman/bibi, kakak/adik/ipar, sepupu, atau keponakan?', fail:'tidak', why:'Hubungan pemberi tidak termasuk daftar keluarga huruf a.'},
-     {t:'Apakah pemberi sedang punya urusan yang terkait jabatan Anda (konflik kepentingan)?', fail:'ya', why:'Ada konflik kepentingan, sehingga huruf a tidak berlaku.'}]},
- {id:'musibah', t:'Bantuan musibah atau bencana', s:'Sakit, kecelakaan, kematian, bencana', huruf:'m',
-  q:[{t:'Apakah musibah dialami Anda sendiri, suami/istri, anak, orang tua, mertua, atau menantu?', fail:'tidak', why:'Musibah tidak dialami pihak yang disebut huruf m.'},
-     {t:'Apakah nilainya wajar dan patut, dan pemberi tidak punya urusan dengan jabatan Anda?', fail:'tidak', why:'Nilai tidak wajar atau ada konflik kepentingan (huruf m).'}]},
- {id:'bunga', t:'Karangan bunga ucapan', s:'Pernikahan, duka, pisah sambut, promosi jabatan', huruf:'k', onlyGoods:true},
- {id:'seminar', t:'Perlengkapan peserta seminar/pelatihan dinas', s:'Tas, buku, seminar kit', huruf:'d',
-  q:[{t:'Apakah perlengkapan yang sama diberikan kepada semua peserta?', fail:'tidak', why:'Tidak Berlaku Umum untuk semua peserta (huruf d).'}]},
- {id:'promosi', t:'Suvenir atau merchandise promosi berlogo', s:'Kaus, kalender, mug, pulpen', huruf:'e', noMoney:true,
-  q:[{t:'Apakah suvenir ini berlogo/berisi pesan sosialisasi dan dibagikan sama kepada umum?', fail:'tidak', why:'Bukan alat promosi yang Berlaku Umum (huruf e).'}]},
- {id:'honordinas', t:'Honor, transport, atau akomodasi kegiatan dinas', s:'Narasumber, panitia, perjalanan dinas', huruf:'j',
-  q:[{t:'Apakah besarannya sesuai standar biaya yang berlaku di instansi Anda?', fail:'tidak', why:'Di luar standar biaya instansi (huruf j).'},
-     {t:'Apakah biaya yang sama juga sudah ditanggung pihak lain (pembiayaan ganda)?', fail:'ya', why:'Terdapat pembiayaan ganda (huruf j).'}]},
- {id:'profesi', t:'Honor profesi di luar kedinasan', s:'Mengajar, menulis, konsultan pribadi', huruf:'i',
-  q:[{t:'Apakah kegiatan ini sama sekali tidak terkait tugas dan jabatan Anda?', fail:'tidak', why:'Kegiatan terkait tugas atau jabatan (huruf i).'},
-     {t:'Apakah kegiatan ini melanggar kode etik atau aturan instansi Anda?', fail:'ya', why:'Melanggar kode etik/aturan instansi (huruf i).'}]},
- {id:'lomba', t:'Hadiah lomba atau kompetisi', s:'Juara lomba lari, karya tulis, dll.', huruf:'f',
-  q:[{t:'Apakah Anda ikut dengan biaya sendiri?', fail:'tidak', why:'Tidak diikuti dengan biaya sendiri (huruf f).'},
-     {t:'Apakah lomba ini terkait kedinasan?', fail:'ya', why:'Lomba terkait kedinasan (huruf f).'}]},
- {id:'penghargaan', t:'Penghargaan prestasi kerja dari pemerintah', s:'Uang atau barang', huruf:'g',
-  q:[{t:'Apakah diberikan oleh pemerintah sesuai peraturan perundang-undangan, terkait prestasi kerja?', fail:'tidak', why:'Bukan penghargaan pemerintah sesuai peraturan (huruf g).'}]},
- {id:'diskon', t:'Diskon, voucher, poin, undian, atau hadiah langsung', s:'Dari toko, bank, aplikasi', huruf:'h',
-  q:[{t:'Apakah promo ini berlaku untuk umum, siapa pun bisa mendapatkannya?', fail:'tidak', why:'Tidak Berlaku Umum (huruf h).'},
-     {t:'Apakah Anda mendapatkannya karena kedinasan atau jabatan?', fail:'ya', why:'Terkait kedinasan (huruf h).'}]},
- {id:'hidangan', t:'Jamuan makan atau hidangan', s:'Di acara, rapat, kunjungan', huruf:'o', onlyGoods:true,
-  q:[{t:'Apakah hidangan disajikan untuk semua hadirin, bukan khusus untuk Anda?', fail:'tidak', why:'Hidangan tidak Berlaku Umum (huruf o).'}]},
- {id:'investasi', t:'Bunga atau keuntungan investasi pribadi', s:'Deposito, saham, reksa dana', huruf:'b',
-  q:[{t:'Apakah bunga/keuntungannya sama dengan yang diterima nasabah atau investor lain?', fail:'tidak', why:'Tidak Berlaku Umum (huruf b).'}]},
- {id:'koperasi', t:'Manfaat koperasi atau organisasi pegawai', s:'SHU, bingkisan anggota', huruf:'c',
-  q:[{t:'Apakah manfaat ini diberikan kepada semua anggota sesuai keanggotaan?', fail:'tidak', why:'Tidak Berlaku Umum bagi anggota (huruf c).'}]},
- {id:'plakat', t:'Plakat atau cendera mata kunjungan dinas', s:'Dalam/luar negeri', huruf:'p',
-  q:[{t:'Apakah ditujukan untuk instansi, bukan untuk Anda pribadi?', fail:'tidak', why:'Ditujukan untuk pribadi, bukan instansi (huruf p).'}]},
- {id:'urusan', t:'Dari vendor, rekanan, wajib pajak, atau pemohon layanan', s:'Pihak yang sedang/akan berurusan dengan Anda', huruf:null, always:'tolak', warn:true},
- {id:'lain', t:'Tidak ada di daftar', s:'Situasi lain', huruf:null, always:'lapor',
-  why_always:'Situasi ini tidak termasuk 16 pengecualian Pasal 2 ayat (3).'}
+ {id:'urusan', cat:'layanan', kw:'uang bensin uang lelah salam tempel wajib pajak vendor rekanan kontraktor pemohon izin pemeriksa survei ditinggal di meja',
+  t:'Pemberian dari pihak yang sedang dilayani/diperiksa', s:'Uang "bensin/lelah", amplop di meja, atau bingkisan dari wajib pajak, vendor, dan pemohon layanan', huruf:null, always:'tolak', warn:true,
+  tip:'<b>Langkah taktis di lapangan:</b> Jika barang atau amplop ditinggal di meja kerja/pos satpam tanpa sempat ditolak, jangan dibuka atau dipakai. Foto barangnya, catat perkiraan waktu dan identitas pengirim, lalu laporkan maksimal 30 hari kerja.'},
+ {id:'parsel', cat:'layanan', kw:'parsel lebaran natal imlek hampers bingkisan hari raya thr mitra kerja',
+  t:'Parsel, hampers, atau THR hari raya dari pihak luar', s:'Dikirim mitra kerja, rekanan, atau kenalan ke kantor maupun langsung ke rumah', huruf:null, always:'lapor',
+  why_always:'Parsel, bingkisan hari raya, atau THR dari pihak luar tidak termasuk dalam 16 pengecualian Pasal 2 ayat (3).',
+  tip:'<b>Catatan makanan/buah:</b> Jika berisi makanan/buah mudah basi, Anda boleh menyalurkannya ke panti asuhan atau kegiatan sosial, lalu unggah foto penyerahannya di laporan.'},
+ {id:'hidangan', cat:'layanan', kw:'makan siang traktiran kopi jamuan rapat kunjungan kerja pemeriksaan lapangan',
+  t:'Jamuan makan atau hidangan saat rapat/kunjungan', s:'Makan siang bersama di acara, rapat kantor, atau kunjungan lapangan', huruf:'o', allowedBentuk:['makanan'],
+  q:[{t:'Apakah hidangan ini disajikan untuk semua peserta/hadirin rapat, bukan traktiran khusus hanya untuk Anda?', fail:'tidak', why:'Hidangan tidak berlaku umum bagi seluruh hadirin (huruf o).'}]},
+ {id:'plakat', cat:'layanan', kw:'plakat vandel cendera mata kenang-kenangan studi banding audiensi',
+  t:'Plakat atau cendera mata kunjungan kedinasan', s:'Kenang-kenangan saat studi banding atau audiensi antarinstansi', huruf:'p', allowedBentuk:['barang'],
+  q:[{t:'Apakah plakat/cendera mata ini ditujukan untuk instansi, bukan untuk dibawa pulang pribadi?', fail:'tidak', why:'Ditujukan untuk individu/pribadi, bukan untuk instansi (huruf p).'}]},
+ {id:'rekan', cat:'kantor', perGiver:true, kw:'kado ulang tahun pisah sambut mutasi promosi purnabakti pensiun urunan patungan teman kantor sekantor',
+  t:'Hadiah atau kado patungan dari sesama rekan kerja', s:'Acara ulang tahun, pisah sambut mutasi/promosi, atau purnabakti di kantor', huruf:'n', noMoney:true, limit:500000, yearly:1500000,
+  why_limit:'Nilai pemberian melebihi batas Rp500.000 per pemberi dari sesama rekan kerja (huruf n).',
+  q:[{t:'Apakah rekan kerja tersebut sedang menunggu keputusan, tanda tangan, atau penilaian kinerja langsung dari Anda?', fail:'ya', why:'Ada potensi konflik kepentingan dalam hubungan kerja (huruf n).'}]},
+ {id:'seminar', cat:'kantor', kw:'seminar kit tas diklat pelatihan bimtek workshop tumbler modul',
+  t:'Perlengkapan peserta diklat, seminar, atau bimtek', s:'Tas, tumbler, buku catatan, atau seminar kit dari penyelenggara acara', huruf:'d',
+  q:[{t:'Apakah perlengkapan yang sama persis dibagikan kepada seluruh peserta acara?', fail:'tidak', why:'Tidak berlaku umum bagi semua peserta (huruf d).'}]},
+ {id:'koperasi', cat:'kantor', kw:'shu koperasi pegawai korpri dharma wanita bingkisan anggota',
+  t:'Manfaat koperasi atau organisasi kepegawaian', s:'Sisa Hasil Usaha (SHU) atau bingkisan rutin anggota koperasi kantor', huruf:'c',
+  q:[{t:'Apakah manfaat ini diberikan kepada seluruh anggota sesuai aturan keanggotaan koperasi?', fail:'tidak', why:'Tidak berlaku umum bagi seluruh anggota (huruf c).'}]},
+ {id:'penghargaan', cat:'kantor', kw:'satyalancana piagam bonus prestasi kinerja pemerintah',
+  t:'Penghargaan prestasi kerja resmi dari pemerintah', s:'Uang pembinaan atau barang penghargaan sesuai ketentuan perundang-undangan', huruf:'g',
+  q:[{t:'Apakah diberikan secara resmi oleh instansi pemerintah berdasarkan peraturan yang sah?', fail:'tidak', why:'Bukan penghargaan resmi pemerintah sesuai peraturan (huruf g).'}]},
+ {id:'nikah', cat:'pribadi', perGiver:true, kw:'amplop kondangan nikah pernikahan lahiran bayi akikah khitanan sunatan upacara adat',
+  t:'Amplop atau kado hajatan keluarga (nikah, lahiran, khitanan)', s:'Pemberian dari tamu undangan atau kenalan saat Anda menggelar acara pribadi', huruf:'l', limit:1500000,
+  why_limit:'Nilai melebihi batas maksimal Rp1.500.000 per pemberi untuk acara pernikahan/kelahiran/adat (huruf l).'},
+ {id:'keluarga', cat:'pribadi', kw:'orang tua mertua kakak adik sepupu paman bibi keponakan saudara kandung',
+  t:'Pemberian dari anggota keluarga besar', s:'Dari orang tua, mertua, saudara kandung, paman/bibi, hingga sepupu dan keponakan', huruf:'a',
+  q:[{t:'Apakah pemberi masih dalam lingkup keluarga (kakek/nenek sampai sepupu/keponakan)?', fail:'tidak', why:'Hubungan kekerabatan di luar daftar keluarga huruf a.'},
+     {t:'Apakah anggota keluarga tersebut sedang mengurus perizinan, pemeriksaan, atau proyek di unit kerja Anda?', fail:'ya', why:'Terdapat konflik kepentingan dengan jabatan Anda (huruf a).'}]},
+ {id:'musibah', cat:'pribadi', kw:'sakit dirawat rumah sakit duka cita meninggal kecelakaan bencana alam sumbangan',
+  t:'Bantuan atau santunan saat terkena musibah/sakit', s:'Sumbangan saat Anda atau keluarga inti dirawat, meninggal dunia, atau tertimpa bencana', huruf:'m',
+  q:[{t:'Apakah musibah dialami oleh Anda sendiri, pasangan, anak, orang tua, mertua, atau menantu?', fail:'tidak', why:'Pihak yang tertimpa musibah bukan keluarga inti huruf m.'},
+     {t:'Apakah nilainya wajar secara sosial dan pemberi tidak memiliki urusan dinas dengan Anda?', fail:'tidak', why:'Nilai tidak wajar atau ada konflik kepentingan (huruf m).'}]},
+ {id:'bunga', cat:'pribadi', kw:'karangan bunga papan ucapan selamat duka cita pelantikan',
+  t:'Karangan bunga ucapan selamat atau duka cita', s:'Papan bunga untuk pernikahan, pelantikan jabatan, pisah sambut, atau berita duka', huruf:'k', allowedBentuk:['barang']},
+ {id:'honordinas', cat:'umum', kw:'honor narasumber pembicara moderator panitia sppd transport penginapan hotel',
+  t:'Honor, transport, atau penginapan kegiatan dinas', s:'Menjadi narasumber, moderator, atau panitia pada instansi lain sesuai surat tugas', huruf:'j',
+  q:[{t:'Apakah besaran honor/transport tersebut sesuai Standar Biaya (SBM/SBU) yang berlaku?', fail:'tidak', why:'Di luar standar biaya resmi instansi (huruf j).'},
+     {t:'Apakah biaya transport/hotel tersebut sudah dibayarkan juga oleh kantor Anda (pembiayaan ganda)?', fail:'ya', why:'Terjadi pembiayaan ganda (huruf j).'}]},
+ {id:'profesi', cat:'umum', kw:'menulis artikel royalti buku mengajar dosen luar biasa konsultan pribadi',
+  t:'Honor profesi atau karya pribadi di luar jam dinas', s:'Royalti buku, honor menulis opini di media, atau mengajar di luar tugas jabatan', huruf:'i',
+  q:[{t:'Apakah kegiatan ini murni keahlian pribadi dan sama sekali tidak memakai wewenang jabatan Anda?', fail:'tidak', why:'Kegiatan berkaitan langsung dengan tugas atau wewenang jabatan (huruf i).'},
+     {t:'Apakah kegiatan ini melanggar kode etik atau aturan disiplin instansi Anda?', fail:'ya', why:'Melanggar kode etik instansi (huruf i).'}]},
+ {id:'promosi', cat:'umum', kw:'suvenir merchandise kalender pulpen mug kaus berlogo sosialisasi',
+  t:'Suvenir atau merchandise promosi berlogo instansi/perusahaan', s:'Kalender, pulpen, mug, atau kaus berlogo yang dibagikan dalam acara sosialisasi/pameran', huruf:'e', noMoney:true,
+  q:[{t:'Apakah suvenir memiliki logo/pesan sosialisasi dan dibagikan gratis kepada semua pengunjung?', fail:'tidak', why:'Bukan barang promosi yang berlaku umum (huruf e).'}]},
+ {id:'diskon', cat:'umum', kw:'diskon promo cashback poin kartu kredit undian bank hadiah langsung belanja',
+  t:'Diskon, voucher, poin, atau hadiah undian promo umum', s:'Potongan harga belanja, poin aplikasi, atau undian nasabah dari bank/toko', huruf:'h',
+  q:[{t:'Apakah promo atau undian ini terbuka untuk masyarakat umum?', fail:'tidak', why:'Tidak berlaku umum (huruf h).'},
+     {t:'Apakah Anda mendapatkan diskon/hadiah khusus ini karena posisi atau jabatan dinas Anda?', fail:'ya', why:'Fasilitas didapatkan karena jabatan (huruf h).'}]},
+ {id:'lomba', cat:'umum', kw:'juara lomba lari fun run karya tulis kompetisi turnamen olahraga',
+  t:'Hadiah juara lomba atau kompetisi terbuka', s:'Hadiah lomba lari, karya tulis, atau kompetisi yang diikuti atas nama pribadi', huruf:'f',
+  q:[{t:'Apakah biaya pendaftaran dan akomodasi lomba ditanggung sendiri?', fail:'tidak', why:'Menggunakan biaya kedinasan (huruf f).'},
+     {t:'Apakah penyelenggara lomba sedang berurusan dinas dengan unit kerja Anda?', fail:'ya', why:'Ada keterkaitan kedinasan dengan penyelenggara (huruf f).'}]},
+ {id:'investasi', cat:'umum', kw:'bunga deposito dividen saham reksa dana obligasi',
+  t:'Bunga tabungan, deposito, atau keuntungan investasi pribadi', s:'Imbal hasil penempatan dana pribadi di bank, saham, atau reksa dana', huruf:'b',
+  q:[{t:'Apakah suku bunga atau imbal hasilnya sama dengan yang diterima nasabah/investor umum lainnya?', fail:'tidak', why:'Mendapat perlakuan khusus yang tidak berlaku umum (huruf b).'}]},
+ {id:'lain', cat:'umum', kw:'lainnya tidak ada di daftar bingung',
+  t:'Kondisi lain yang belum tercantum di atas', s:'Pemberian dalam situasi khusus di luar daftar pilihan', huruf:null, always:'lapor',
+  why_always:'Karena tidak termasuk dalam 16 pengecualian Pasal 2 ayat (3), langkah paling aman adalah melaporkannya.'}
 ];
 
 const EXC = [
  ['a','Pemberian dalam keluarga (kakek/nenek sampai keponakan), sepanjang tidak ada konflik kepentingan.'],
- ['b','Keuntungan/bunga penempatan dana, investasi, atau saham pribadi yang Berlaku Umum.'],
- ['c','Manfaat koperasi atau organisasi kepegawaian berdasarkan keanggotaan, Berlaku Umum.'],
- ['d','Perangkat/perlengkapan peserta seminar, lokakarya, pelatihan kedinasan, Berlaku Umum.'],
- ['e','Hadiah bukan uang untuk promosi/sosialisasi berlogo, tanpa konflik kepentingan, Berlaku Umum.'],
+ ['b','Keuntungan/bunga penempatan dana, investasi, atau saham pribadi yang berlaku umum.'],
+ ['c','Manfaat koperasi atau organisasi kepegawaian berdasarkan keanggotaan yang berlaku umum.'],
+ ['d','Perangkat/perlengkapan peserta seminar, lokakarya, atau pelatihan kedinasan yang berlaku umum.'],
+ ['e','Hadiah bukan uang untuk promosi/sosialisasi berlogo, tanpa konflik kepentingan, dan berlaku umum.'],
  ['f','Hadiah lomba yang diikuti dengan biaya sendiri dan tidak terkait kedinasan.'],
- ['g','Penghargaan uang/barang terkait prestasi kerja dari pemerintah sesuai peraturan.'],
- ['h','Hadiah langsung/undian, diskon, voucher, poin, suvenir yang Berlaku Umum dan tidak terkait kedinasan.'],
+ ['g','Penghargaan uang/barang terkait prestasi kerja dari pemerintah sesuai peraturan perundang-undangan.'],
+ ['h','Hadiah langsung/undian, diskon, voucher, poin, atau suvenir yang berlaku umum dan tidak terkait kedinasan.'],
  ['i','Honor profesi di luar kedinasan yang tidak terkait tugas, tanpa konflik kepentingan dan tidak melanggar kode etik.'],
  ['j','Honor, transport, akomodasi kedinasan sesuai standar biaya instansi, tanpa pembiayaan ganda dan konflik kepentingan.'],
- ['k','Karangan bunga ucapan untuk pernikahan, kelahiran, kematian, upacara adat/agama, pisah sambut, pensiun, promosi.'],
- ['l','Pemberian terkait pertunangan, pernikahan, kelahiran, akikah, baptis, khitanan, potong gigi, upacara adat/agama.','Maks. Rp1.500.000 per pemberi'],
+ ['k','Karangan bunga ucapan untuk pernikahan, kelahiran, kematian, upacara adat/agama, pisah sambut, pensiun, atau promosi.'],
+ ['l','Pemberian terkait pertunangan, pernikahan, kelahiran, akikah, baptis, khitanan, potong gigi, atau upacara adat/agama.','Maks. Rp1.500.000 per pemberi'],
  ['m','Pemberian terkait musibah/bencana yang dialami diri, pasangan, anak, orang tua, mertua, atau menantu; wajar dan tanpa konflik kepentingan.'],
  ['n','Pemberian sesama rekan kerja, bukan uang/alat tukar, tanpa konflik kepentingan.','Maks. Rp500.000 per pemberian · Rp1.500.000 per tahun dari pemberi yang sama'],
- ['o','Hidangan atau sajian yang Berlaku Umum.'],
+ ['o','Hidangan atau sajian yang berlaku umum.'],
  ['p','Cendera mata/plakat untuk instansi dalam hubungan kedinasan, tidak untuk individu.']
 ];
 
-const BENTUK = [['uang','Uang / transfer'],['voucher','Voucher / alat tukar'],['makanan','Makanan/minuman mudah rusak'],['barang','Barang lain']];
-
-/* ---------- libur (perkiraan) ---------- */
+const BENTUK = [['uang','Uang tunai / transfer'],['voucher','Voucher / e-wallet / alat tukar'],['makanan','Makanan / minuman mudah rusak'],['barang','Barang lainnya']];
 const DEFAULT_HOL = ['2026-01-01','2026-01-16','2026-02-16','2026-02-17','2026-03-18','2026-03-19','2026-03-20','2026-03-23','2026-03-24','2026-04-03','2026-05-01','2026-05-14','2026-05-15','2026-05-27','2026-05-28','2026-06-01','2026-06-16','2026-08-17','2026-08-25','2026-12-24','2026-12-25'];
 let HOL = DEFAULT_HOL.slice();
-try { const s = localStorage.getItem('pg-hol'); if (s) HOL = JSON.parse(s); } catch(e){}
-const saveHol = () => { try { localStorage.setItem('pg-hol', JSON.stringify(HOL)); } catch(e){} };
 
-const iso = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-const fromIso = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
 function addWorkDays(startIso, n){
   const d = fromIso(startIso); let c = 0;
-  while (c < n){ d.setDate(d.getDate()+1); const w = d.getDay(); if (w===0||w===6) continue; if (HOL.includes(iso(d))) continue; c++; }
+  while (c < n){ d.setDate(d.getDate()+1); const w = d.getDay(); if (w===0||w===6||HOL.includes(iso(d))) continue; c++; }
   return d;
 }
 function workDaysBetween(startIso, endIso){
@@ -430,63 +846,52 @@ function workDaysBetween(startIso, endIso){
   while (d < e){ d.setDate(d.getDate()+1); const w = d.getDay(); if (w===0||w===6||HOL.includes(iso(d))) continue; c++; }
   return c;
 }
-const longDate = d => d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-const today = iso(new Date());
 
-/* ---------- routing ---------- */
-const TABS = ['cek','pengecualian','tenggat','lapor'];
+/* ---------- ROUTING ---------- */
+const TABS = ['cek','formulir','pengecualian','tenggat','lapor'];
 function route(){
   const h = (location.hash||'').slice(1); const tab = TABS.includes(h) ? h : 'cek';
   TABS.forEach(t => { $('v-'+t).hidden = t!==tab; });
   document.querySelectorAll('a[data-tab]').forEach(a => { if (a.dataset.tab===tab) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
-  if (route.ready) window.scrollTo(0,0); route.ready = true;
 }
 window.addEventListener('hashchange', route);
 
-/* ---------- checker ---------- */
-const st = {sit:null, bentuk:null, nilai:null, unknown:false, tgl:today, total:null, qs:[], qi:0, answers:[]};
+/* ---------- CHECKER FLOW ---------- */
+const st = {sit:null, cat:'semua', bentuk:null, nilai:null, unknown:false, tgl:today, total:null, qs:[], qi:0, answers:[]};
+const CAT_LABEL = {layanan:'Layanan & Lapangan', kantor:'Internal Kantor', pribadi:'Keluarga & Hajatan', umum:'Kegiatan Luar & Umum'};
 
-function renderGrid(filter=''){
-  const f = filter.trim().toLowerCase();
-  $('sit-grid').innerHTML = SIT.filter(s => !f || (s.t+' '+s.s).toLowerCase().includes(f)).map(s =>
-    `<button class="sit${s.warn?' warn':''}" data-id="${s.id}"><span class="tag">${s.huruf ? 'Pengecualian huruf '+s.huruf : (s.always==='tolak'?'Pasal 2 ayat 2':'Bukan pengecualian')}</span><b>${s.t}</b><small>${s.s}</small></button>`).join('')
-    || '<p class="hint" style="color:var(--muted)">Tidak ditemukan. Pilih “Tidak ada di daftar”.</p>';
+function renderGrid(){
+  const f = $('q-search').value.trim().toLowerCase();
+  $('quick-wrap').hidden = f.length > 0;
+  const filtered = SIT.filter(s => (f.length>0 || st.cat==='semua' || s.cat===st.cat) && (!f || (s.t+' '+s.s+' '+(s.kw||'')).toLowerCase().includes(f)));
+  $('sit-grid').innerHTML = filtered.map(s => `<button class="sit${s.warn?' warn':''}" data-id="${s.id}"><span class="tag">${s.warn?'Wajib Tolak · Pasal 2(2)':CAT_LABEL[s.cat]}</span><b>${s.t}</b><small>${s.s}</small></button>`).join('');
 }
-$('q-search').addEventListener('input', e => renderGrid(e.target.value));
-$('sit-grid').addEventListener('click', e => {
-  const b = e.target.closest('.sit'); if (!b) return;
-  st.sit = SIT.find(s => s.id===b.dataset.id); goStep(2);
-});
+$('q-search').addEventListener('input', renderGrid);
+$('cat-tabs').addEventListener('click', e => { const b = e.target.closest('.cat-btn'); if (!b) return; st.cat=b.dataset.cat; document.querySelectorAll('.cat-btn').forEach(x=>x.classList.toggle('active',x===b)); renderGrid(); });
+$('quick-wrap').addEventListener('click', e => { const b = e.target.closest('.qcard'); if (!b) return; st.sit = SIT.find(s=>s.id===b.dataset.jump); if (st.sit) goStep(2); });
+$('sit-grid').addEventListener('click', e => { const b = e.target.closest('.sit'); if (!b) return; st.sit = SIT.find(s=>s.id===b.dataset.id); goStep(2); });
 
-$('bentuk').innerHTML = BENTUK.map(([v,l],i) => `<label class="chip"><input type="radio" name="bentuk" value="${v}" id="b-${v}"><span>${l}</span></label>`).join('');
-$('f-tgl').value = today; $('f-tgl').max = today;
-$('f-nilai').addEventListener('input', e => { const n = parseRp(e.target.value); e.target.value = n===null ? '' : fmt(n); });
-$('f-total').addEventListener('input', e => { const n = parseRp(e.target.value); e.target.value = n===null ? '' : fmt(n); });
+$('bentuk').innerHTML = BENTUK.map(([v,l]) => `<label class="chip"><input type="radio" name="bentuk" value="${v}"><span>${l}</span></label>`).join('');
+$('f-tgl').value = today; $('f-nilai').addEventListener('input', e => { const n = parseRp(e.target.value); e.target.value = n===null ? '' : fmt(n); });
 $('f-unknown').addEventListener('change', e => { $('f-nilai').disabled = e.target.checked; });
 
 function goStep(n){
   [1,2,3,4].forEach(i => $('s'+i).hidden = i!==n);
   document.querySelectorAll('#steps li').forEach((li,i) => { li.className = i+1===n ? 'on' : (i+1<n ? 'done' : ''); });
-  if (n===2){ $('s2-name').textContent = st.sit.t; $('wrap-total').hidden = !st.sit.yearly; $('wrap-pemberi').hidden = !st.sit.perGiver; if (st.sit.perGiver) $('pemberi-hint').textContent = 'Untuk kado urunan (misalnya dari teman satu kantor saat perpisahan), isi jumlah orang yang ikut memberi. Batas Rp'+fmt(st.sit.limit)+' berlaku per pemberi.'; $('s2-err').textContent=''; }
+  if (n===2){ $('s2-name').textContent = st.sit.t; $('wrap-total').hidden = !st.sit.yearly; $('wrap-pemberi').hidden = !st.sit.perGiver; }
   if (n===3){ $('s3-name').textContent = st.sit.t; showQ(); }
-  if (n>1) $('steps').scrollIntoView({block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto':'smooth'});
 }
 document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click', () => goStep(Number(b.dataset.back))));
 
 $('to-q').addEventListener('click', () => {
   const r = document.querySelector('input[name=bentuk]:checked');
   if (!r){ $('s2-err').textContent = 'Pilih bentuk pemberian dulu.'; return; }
-  st.bentuk = r.value; st.unknown = $('f-unknown').checked;
-  st.nilai = st.unknown ? null : parseRp($('f-nilai').value);
-  if (!st.unknown && st.nilai===null && st.sit.limit){ $('s2-err').textContent = 'Isi nilainya, atau centang “tidak tahu nilainya”.'; return; }
-  st.tgl = $('f-tgl').value || today; st.total = parseRp($('f-total').value);
-  st.item = $('f-item').value.trim();
-  st.pemberi = st.sit.perGiver ? Math.max(1, parseInt($('f-pemberi').value,10)||1) : 1;
-  // build question list
+  st.bentuk = r.value; st.unknown = $('f-unknown').checked; st.nilai = st.unknown ? null : parseRp($('f-nilai').value);
+  st.tgl = $('f-tgl').value || today; st.item = $('f-item').value.trim(); st.pemberi = st.sit.perGiver ? Math.max(1, parseInt($('f-pemberi').value,10)||1) : 1;
   const qs = [];
   if (!st.sit.always){
-    qs.push({t:'Apakah pemberi sedang atau akan punya urusan dinas dengan Anda, dan pemberian ini berlawanan dengan tugas Anda?', h:'Contoh: rekanan pengadaan, wajib pajak yang Anda periksa, pemohon izin yang Anda layani.', fail:'ya', kind:'tolak', why:'Pemberian berhubungan dengan jabatan dan berlawanan dengan tugas (Pasal 2 ayat 2).'});
-    qs.push({t:'Apakah instansi Anda melarang penerimaan seperti ini?', h:'Misalnya kode etik atau peraturan pengendalian gratifikasi di kantor Anda. Bila tidak tahu, pilih Ragu.', fail:'ya', kind:'instansi', why:'Dilarang aturan instansi, sehingga pengecualian Pasal 2 ayat (3) tidak berlaku (ayat 4).'});
+    qs.push({t:'Apakah pemberi adalah orang yang sedang Anda layani, periksa, atau urus berkasnya di kantor?', fail:'ya', kind:'tolak', why:'Pemberi memiliki hubungan urusan dengan jabatan Anda (Pasal 2 ayat 2).'});
+    qs.push({t:'Apakah aturan internal kantor Anda melarang penerimaan seperti ini?', fail:'ya', kind:'instansi', why:'Dilarang oleh ketentuan internal instansi Anda (Pasal 2 ayat 4).'});
     (st.sit.q||[]).forEach(q => qs.push(Object.assign({kind:'syarat'}, q)));
   }
   st.qs = qs; st.qi = 0; st.answers = [];
@@ -498,109 +903,127 @@ function showQ(){
   const q = st.qs[st.qi];
   $('q-meta').textContent = 'Pertanyaan '+(st.qi+1)+' dari '+st.qs.length;
   $('q-text').textContent = q.t; $('q-hint').textContent = q.h || '';
-  const box = $('qbox'); box.classList.remove('fade'); void box.offsetWidth; box.classList.add('fade');
 }
 document.querySelectorAll('.answers button').forEach(b => b.addEventListener('click', () => {
-  const a = b.dataset.a, q = st.qs[st.qi];
-  st.answers.push({q, a});
-  const failed = a==='ragu' || a===q.fail;
-  if (failed && q.kind==='tolak') return showResult();
-  st.qi++;
-  if (st.qi < st.qs.length) showQ(); else showResult();
+  const a = b.dataset.a, q = st.qs[st.qi]; st.answers.push({q, a});
+  if ((a==='ragu'||a===q.fail) && q.kind==='tolak') return showResult();
+  st.qi++; if (st.qi < st.qs.length) showQ(); else showResult();
 }));
 
 function evaluate(){
   const s = st.sit, reasons = []; let status = 'aman';
-  if (s.always==='tolak'){ return {status:'tolak', reasons:['Pemberi sedang atau akan berurusan dengan jabatan Anda. Pemberian seperti ini dianggap berhubungan dengan jabatan dan berlawanan dengan tugas (Pasal 2 ayat 2).']}; }
-  if (s.always==='lapor'){ return {status:'lapor', reasons:[s.why_always]}; }
+  if (s.always==='tolak') return {status:'tolak', reasons:['Pemberi sedang atau akan berurusan dengan layanan/jabatan Anda (Pasal 2 ayat 2).']};
+  if (s.always==='lapor') return {status:'lapor', reasons:[s.why_always]};
   for (const {q,a} of st.answers){
-    const failed = a===q.fail || a==='ragu';
-    if (!failed) continue;
-    if (q.kind==='tolak') return {status:'tolak', reasons:[a==='ragu' ? 'Anda ragu apakah pemberi berurusan dengan jabatan Anda. Lebih aman menolak; bila tidak bisa menolak, laporkan.' : q.why]};
-    status = 'lapor';
-    reasons.push(a==='ragu' ? 'Anda ragu: “'+q.t+'” Saat ragu, pilihan aman adalah melapor.' : q.why);
-  }
-  if ((st.bentuk==='uang'||st.bentuk==='voucher') && s.noMoney){ status='lapor'; reasons.push('Berbentuk uang atau alat tukar, padahal pengecualian huruf '+s.huruf+' hanya untuk pemberian bukan uang.'); }
-  if ((st.bentuk==='uang'||st.bentuk==='voucher') && s.onlyGoods){ status='lapor'; reasons.push('Berbentuk uang atau alat tukar, sehingga tidak termasuk huruf '+s.huruf+'.'); }
-  if (s.limit){
-    if (st.nilai===null){ status='lapor'; reasons.push('Nilainya belum diketahui, padahal huruf '+s.huruf+' punya batas nilai.'); }
-    else { const per = Math.round(st.nilai / (st.pemberi||1));
-      if (per > s.limit){ status='lapor'; reasons.push(s.why_limit+(st.pemberi>1 ? ' Rp'+fmt(st.nilai)+' dari '+st.pemberi+' pemberi = rata-rata Rp'+fmt(per)+' per pemberi.' : ' Nilai yang Anda isi: Rp'+fmt(st.nilai)+'.')); }
-      else if (st.pemberi>1){ reasons.push('Kado bersama Rp'+fmt(st.nilai)+' dari '+st.pemberi+' pemberi, rata-rata Rp'+fmt(per)+' per pemberi, masih dalam batas Rp'+fmt(s.limit)+' (huruf '+s.huruf+').'); reasons.push('Hitungan per pemberi hanya berlaku bila pemberian memang patungan dari orang-orang tersebut. Bila ragu, laporkan ke GOL KPK atau UPG.'); }
+    if (a===q.fail || a==='ragu'){
+      if (q.kind==='tolak') return {status:'tolak', reasons:[q.why]};
+      status = 'lapor'; reasons.push(a==='ragu' ? 'Anda ragu pada pertanyaan: “'+q.t+'”' : q.why);
     }
   }
-  if (s.yearly && st.total!==null && st.total > s.yearly){ status='lapor'; reasons.push('Total dari pemberi yang sama tahun ini Rp'+fmt(st.total)+', melebihi Rp1.500.000 per tahun (huruf n).'); }
-  if (status==='aman') reasons.unshift('Memenuhi pengecualian Pasal 2 ayat (3) huruf '+s.huruf+(s.limit && st.nilai!==null && st.pemberi<=1 ? ', nilai Rp'+fmt(st.nilai)+' masih dalam batas Rp'+fmt(s.limit)+'.' : '.'));
+  if ((st.bentuk==='uang'||st.bentuk==='voucher') && s.noMoney){ status='lapor'; reasons.push('Berbentuk uang/voucher, sedangkan pengecualian huruf '+s.huruf+' hanya untuk barang.'); }
+  if (s.allowedBentuk && !s.allowedBentuk.includes(st.bentuk)){ status='lapor'; reasons.push('Bentuk pemberian tidak sesuai jenis yang dikecualikan pada huruf '+s.huruf+'.'); }
+  if (s.limit){
+    if (st.nilai===null){ status='lapor'; reasons.push('Nilai barang belum diketahui.'); }
+    else if (Math.round(st.nilai/(st.pemberi||1)) > s.limit){ status='lapor'; reasons.push(s.why_limit); }
+  }
+  if (status==='aman') reasons.unshift('Memenuhi syarat pengecualian Pasal 2 ayat (3) huruf '+s.huruf+'.');
   return {status, reasons};
 }
 
-const LABEL = {
-  tolak:{stamp:'Wajib tolak', h:'Tolak pemberian ini', cls:'r-tolak'},
-  lapor:{stamp:'Wajib lapor', h:'Laporkan ke KPK', cls:'r-lapor'},
-  aman:{stamp:'Tidak wajib lapor', h:'Termasuk pengecualian, tidak wajib dilaporkan', cls:'r-aman'}
-};
-
 function showResult(){
-  const r = evaluate(), L = LABEL[r.status];
-  const bentukL = (BENTUK.find(b => b[0]===st.bentuk)||[,'-'])[1];
-  let next = [], extra = '';
-  if (r.status==='tolak'){
-    next = ['Tolak dengan sopan dan jelaskan bahwa Anda terikat aturan gratifikasi.','Penolakan dapat dilaporkan ke KPK atau UPG (Pasal 4A), mekanismenya sama dengan laporan penerimaan.','Bila tidak mungkin menolak (dikirim tanpa sepengetahuan Anda, atau menolak tidak patut), terima lalu laporkan paling lama 30 hari kerja.'];
-  } else if (r.status==='lapor'){
-    const dl = addWorkDays(st.tgl, 30), sisa = workDaysBetween(today, iso(dl)), lewat = fromIso(today) > dl;
-    extra = `<div class="deadline"><div><div class="lbl">Batas akhir lapor (30 hari kerja)</div><div class="d">${longDate(dl)}</div></div><div class="hint" style="color:var(--muted)">${lewat ? '<b style="color:var(--tolak)">Sudah lewat.</b> Tetap laporkan segera; status dapat ditetapkan milik negara (Pasal 17 ayat 3).' : 'Sisa '+sisa+' hari kerja dari hari ini.'}</div></div>`;
-    next = ['Jangan anggap pemberian ini sudah sah menjadi milik Anda. KPK yang akan menetapkan statusnya, menjadi milik Anda atau milik negara, paling lama 30 hari kerja sejak laporan diterima (Pasal 17–18).','Laporkan lewat GOL KPK, aplikasi GOL, email pelaporan.gratifikasi@kpk.go.id, atau UPG instansi.','Gratifikasi yang dilaporkan dalam 30 hari kerja tidak dianggap suap (Pasal 12C UU Tipikor). Melapor membuat Anda aman.'];
-    if (st.bentuk==='makanan') next.push('Makanan/minuman mudah rusak tidak wajib diserahkan dan boleh langsung disalurkan untuk kemanfaatan sosial (Pasal 5 ayat 2–3). Simpan fotonya.');
-    else next.push('Simpan objeknya dalam kondisi baik; KPK dapat meminta objek disertakan untuk verifikasi (Pasal 5 ayat 1).');
-  } else {
-    next = ['Tidak perlu dilaporkan. Simpan catatan singkat bila suatu saat ditanya.','Bila masih ragu, Anda tetap boleh melaporkannya lewat GOL KPK atau UPG. KPK yang akan menetapkan statusnya.','Bila situasinya berubah (pemberi mulai berurusan dengan Anda), cek ulang.'];
-  }
-  st.last = {r, L, bentukL};
-  $('result').innerHTML = `<div class="result ${L.cls} fade">
-    <span class="stamp">${L.stamp}</span>
-    <h2>${L.h}</h2>
-    <ul class="why">${r.reasons.map(x => '<li>'+x+'</li>').join('')}</ul>
-    ${extra}
-    <ul class="next">${next.map(x => '<li>'+x+'</li>').join('')}</ul>
-    <p class="summary"><b>Situasi:</b> ${st.sit.t} · <b>Bentuk:</b> ${bentukL}${st.item ? ' ('+escapeHtml(st.item)+')' : ''} · <b>Nilai:</b> ${st.nilai!==null ? 'Rp'+fmt(st.nilai) : 'tidak diketahui'}${st.pemberi>1 ? ' dari '+st.pemberi+' pemberi' : ''} · <b>Diterima:</b> ${longDate(fromIso(st.tgl))}</p>
-    <p class="pasal">Dasar: Pasal 2 Perkom KPK 2/2019 jo. Perkom KPK 1/2026${st.sit.huruf ? ' · huruf '+st.sit.huruf : ''}</p>
-  </div>`;
+  const r = evaluate();
+  const L = {tolak:{stamp:'Wajib Tolak',h:'Tolak pemberian ini secara sopan',cls:'r-tolak'}, lapor:{stamp:'Wajib Lapor KPK',h:'Laporkan melalui GOL KPK atau UPG',cls:'r-lapor'}, aman:{stamp:'Aman Diterima',h:'Tidak wajib dilaporkan',cls:'r-aman'}}[r.status];
+  st.lastStatus = r.status;
+  $('result').innerHTML = `<div class="result ${L.cls}"><span class="stamp">${L.stamp}</span><h2>${L.h}</h2><ul class="why">${r.reasons.map(x=>'<li>'+x+'</li>').join('')}</ul>${st.sit.tip?'<div class="field-tip">'+st.sit.tip+'</div>':''}<p class="pasal">Dasar: Pasal 2 Perkom KPK 2/2019 jo. Perkom KPK 1/2026</p></div>`;
   goStep(4);
 }
-function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 
-$('restart').addEventListener('click', () => {
-  st.sit=null; document.querySelectorAll('input[name=bentuk]').forEach(r=>r.checked=false);
-  $('f-nilai').value=''; $('f-total').value=''; $('f-item').value=''; $('f-pemberi').value='1'; $('f-unknown').checked=false; $('f-nilai').disabled=false; $('f-tgl').value=today;
-  $('q-search').value=''; renderGrid(); $('copy-msg').textContent=''; goStep(1);
-});
-async function copyText(t, msgEl){
-  try { await navigator.clipboard.writeText(t); msgEl.textContent='Tersalin.'; }
-  catch(e){ msgEl.textContent='Tidak bisa menyalin otomatis. Blok teks hasil lalu salin manual.'; }
-}
-$('copy-res').addEventListener('click', () => {
-  const box = $('result').querySelector('.result'); copyText(box ? box.innerText : '', $('copy-msg'));
-});
-$('copy-mail').addEventListener('click', e => copyText('pelaporan.gratifikasi@kpk.go.id', e.target).then(()=>{}));
+$('restart').addEventListener('click', () => goStep(1));
 
-/* ---------- pengecualian list ---------- */
+/* ---------- AUTO-FILL DARI HASIL CEK KE FORMULIR PDF ---------- */
+$('btn-to-form').addEventListener('click', () => {
+  if (st.sit) {
+    if (st.lastStatus === 'tolak') {
+      document.querySelector('input[name="f_jenis_lap"][value="Laporan Penolakan"]').checked = true;
+      document.querySelector('input[name="fc_lokasi"][value="Ditolak / Dikembalikan ke Pemberi"]').checked = true;
+    } else {
+      document.querySelector('input[name="f_jenis_lap"][value="Laporan Penerimaan"]').checked = true;
+    }
+    if (st.item) $('fc_uraian').value = st.item;
+    if (st.nilai !== null) $('fc_nilai').value = 'Rp' + fmt(st.nilai);
+    if (st.tgl) $('fd_tgl_terima').value = st.tgl;
+    $('fd_kronologi').value = 'Pada tanggal ' + shortDate(fromIso(st.tgl)) + ', terjadi peristiwa ' + st.sit.t.toLowerCase() + (st.item ? ' berupa ' + st.item : '') + '.';
+  }
+  location.hash = '#formulir';
+});
+
+/* ---------- GENERATE & CETAK PDF FORMULIR ---------- */
+$('fd_tgl_terima').value = today;
+$('fe_tgl_ttd').value = today;
+
+function getRadio(name){ const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : '-'; }
+
+$('btn-print-pdf').addEventListener('click', () => {
+  $('p_jenis_lap').textContent = getRadio('f_jenis_lap');
+  $('p_rahasia').textContent = getRadio('f_rahasia');
+
+  $('p_nama').textContent = $('fa_nama').value || '-';
+  $('p_nik').textContent = $('fa_nik').value || '-';
+  $('p_tmplahir').textContent = $('fa_tmplahir').value || '-';
+  $('p_tgllahir').textContent = $('fa_tgllahir').value ? shortDate(fromIso($('fa_tgllahir').value)) : '-';
+  $('p_instansi').textContent = $('fa_instansi').value || '-';
+  $('p_jabatan').textContent = $('fa_jabatan').value || '-';
+  $('p_email').textContent = $('fa_email').value || '-';
+  const almt = [$('fa_alamat').value, $('fa_kec').value ? 'Kec. '+$('fa_kec').value : '', $('fa_kota').value, $('fa_prov').value].filter(Boolean).join(', ');
+  $('p_alamat').textContent = almt || '-';
+  $('p_hp').textContent = $('fa_hp').value || '-';
+  $('p_kontak').textContent = $('fa_kontak').value || '-';
+
+  $('pb_nama').textContent = $('fb_nama').value || '-';
+  $('pb_instansi').textContent = $('fb_instansi').value || '-';
+  $('pb_alamat').textContent = $('fb_alamat').value || '-';
+  const hub = getRadio('fb_hub');
+  $('pb_hub').textContent = hub === 'Lainnya' ? ('Lainnya: ' + ($('fb_hub_lain').value || '-')) : hub;
+  $('pb_alasan').textContent = $('fb_alasan').value || '-';
+
+  const prst = getRadio('fc_peristiwa');
+  $('pc_peristiwa').textContent = prst === 'Lainnya' ? ('Lainnya: ' + ($('fc_peristiwa_lain').value || '-')) : prst;
+  $('pc_lokasi').textContent = getRadio('fc_lokasi');
+  $('pc_jenis').textContent = getRadio('fc_jenis');
+  $('pc_uraian').textContent = $('fc_uraian').value || '-';
+  $('pc_nilai').textContent = $('fc_nilai').value || '-';
+
+  $('pd_tgl_terima').textContent = $('fd_tgl_terima').value ? shortDate(fromIso($('fd_tgl_terima').value)) : '-';
+  $('pd_tgl_upg').textContent = $('fd_tgl_upg').value ? shortDate(fromIso($('fd_tgl_upg').value)) : '-';
+  $('pd_tempat').textContent = $('fd_tempat').value || '-';
+  $('pd_kronologi').textContent = $('fd_kronologi').value || '-';
+
+  $('pe_kompensasi').textContent = getRadio('fe_kompensasi');
+  const kotaTtd = $('fe_kota_ttd').value || '....................';
+  const tglTtd = $('fe_tgl_ttd').value ? shortDate(fromIso($('fe_tgl_ttd').value)) : '....................';
+  $('pe_tempat_tgl').textContent = kotaTtd + ', ' + tglTtd;
+  $('pe_nama_ttd').textContent = $('fa_nama').value || '........................................';
+
+  window.print();
+});
+
+$('btn-reset-form').addEventListener('click', () => {
+  if (confirm('Kosongkan seluruh isian formulir?')) $('grat-form').reset();
+});
+
+/* ---------- OTHER TABS INIT ---------- */
 $('exc-list').innerHTML = EXC.map(([l,t,lim]) => `<div class="exc"><div class="letter">${l}</div><p>${t}</p>${lim?'<div class="lim">'+lim+'</div>':''}</div>`).join('');
-
-/* ---------- tenggat ---------- */
 $('t-tgl').value = today;
-function renderHol(){
-  HOL.sort();
-  $('hol').innerHTML = HOL.map(d => `<button data-d="${d}" title="Hapus">${d}</button>`).join('');
-}
+function renderHol(){ HOL.sort(); $('hol').innerHTML = HOL.map(d => `<button data-d="${d}">${d}</button>`).join(''); }
 function renderTenggat(){
   const s = $('t-tgl').value || today, n = Number(document.querySelector('input[name=tmode]:checked').value);
-  const dl = addWorkDays(s, n), sisa = workDaysBetween(today, iso(dl)), lewat = fromIso(today) > dl;
-  $('t-out').innerHTML = `<div><div class="lbl">${n===30?'Batas akhir lapor':'Batas melengkapi laporan'}</div><div class="d">${longDate(dl)}</div></div><div class="hint" style="color:var(--muted)">${lewat ? '<b style="color:var(--tolak)">Sudah lewat dari hari ini.</b>' : 'Sisa '+sisa+' hari kerja dari hari ini.'}</div>`;
+  const dl = addWorkDays(s, n), sisa = workDaysBetween(today, iso(dl));
+  $('t-out').innerHTML = `<div><div class="lbl">Batas akhir</div><div class="d">${longDate(dl)}</div></div><div class="hint">Sisa ${sisa} hari kerja dari hari ini.</div>`;
 }
 $('t-tgl').addEventListener('change', renderTenggat);
 document.querySelectorAll('input[name=tmode]').forEach(r => r.addEventListener('change', renderTenggat));
-$('hol').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; HOL = HOL.filter(d => d!==b.dataset.d); saveHol(); renderHol(); renderTenggat(); });
-$('h-btn').addEventListener('click', () => { const v = $('h-add').value; if (v && !HOL.includes(v)){ HOL.push(v); saveHol(); renderHol(); renderTenggat(); } });
+$('hol').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; HOL = HOL.filter(d => d!==b.dataset.d); renderHol(); renderTenggat(); });
+$('h-btn').addEventListener('click', () => { const v = $('h-add').value; if (v && !HOL.includes(v)){ HOL.push(v); renderHol(); renderTenggat(); } });
 
 renderGrid(); renderHol(); renderTenggat(); goStep(1); route();
 })();
