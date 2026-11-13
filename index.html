@@ -44,13 +44,13 @@
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;font-variant-numeric:tabular-nums}
 .wrap{max-width:920px;margin:0 auto;padding-inline:16px}
 
-/* Header & Logo Konsep 1 (Perisai Integritas) */
+/* Header */
 header.top{background:var(--head-bg);border-bottom:3px solid var(--accent);position:sticky;top:0;z-index:15}
 .brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 6px}
-.brandleft{display:flex;align-items:center;gap:11px}
-.logo-mark{width:38px;height:38px;border-radius:10px;background:#ffffff;display:grid;place-items:center;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.3)}
-.logo-mark svg{width:30px;height:30px;display:block}
-.brand{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em;color:var(--head-fg);line-height:1.1}
+.brandleft{display:flex;align-items:center;gap:10px}
+.logo-mark{width:38px;height:38px;border-radius:9px;background:#ffffff;display:grid;place-items:center;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.35)}
+.logo-mark svg{width:28px;height:28px}
+.brand{font-family:var(--f-display);font-weight:800;font-size:1.3rem;letter-spacing:-.02em;color:var(--head-fg);line-height:1.1}
 .brand span{color:var(--accent)}
 .reg{font-size:.7rem;color:var(--head-muted);margin-top:2px}
 .head-actions{display:flex;align-items:center;gap:8px}
@@ -118,6 +118,7 @@ p{margin:0}
 .btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .btn{padding:12px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#fff;font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .btn.ghost{background:transparent;color:var(--accent)}
+.btn.dark{background:var(--head-bg);border-color:var(--head-bg);color:#fff}
 
 .q{font-size:1.18rem;font-weight:700;line-height:1.35}
 .qmeta{font-size:.76rem;color:var(--muted)}
@@ -134,9 +135,10 @@ p{margin:0}
 .deadline .d{font-weight:800;font-size:1.3rem}
 .deadline .lbl{font-size:.76rem;color:var(--muted);text-transform:uppercase;font-weight:600}
 .field-tip{border-left:4px solid var(--c);font-size:.92rem}
+.summary{font-size:.9rem;color:var(--muted);margin-top:14px}
 .pasal{font-size:.78rem;color:var(--muted);margin-top:12px}
 
-/* Form Generator Section */
+/* Form Generator Section (Di dalam Cara Melapor) */
 .form-sec-title{background:var(--head-bg);color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;font-size:.95rem;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center}
 .form-sec-title span{font-size:.75rem;font-weight:500;color:var(--head-muted)}
 .radio-list{display:flex;flex-direction:column;gap:8px}
@@ -149,6 +151,7 @@ p{margin:0}
 .exc p{font-size:.9rem;margin-top:6px}
 .exc .lim{font-size:.76rem;color:var(--lapor);margin-top:6px;font-weight:600}
 .note{padding:12px 14px;border-radius:10px;background:var(--accent-soft);font-size:.92rem}
+.note.warn{background:var(--lapor-soft)}
 .channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:12px}
 .chan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}
 .chan code{font-size:.8rem;word-break:break-all}
@@ -170,7 +173,7 @@ footer p+p{margin-top:6px}
 .bottomnav a[aria-current="page"] svg{stroke:var(--accent)}
 @media (max-width:760px){
   nav.tabs{display:none}
-  .bottomnav{display:grid;grid-template-columns:repeat(5,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--head-bg);border-top:3px solid var(--accent)}
+  .bottomnav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--head-bg);border-top:3px solid var(--accent)}
   footer{padding-bottom:96px}
   .icon-btn span{display:none}
 }
@@ -216,13 +219,11 @@ footer p+p{margin-top:6px}
   <div class="wrap">
     <div class="brandbar">
       <div class="brandleft">
-        <!-- Logo Konsep 1: Perisai Integritas -->
         <div class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 64 64">
-            <path d="M32 6 L54 14 L54 31 C54 45 44 55 32 60 C20 55 10 45 10 31 L10 14 Z" fill="#d71920"/>
-            <path d="M32 10 L50 17 L50 31 C50 42.5 41.5 51.5 32 55.8 C22.5 51.5 14 42.5 14 31 L14 17 Z" fill="none" stroke="#ffffff" stroke-width="2.5"/>
-            <path d="M32 10 L50 17 L50 31 C50 42.5 41.5 51.5 32 55.8 Z" fill="#b31217"/>
-            <path d="M23 32 L29.5 38.5 L42 25" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg viewBox="0 0 100 100">
+            <path d="M50 8 L86 22 V48 C86 71 70 86 50 94 C30 86 14 71 14 48 V22 Z" fill="#d71920"/>
+            <path d="M50 16 L78 27 V48 C78 66 65 79 50 86 C35 79 22 66 22 48 V27 Z" fill="#b31017"/>
+            <path d="M35 50 L46 61 L67 39" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div>
@@ -243,9 +244,8 @@ footer p+p{margin-top:6px}
       </div>
     </div>
     <nav class="tabs" aria-label="Menu">
-      <a href="#cek" data-tab="cek">1. Cek Status</a>
-      <a href="#formulir" data-tab="formulir">2. Buat Formulir PDF</a>
-      <a href="#pengecualian" data-tab="pengecualian">16 Pengecualian</a>
+      <a href="#cek" data-tab="cek">Cek Status</a>
+      <a href="#pengecualian" data-tab="pengecualian">Aman Diterima</a>
       <a href="#tenggat" data-tab="tenggat">Hitung Tenggat</a>
       <a href="#lapor" data-tab="lapor">Cara Melapor</a>
     </nav>
@@ -343,169 +343,14 @@ footer p+p{margin-top:6px}
   </div>
 </section>
 
-<!-- ===== TAB 2: FORMULIR MANUAL & CETAK PDF ===== -->
-<section id="v-formulir" class="view" hidden>
-  <h1>Formulir Laporan Gratifikasi (Siap Cetak PDF)</h1>
-  <p class="lead">Mengacu pada format Formulir Laporan Gratifikasi KPK (SK Pimpinan KPK No. 1461 Tahun 2020 jo. Perkom KPK 1/2026). Lengkapi kolom di bawah, lalu klik <b>Cetak / Simpan sebagai PDF</b> untuk dikirim lewat email <code>pelaporan.gratifikasi@kpk.go.id</code> atau diserahkan ke UPG kantor.</p>
-
-  <div class="note" style="margin-top:14px"><b>Privasi Terjaga:</b> Seluruh isian formulir ini hanya diproses di peramban perangkat Anda dan tidak dikirim ke server mana pun.</div>
-
-  <form id="grat-form" class="stack" style="margin-top:20px" onsubmit="return false;">
-
-    <div class="panel stack">
-      <div class="form-sec-title">Jenis &amp; Kerahasiaan Laporan <span>Wajib dipilih</span></div>
-      <div class="two">
-        <div class="field">
-          <span class="legend">Jenis Laporan</span>
-          <div class="radio-list">
-            <label class="check"><input type="radio" name="f_jenis_lap" value="Laporan Penerimaan" checked> Laporan Penerimaan Gratifikasi</label>
-            <label class="check"><input type="radio" name="f_jenis_lap" value="Laporan Penolakan"> Laporan Penolakan Gratifikasi</label>
-          </div>
-        </div>
-        <div class="field">
-          <span class="legend">Kerahasiaan Laporan</span>
-          <div class="radio-list">
-            <label class="check"><input type="radio" name="f_rahasia" value="Pribadi & Rahasia (Pelapor dirahasiakan dari UPG)" checked> Pribadi &amp; Rahasia (dirahasiakan dari UPG)</label>
-            <label class="check"><input type="radio" name="f_rahasia" value="Tembuskan ke UPG"> Tembuskan ke UPG Instansi</label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel stack">
-      <div class="form-sec-title">A. Identitas Pelapor <span>Seluruhnya wajib diisi</span></div>
-      <div class="two">
-        <div class="field"><label for="fa_nama">1. Nama Lengkap (tanpa gelar)</label><input type="text" id="fa_nama" placeholder="Sesuai KTP"></div>
-        <div class="field"><label for="fa_nik">2. Nomor Induk Kependudukan (NIK)</label><input type="text" id="fa_nik" inputmode="numeric" maxlength="16" placeholder="16 digit NIK"></div>
-      </div>
-      <div class="two">
-        <div class="field"><label for="fa_tmplahir">3. Tempat Lahir</label><input type="text" id="fa_tmplahir" placeholder="Kota/Kabupaten kelahiran"></div>
-        <div class="field"><label for="fa_tgllahir">4. Tanggal Lahir</label><input type="date" id="fa_tgllahir"></div>
-      </div>
-      <div class="two">
-        <div class="field"><label for="fa_instansi">5. Nama Instansi dan Unit Kerja</label><input type="text" id="fa_instansi" placeholder="Contoh: Kementerian Keuangan / KPP Pratama..."></div>
-        <div class="field"><label for="fa_jabatan">6. Jabatan / Pangkat / Golongan</label><input type="text" id="fa_jabatan" placeholder="Contoh: Penyuluh Pajak / Penata / III/c"></div>
-      </div>
-      <div class="two">
-        <div class="field"><label for="fa_email">7. Alamat Email Penerima</label><input type="text" id="fa_email" placeholder="Dokumen SK KPK akan dikirim ke email ini"></div>
-        <div class="field"><label for="fa_hp">9. Nomor HP / WhatsApp</label><input type="text" id="fa_hp" placeholder="08xxxxxxxxxx"></div>
-      </div>
-      <div class="field"><label for="fa_alamat">8. Alamat Lengkap Penerima (sesuai KTP)</label><input type="text" id="fa_alamat" placeholder="Jalan, RT/RW, Kelurahan/Desa"></div>
-      <div class="three">
-        <div class="field"><label for="fa_kec">Kecamatan</label><input type="text" id="fa_kec"></div>
-        <div class="field"><label for="fa_kota">Kabupaten / Kota</label><input type="text" id="fa_kota"></div>
-        <div class="field"><label for="fa_prov">Provinsi</label><input type="text" id="fa_prov"></div>
-      </div>
-      <div class="field"><label for="fa_kontak">10. Nama dan Nomor HP Pihak Lain yang Dapat Dihubungi <span class="hint">(keluarga/rekan dekat)</span></label><input type="text" id="fa_kontak" placeholder="Contoh: Ikrima (Istri) - 0812xxxxxxxx"></div>
-    </div>
-
-    <div class="panel stack">
-      <div class="form-sec-title">B. Data Pemberi Gratifikasi <span>Wajib diisi</span></div>
-      <div class="two">
-        <div class="field"><label for="fb_nama">1. Nama Lengkap Pemberi</label><input type="text" id="fb_nama" placeholder="Isi 'Tidak diketahui' jika dikirim anonim"></div>
-        <div class="field"><label for="fb_instansi">2. Instansi / Perusahaan Pemberi</label><input type="text" id="fb_instansi" placeholder="Nama PT/CV/Instansi atau perorangan"></div>
-      </div>
-      <div class="field"><label for="fb_alamat">3. Alamat Lengkap Pemberi</label><input type="text" id="fb_alamat" placeholder="Alamat kantor atau rumah pemberi (jika diketahui)"></div>
-      <div class="field">
-        <span class="legend">4. Hubungan Pemberi - Penerima Gratifikasi (pilih salah satu)</span>
-        <div class="radio-list">
-          <label class="check"><input type="radio" name="fb_hub" value="Penyedia Barang & Jasa/Penerima Layanan/terkait Pengawasan/Pemeriksaan" checked> Penyedia Barang &amp; Jasa / Penerima Layanan / terkait Pengawasan / Pemeriksaan</label>
-          <label class="check"><input type="radio" name="fb_hub" value="Antara sesama Pegawai di lingkungan internal instansi"> Antara sesama Pegawai di lingkungan internal instansi</label>
-          <label class="check"><input type="radio" name="fb_hub" value="Merupakan pemberian dalam keluarga"> Merupakan pemberian dalam keluarga</label>
-          <label class="check"><input type="radio" name="fb_hub" value="Identitas Pemberi tidak diketahui"> Identitas Pemberi tidak diketahui</label>
-          <label class="check"><input type="radio" name="fb_hub" value="Lainnya"> Lainnya, sebutkan:</label>
-          <input type="text" id="fb_hub_lain" class="inline-other" placeholder="Sebutkan hubungan lainnya...">
-        </div>
-      </div>
-      <div class="field"><label for="fb_alasan">5. Alasan Pemberian</label><input type="text" id="fb_alasan" placeholder="Contoh: Ucapan terima kasih atas pelayanan, parsel hari raya, kado pernikahan"></div>
-    </div>
-
-    <div class="panel stack">
-      <div class="form-sec-title">C. Data Penerimaan / Penolakan Gratifikasi <span>Wajib diisi</span></div>
-      <div class="field">
-        <span class="legend">1. Peristiwa Terkait Gratifikasi (pilih salah satu)</span>
-        <div class="radio-list">
-          <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)" checked> Pemberian terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)</label>
-          <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian tidak terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)"> Pemberian tidak terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)</label>
-          <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian dalam rangka pisah sambut/pensiun/mutasi jabatan/ulang tahun"> Pemberian dalam rangka pisah sambut / pensiun / mutasi jabatan / ulang tahun</label>
-          <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian terkait dengan pernikahan/upacara adat/agama lainnya atau terkait musibah/bencana"> Pemberian terkait pernikahan / upacara adat / agama atau musibah / bencana</label>
-          <label class="check"><input type="radio" name="fc_peristiwa" value="Keuntungan Investasi/Manfaat dari Koperasi/Hadiah Undian atau Langsung"> Keuntungan Investasi / Manfaat Koperasi / Hadiah Undian atau Langsung</label>
-          <label class="check"><input type="radio" name="fc_peristiwa" value="Lainnya"> Lainnya, sebutkan:</label>
-          <input type="text" id="fc_peristiwa_lain" class="inline-other" placeholder="Sebutkan peristiwa lainnya...">
-        </div>
-      </div>
-
-      <div class="field">
-        <span class="legend">2. Lokasi Objek Gratifikasi Saat Ini</span>
-        <div class="chips">
-          <label class="chip"><input type="radio" name="fc_lokasi" value="Disimpan Pelapor" checked><span>Disimpan Pelapor</span></label>
-          <label class="chip"><input type="radio" name="fc_lokasi" value="Dititipkan di UPG"><span>Dititipkan di UPG</span></label>
-          <label class="chip"><input type="radio" name="fc_lokasi" value="Dititipkan di KPK"><span>Dititipkan di KPK</span></label>
-          <label class="chip"><input type="radio" name="fc_lokasi" value="Disalurkan Sosial (Makanan/Mudah Rusak)"><span>Disalurkan Sosial</span></label>
-          <label class="chip"><input type="radio" name="fc_lokasi" value="Ditolak / Dikembalikan ke Pemberi"><span>Ditolak di Tempat</span></label>
-        </div>
-      </div>
-
-      <div class="field">
-        <span class="legend">3. Jenis / Objek Gratifikasi</span>
-        <div class="radio-list">
-          <label class="check"><input type="radio" name="fc_jenis" value="Uang/Alat tukar lainnya" checked> Uang / Voucher / Cek / Alat tukar lainnya</label>
-          <label class="check"><input type="radio" name="fc_jenis" value="Hidangan/Oleh-oleh/Makanan/Minuman kemasan dengan masa berlaku"> Hidangan / Oleh-oleh / Makanan / Minuman kemasan</label>
-          <label class="check"><input type="radio" name="fc_jenis" value="Karangan Bunga/Cindera mata/Plakat/Barang dengan logo instansi Pemberi"> Karangan Bunga / Cindera mata / Plakat / Barang berlogo</label>
-          <label class="check"><input type="radio" name="fc_jenis" value="Tiket perjalanan/Fasilitas penginapan/Fasilitas lainnya"> Tiket perjalanan / Fasilitas penginapan / Fasilitas lainnya</label>
-          <label class="check"><input type="radio" name="fc_jenis" value="Barang lainnya"> Barang lainnya (elektronik, tas, jam, logam mulia, dll.)</label>
-        </div>
-      </div>
-
-      <div class="two">
-        <div class="field"><label for="fc_uraian">4. Uraian Detail Objek Gratifikasi</label><input type="text" id="fc_uraian" placeholder="Jenis, jumlah, merek, warna, pecahan uang, dll."></div>
-        <div class="field"><label for="fc_nilai">5. Nilai Nominal / Taksiran Harga (Rp)</label><input type="text" id="fc_nilai" placeholder="Contoh: Rp1.500.000"></div>
-      </div>
-    </div>
-
-    <div class="panel stack">
-      <div class="form-sec-title">D. Kronologi &amp; E. Permohonan Kompensasi <span>Wajib diisi</span></div>
-      <div class="three">
-        <div class="field"><label for="fd_tgl_terima">1. Tanggal Penerimaan / Penolakan</label><input type="date" id="fd_tgl_terima"></div>
-        <div class="field"><label for="fd_tgl_upg">2. Tanggal Lapor UPG <span class="hint">(opsional)</span></label><input type="date" id="fd_tgl_upg"></div>
-        <div class="field"><label for="fd_tempat">3. Tempat Penerimaan</label><input type="text" id="fd_tempat" placeholder="Contoh: Ruang Pelayanan KPP / Rumah"></div>
-      </div>
-      <div class="field">
-        <label for="fd_kronologi">4. Uraian Proses Terjadinya Penerimaan / Penolakan Gratifikasi</label>
-        <textarea id="fd_kronologi" placeholder="Jelaskan secara singkat: kapan, di mana, dengan siapa, bagaimana prosesnya, dan dalam rangka apa pemberian terjadi..."></textarea>
-      </div>
-      <div class="field">
-        <span class="legend">E. Permohonan Kompensasi Objek Gratifikasi</span>
-        <span class="hint">Apakah Anda bersedia menyerahkan uang sebesar nilai SK KPK jika ingin memiliki barang gratifikasi tersebut?</span>
-        <div class="chips">
-          <label class="chip"><input type="radio" name="fe_kompensasi" value="Tidak" checked><span>Tidak (Serahkan barang jika milik negara)</span></label>
-          <label class="chip"><input type="radio" name="fe_kompensasi" value="Ya"><span>Ya (Bersedia kompensasi uang)</span></label>
-        </div>
-      </div>
-      <div class="two">
-        <div class="field"><label for="fe_kota_ttd">Kota Penandatanganan</label><input type="text" id="fe_kota_ttd" placeholder="Contoh: Tangerang"></div>
-        <div class="field"><label for="fe_tgl_ttd">Tanggal Penandatanganan</label><input type="date" id="fe_tgl_ttd"></div>
-      </div>
-    </div>
-
-    <div class="btnrow">
-      <button type="button" class="btn" id="btn-print-pdf">
-        <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-        Cetak / Simpan sebagai PDF
-      </button>
-      <button type="button" class="btn ghost" id="btn-reset-form">Kosongkan Formulir</button>
-    </div>
-  </form>
-</section>
-
-<!-- ===== TAB 3: PENGECUALIAN ===== -->
+<!-- ===== TAB 2: AMAN DITERIMA (16 PENGECUALIAN) ===== -->
 <section id="v-pengecualian" class="view" hidden>
-  <h1>16 penerimaan yang tidak wajib dilaporkan</h1>
-  <p class="lead">Pasal 2 ayat (3) Perkom KPK 2/2019 sebagaimana diubah Perkom KPK 1/2026. Semua pengecualian gugur bila penerimaan itu dilarang oleh aturan internal instansi Anda (ayat 4).</p>
+  <h1>16 Pemberian yang Aman Diterima</h1>
+  <p class="lead">Daftar pemberian yang dikecualikan dari kewajiban lapor berdasarkan Pasal 2 ayat (3) Perkom KPK 2/2019 jo. Perkom KPK 1/2026. Seluruh pengecualian ini gugur apabila dilarang oleh aturan internal instansi Anda (ayat 4).</p>
   <div class="list-exc" id="exc-list"></div>
 </section>
 
-<!-- ===== TAB 4: TENGGAT ===== -->
+<!-- ===== TAB 3: TENGGAT ===== -->
 <section id="v-tenggat" class="view" hidden>
   <h1>Kapan batas akhir melapor?</h1>
   <p class="lead">Laporan wajib disampaikan paling lama 30 hari kerja sejak gratifikasi diterima. Sabtu, Minggu, libur nasional, dan cuti bersama tidak dihitung.</p>
@@ -533,7 +378,7 @@ footer p+p{margin-top:6px}
   </div>
 </section>
 
-<!-- ===== TAB 5: CARA LAPOR ===== -->
+<!-- ===== TAB 4: CARA MELAPOR & GENERATOR FORMULIR PDF ===== -->
 <section id="v-lapor" class="view" hidden>
   <h1>Cara melapor gratifikasi</h1>
   <p class="lead">Pilih salah satu kanal resmi berikut. Laporan penolakan gratifikasi juga dapat disampaikan lewat kanal yang sama (Pasal 4A).</p>
@@ -543,6 +388,7 @@ footer p+p{margin-top:6px}
     <div class="chan"><h3>UPG Instansi</h3><p>Unit Pengendali Gratifikasi di kantor Anda siap meneruskan laporan ke KPK.</p></div>
     <div class="chan"><h3>Surat / Pos ke KPK</h3><p>Direktorat Gratifikasi KPK, Gedung Merah Putih, Jl. Kuningan Persada Kav. 4, Jakarta Selatan 12950.</p></div>
   </div>
+
   <h2 style="margin-top:32px">Alur setelah melapor</h2>
   <ol class="timeline">
     <li><span class="when">Hari 0</span><div><b>Laporan masuk.</b> Diverifikasi oleh UPG kantor Anda atau langsung oleh tim KPK.</div></li>
@@ -550,13 +396,172 @@ footer p+p{margin-top:6px}
     <li><span class="when">≤ 30 hari kerja</span><div><b>Penetapan status</b> oleh Pimpinan KPK: milik penerima atau milik negara (Pasal 17–18).</div></li>
     <li><span class="when">≤ 7 hari kerja</span><div><b>SK disampaikan</b> kepada pelapor secara elektronik (Pasal 19).</div></li>
   </ol>
+
+  <!-- BAGIAN FORMULIR PDF MANUAL DI DALAM MENU CARA MELAPOR -->
+  <div id="form-builder-anchor" style="margin-top:44px;padding-top:28px;border-top:2px solid var(--line)">
+    <h2>Formulir Laporan Gratifikasi (Siap Cetak PDF)</h2>
+    <p class="lead">Gunakan formulir di bawah ini jika Anda memilih melapor via email <code>pelaporan.gratifikasi@kpk.go.id</code> atau menyerahkan berkas fisik ke UPG. Mengacu SK Pimpinan KPK No. 1461 Tahun 2020 jo. Perkom KPK 1/2026.</p>
+
+    <div class="note" style="margin-top:14px"><b>Privasi Terjaga:</b> Seluruh isian formulir ini hanya diproses di peramban perangkat Anda dan tidak dikirim ke server mana pun.</div>
+
+    <form id="grat-form" class="stack" style="margin-top:20px" onsubmit="return false;">
+
+      <!-- PENGATURAN LAPORAN -->
+      <div class="panel stack">
+        <div class="form-sec-title">Jenis &amp; Kerahasiaan Laporan <span>Wajib dipilih</span></div>
+        <div class="two">
+          <div class="field">
+            <span class="legend">Jenis Laporan</span>
+            <div class="radio-list">
+              <label class="check"><input type="radio" name="f_jenis_lap" value="Laporan Penerimaan" checked> Laporan Penerimaan Gratifikasi</label>
+              <label class="check"><input type="radio" name="f_jenis_lap" value="Laporan Penolakan"> Laporan Penolakan Gratifikasi</label>
+            </div>
+          </div>
+          <div class="field">
+            <span class="legend">Kerahasiaan Laporan</span>
+            <div class="radio-list">
+              <label class="check"><input type="radio" name="f_rahasia" value="Pribadi & Rahasia (Pelapor dirahasiakan dari UPG)" checked> Pribadi &amp; Rahasia (dirahasiakan dari UPG)</label>
+              <label class="check"><input type="radio" name="f_rahasia" value="Tembuskan ke UPG"> Tembuskan ke UPG Instansi</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAGIAN A: IDENTITAS PELAPOR -->
+      <div class="panel stack">
+        <div class="form-sec-title">A. Identitas Pelapor <span>Seluruhnya wajib diisi</span></div>
+        <div class="two">
+          <div class="field"><label for="fa_nama">1. Nama Lengkap (tanpa gelar)</label><input type="text" id="fa_nama" placeholder="Sesuai KTP"></div>
+          <div class="field"><label for="fa_nik">2. Nomor Induk Kependudukan (NIK)</label><input type="text" id="fa_nik" inputmode="numeric" maxlength="16" placeholder="16 digit NIK"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="fa_tmplahir">3. Tempat Lahir</label><input type="text" id="fa_tmplahir" placeholder="Kota/Kabupaten kelahiran"></div>
+          <div class="field"><label for="fa_tgllahir">4. Tanggal Lahir</label><input type="date" id="fa_tgllahir"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="fa_instansi">5. Nama Instansi dan Unit Kerja</label><input type="text" id="fa_instansi" placeholder="Contoh: Kementerian Keuangan / KPP Pratama..."></div>
+          <div class="field"><label for="fa_jabatan">6. Jabatan / Pangkat / Golongan</label><input type="text" id="fa_jabatan" placeholder="Contoh: Penyuluh Pajak / Penata / III/c"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="fa_email">7. Alamat Email Penerima</label><input type="text" id="fa_email" placeholder="Dokumen SK KPK akan dikirim ke email ini"></div>
+          <div class="field"><label for="fa_hp">9. Nomor HP / WhatsApp</label><input type="text" id="fa_hp" placeholder="08xxxxxxxxxx"></div>
+        </div>
+        <div class="field"><label for="fa_alamat">8. Alamat Lengkap Penerima (sesuai KTP)</label><input type="text" id="fa_alamat" placeholder="Jalan, RT/RW, Kelurahan/Desa"></div>
+        <div class="three">
+          <div class="field"><label for="fa_kec">Kecamatan</label><input type="text" id="fa_kec"></div>
+          <div class="field"><label for="fa_kota">Kabupaten / Kota</label><input type="text" id="fa_kota"></div>
+          <div class="field"><label for="fa_prov">Provinsi</label><input type="text" id="fa_prov"></div>
+        </div>
+        <div class="field"><label for="fa_kontak">10. Nama dan Nomor HP Pihak Lain yang Dapat Dihubungi <span class="hint">(keluarga/rekan dekat)</span></label><input type="text" id="fa_kontak" placeholder="Contoh: Nama Pasangan / Kerabat - 0812xxxxxxxx"></div>
+      </div>
+
+      <!-- BAGIAN B: DATA PEMBERI GRATIFIKASI -->
+      <div class="panel stack">
+        <div class="form-sec-title">B. Data Pemberi Gratifikasi <span>Wajib diisi</span></div>
+        <div class="two">
+          <div class="field"><label for="fb_nama">1. Nama Lengkap Pemberi</label><input type="text" id="fb_nama" placeholder="Isi 'Tidak diketahui' jika dikirim anonim"></div>
+          <div class="field"><label for="fb_instansi">2. Instansi / Perusahaan Pemberi</label><input type="text" id="fb_instansi" placeholder="Nama PT/CV/Instansi atau perorangan"></div>
+        </div>
+        <div class="field"><label for="fb_alamat">3. Alamat Lengkap Pemberi</label><input type="text" id="fb_alamat" placeholder="Alamat kantor atau rumah pemberi (jika diketahui)"></div>
+        <div class="field">
+          <span class="legend">4. Hubungan Pemberi - Penerima Gratifikasi (pilih salah satu)</span>
+          <div class="radio-list">
+            <label class="check"><input type="radio" name="fb_hub" value="Penyedia Barang & Jasa/Penerima Layanan/terkait Pengawasan/Pemeriksaan" checked> Penyedia Barang &amp; Jasa / Penerima Layanan / terkait Pengawasan / Pemeriksaan</label>
+            <label class="check"><input type="radio" name="fb_hub" value="Antara sesama Pegawai di lingkungan internal instansi"> Antara sesama Pegawai di lingkungan internal instansi</label>
+            <label class="check"><input type="radio" name="fb_hub" value="Merupakan pemberian dalam keluarga"> Merupakan pemberian dalam keluarga</label>
+            <label class="check"><input type="radio" name="fb_hub" value="Identitas Pemberi tidak diketahui"> Identitas Pemberi tidak diketahui</label>
+            <label class="check"><input type="radio" name="fb_hub" value="Lainnya"> Lainnya, sebutkan:</label>
+            <input type="text" id="fb_hub_lain" class="inline-other" placeholder="Sebutkan hubungan lainnya...">
+          </div>
+        </div>
+        <div class="field"><label for="fb_alasan">5. Alasan Pemberian</label><input type="text" id="fb_alasan" placeholder="Contoh: Ucapan terima kasih atas pelayanan, parsel hari raya, kado pernikahan"></div>
+      </div>
+
+      <!-- BAGIAN C: DATA PENERIMAAN GRATIFIKASI -->
+      <div class="panel stack">
+        <div class="form-sec-title">C. Data Penerimaan / Penolakan Gratifikasi <span>Wajib diisi</span></div>
+        <div class="field">
+          <span class="legend">1. Peristiwa Terkait Gratifikasi (pilih salah satu)</span>
+          <div class="radio-list">
+            <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)" checked> Pemberian terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)</label>
+            <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian tidak terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)"> Pemberian tidak terkait dengan pelaksanaan Tugas Pokok Fungsi (Tupoksi)</label>
+            <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian dalam rangka pisah sambut/pensiun/mutasi jabatan/ulang tahun"> Pemberian dalam rangka pisah sambut / pensiun / mutasi jabatan / ulang tahun</label>
+            <label class="check"><input type="radio" name="fc_peristiwa" value="Pemberian terkait dengan pernikahan/upacara adat/agama lainnya atau terkait musibah/bencana"> Pemberian terkait pernikahan / upacara adat / agama atau musibah / bencana</label>
+            <label class="check"><input type="radio" name="fc_peristiwa" value="Keuntungan Investasi/Manfaat dari Koperasi/Hadiah Undian atau Langsung"> Keuntungan Investasi / Manfaat Koperasi / Hadiah Undian atau Langsung</label>
+            <label class="check"><input type="radio" name="fc_peristiwa" value="Lainnya"> Lainnya, sebutkan:</label>
+            <input type="text" id="fc_peristiwa_lain" class="inline-other" placeholder="Sebutkan peristiwa lainnya...">
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="legend">2. Lokasi Objek Gratifikasi Saat Ini</span>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="fc_lokasi" value="Disimpan Pelapor" checked><span>Disimpan Pelapor</span></label>
+            <label class="chip"><input type="radio" name="fc_lokasi" value="Dititipkan di UPG"><span>Dititipkan di UPG</span></label>
+            <label class="chip"><input type="radio" name="fc_lokasi" value="Dititipkan di KPK"><span>Dititipkan di KPK</span></label>
+            <label class="chip"><input type="radio" name="fc_lokasi" value="Disalurkan Sosial (Makanan/Mudah Rusak)"><span>Disalurkan Sosial</span></label>
+            <label class="chip"><input type="radio" name="fc_lokasi" value="Ditolak / Dikembalikan ke Pemberi"><span>Ditolak di Tempat</span></label>
+          </div>
+        </div>
+
+        <div class="field">
+          <span class="legend">3. Jenis / Objek Gratifikasi</span>
+          <div class="radio-list">
+            <label class="check"><input type="radio" name="fc_jenis" value="Uang/Alat tukar lainnya" checked> Uang / Voucher / Cek / Alat tukar lainnya</label>
+            <label class="check"><input type="radio" name="fc_jenis" value="Hidangan/Oleh-oleh/Makanan/Minuman kemasan dengan masa berlaku"> Hidangan / Oleh-oleh / Makanan / Minuman kemasan</label>
+            <label class="check"><input type="radio" name="fc_jenis" value="Karangan Bunga/Cindera mata/Plakat/Barang dengan logo instansi Pemberi"> Karangan Bunga / Cindera mata / Plakat / Barang berlogo</label>
+            <label class="check"><input type="radio" name="fc_jenis" value="Tiket perjalanan/Fasilitas penginapan/Fasilitas lainnya"> Tiket perjalanan / Fasilitas penginapan / Fasilitas lainnya</label>
+            <label class="check"><input type="radio" name="fc_jenis" value="Barang lainnya"> Barang lainnya (elektronik, tas, jam, logam mulia, dll.)</label>
+          </div>
+        </div>
+
+        <div class="two">
+          <div class="field"><label for="fc_uraian">4. Uraian Detail Objek Gratifikasi</label><input type="text" id="fc_uraian" placeholder="Jenis, jumlah, merek, warna, pecahan uang, dll."></div>
+          <div class="field"><label for="fc_nilai">5. Nilai Nominal / Taksiran Harga (Rp)</label><input type="text" id="fc_nilai" placeholder="Contoh: Rp1.500.000"></div>
+        </div>
+      </div>
+
+      <!-- BAGIAN D & E: KRONOLOGI & KOMPENSASI -->
+      <div class="panel stack">
+        <div class="form-sec-title">D. Kronologi &amp; E. Permohonan Kompensasi <span>Wajib diisi</span></div>
+        <div class="three">
+          <div class="field"><label for="fd_tgl_terima">1. Tanggal Penerimaan / Penolakan</label><input type="date" id="fd_tgl_terima"></div>
+          <div class="field"><label for="fd_tgl_upg">2. Tanggal Lapor UPG <span class="hint">(opsional)</span></label><input type="date" id="fd_tgl_upg"></div>
+          <div class="field"><label for="fd_tempat">3. Tempat Penerimaan</label><input type="text" id="fd_tempat" placeholder="Contoh: Ruang Pelayanan KPP / Rumah"></div>
+        </div>
+        <div class="field">
+          <label for="fd_kronologi">4. Uraian Proses Terjadinya Penerimaan / Penolakan Gratifikasi</label>
+          <textarea id="fd_kronologi" placeholder="Jelaskan secara singkat: kapan, di mana, dengan siapa, bagaimana prosesnya, dan dalam rangka apa pemberian terjadi..."></textarea>
+        </div>
+        <div class="field">
+          <span class="legend">E. Permohonan Kompensasi Objek Gratifikasi</span>
+          <span class="hint">Apakah Anda bersedia menyerahkan uang sebesar nilai SK KPK jika ingin memiliki barang gratifikasi tersebut?</span>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="fe_kompensasi" value="Tidak" checked><span>Tidak (Serahkan barang jika milik negara)</span></label>
+            <label class="chip"><input type="radio" name="fe_kompensasi" value="Ya"><span>Ya (Bersedia kompensasi uang)</span></label>
+          </div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="fe_kota_ttd">Kota Penandatanganan</label><input type="text" id="fe_kota_ttd" placeholder="Contoh: Tangerang"></div>
+          <div class="field"><label for="fe_tgl_ttd">Tanggal Penandatanganan</label><input type="date" id="fe_tgl_ttd"></div>
+        </div>
+      </div>
+
+      <div class="btnrow">
+        <button type="button" class="btn" id="btn-print-pdf">
+          <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          Cetak / Simpan sebagai PDF
+        </button>
+        <button type="button" class="btn ghost" id="btn-reset-form">Kosongkan Formulir</button>
+      </div>
+    </form>
+  </div>
 </section>
 
 </main>
 
 <!-- ==================== TEMPLATE CETAK PDF (2 HALAMAN RESMI) ==================== -->
 <div id="print-sheet" aria-hidden="true">
-  <!-- HALAMAN 1 -->
   <div class="p-page">
     <div class="p-header">
       <div class="p-kpk">KPK<small>Komisi Pemberantasan Korupsi</small></div>
@@ -606,7 +611,6 @@ footer p+p{margin-top:6px}
     </table>
   </div>
 
-  <!-- HALAMAN 2 -->
   <div class="p-page">
     <div class="p-header">
       <div class="p-kpk">KPK<small>Komisi Pemberantasan Korupsi</small></div>
@@ -668,11 +672,10 @@ footer p+p{margin-top:6px}
 </footer>
 
 <nav class="bottomnav" aria-label="Menu bawah">
-  <a href="#cek" data-tab="cek"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Cek</a>
-  <a href="#formulir" data-tab="formulir"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>Formulir</a>
-  <a href="#pengecualian" data-tab="pengecualian"><svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>Aturan</a>
-  <a href="#tenggat" data-tab="tenggat"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Tenggat</a>
-  <a href="#lapor" data-tab="lapor"><svg viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg>Lapor</a>
+  <a href="#cek" data-tab="cek"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Cek Status</a>
+  <a href="#pengecualian" data-tab="pengecualian"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Aman Diterima</a>
+  <a href="#tenggat" data-tab="tenggat"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Hitung Tenggat</a>
+  <a href="#lapor" data-tab="lapor"><svg viewBox="0 0 24 24"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg>Cara Melapor</a>
 </nav>
 
 <script>
@@ -686,36 +689,28 @@ const longDate = d => d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric'
 const shortDate = d => d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
 const today = iso(new Date());
 
-/* ---------- GENERATOR IKON KONSEP 1: PERISAI INTEGRITAS ---------- */
+/* ---------- ICON & MANIFEST (KONSEP 1: PERISAI INTEGRITAS) ---------- */
 function generateAppIcons(){
   function drawLogo(size){
     const c = document.createElement('canvas'); c.width = size; c.height = size;
     const ctx = c.getContext('2d'), r = size * 0.22;
-    // Latar putih membulat
     ctx.fillStyle = '#ffffff';
     ctx.beginPath(); ctx.moveTo(r,0); ctx.lineTo(size-r,0); ctx.quadraticCurveTo(size,0,size,r);
     ctx.lineTo(size,size-r); ctx.quadraticCurveTo(size,size,size-r,size); ctx.lineTo(r,size);
     ctx.quadraticCurveTo(0,size,0,size-r); ctx.lineTo(0,r); ctx.quadraticCurveTo(0,0,r,0); ctx.fill();
-
-    ctx.save(); ctx.scale(size/64, size/64);
-    // Perisai merah utama
+    
+    ctx.save(); ctx.scale(size/100, size/100);
+    // Perisai Luar
     ctx.fillStyle = '#d71920';
-    ctx.beginPath(); ctx.moveTo(32,6); ctx.lineTo(54,14); ctx.lineTo(54,31);
-    ctx.bezierCurveTo(54,45,44,55,32,60); ctx.bezierCurveTo(20,55,10,45,10,31); ctx.lineTo(10,14); ctx.closePath(); ctx.fill();
-
-    // Sisi kanan perisai lebih gelap untuk efek dimensi
-    ctx.fillStyle = '#b31217';
-    ctx.beginPath(); ctx.moveTo(32,10); ctx.lineTo(50,17); ctx.lineTo(50,31);
-    ctx.bezierCurveTo(50,42.5,41.5,51.5,32,55.8); ctx.closePath(); ctx.fill();
-
-    // Garis tepi putih dalam
-    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(32,10); ctx.lineTo(50,17); ctx.lineTo(50,31);
-    ctx.bezierCurveTo(50,42.5,41.5,51.5,32,55.8); ctx.bezierCurveTo(22.5,51.5,14,42.5,14,31); ctx.lineTo(14,17); ctx.closePath(); ctx.stroke();
-
-    // Tanda centang putih
-    ctx.lineWidth = 4.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    ctx.beginPath(); ctx.moveTo(23,32); ctx.lineTo(29.5,38.5); ctx.lineTo(42,25); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(50,8); ctx.lineTo(86,22); ctx.lineTo(86,48);
+    ctx.bezierCurveTo(86,71,70,86,50,94); ctx.bezierCurveTo(30,86,14,71,14,48); ctx.lineTo(14,22); ctx.closePath(); ctx.fill();
+    // Perisai Dalam
+    ctx.fillStyle = '#b31017';
+    ctx.beginPath(); ctx.moveTo(50,16); ctx.lineTo(78,27); ctx.lineTo(78,48);
+    ctx.bezierCurveTo(78,66,65,79,50,86); ctx.bezierCurveTo(35,79,22,66,22,48); ctx.lineTo(22,27); ctx.closePath(); ctx.fill();
+    // Centang Putih
+    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 9; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(35,50); ctx.lineTo(46,61); ctx.lineTo(67,39); ctx.stroke();
     ctx.restore();
     return c.toDataURL('image/png');
   }
@@ -848,11 +843,15 @@ function workDaysBetween(startIso, endIso){
 }
 
 /* ---------- ROUTING ---------- */
-const TABS = ['cek','formulir','pengecualian','tenggat','lapor'];
+const TABS = ['cek','pengecualian','tenggat','lapor'];
 function route(){
-  const h = (location.hash||'').slice(1); const tab = TABS.includes(h) ? h : 'cek';
+  const raw = (location.hash||'').slice(1);
+  const tab = (raw === 'formulir' || raw === 'form-builder-anchor') ? 'lapor' : (TABS.includes(raw) ? raw : 'cek');
   TABS.forEach(t => { $('v-'+t).hidden = t!==tab; });
   document.querySelectorAll('a[data-tab]').forEach(a => { if (a.dataset.tab===tab) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  if (raw === 'formulir' || raw === 'form-builder-anchor'){
+    setTimeout(() => { const el = $('form-builder-anchor'); if (el) el.scrollIntoView({behavior:'smooth'}); }, 60);
+  }
 }
 window.addEventListener('hashchange', route);
 
@@ -940,7 +939,7 @@ function showResult(){
 
 $('restart').addEventListener('click', () => goStep(1));
 
-/* ---------- AUTO-FILL DARI HASIL CEK KE FORMULIR PDF ---------- */
+/* ---------- AUTO-FILL DARI HASIL CEK KE FORMULIR PDF DI TAB CARA MELAPOR ---------- */
 $('btn-to-form').addEventListener('click', () => {
   if (st.sit) {
     if (st.lastStatus === 'tolak') {
@@ -954,7 +953,8 @@ $('btn-to-form').addEventListener('click', () => {
     if (st.tgl) $('fd_tgl_terima').value = st.tgl;
     $('fd_kronologi').value = 'Pada tanggal ' + shortDate(fromIso(st.tgl)) + ', terjadi peristiwa ' + st.sit.t.toLowerCase() + (st.item ? ' berupa ' + st.item : '') + '.';
   }
-  location.hash = '#formulir';
+  location.hash = '#lapor';
+  setTimeout(() => { const el = $('form-builder-anchor'); if (el) el.scrollIntoView({behavior:'smooth'}); }, 80);
 });
 
 /* ---------- GENERATE & CETAK PDF FORMULIR ---------- */

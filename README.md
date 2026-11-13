@@ -1,4 +1,4 @@
-# GratiCek v1.1
+# GratiCek v1.2
 
 Panduan praktis dan generator formulir pelaporan gratifikasi bagi ASN, Pegawai Negeri, dan Penyelenggara Negara. Aplikasi ini membantu mengecek status sebuah pemberian (**Aman Diterima**, **Wajib Lapor KPK**, atau **Wajib Tolak**) serta menyiapkan formulir laporan siap cetak ke PDF berdasarkan Peraturan KPK Nomor 2 Tahun 2019 sebagaimana diubah dengan **Peraturan KPK Nomor 1 Tahun 2026**.
 
@@ -6,22 +6,23 @@ Panduan praktis dan generator formulir pelaporan gratifikasi bagi ASN, Pegawai N
 
 ## Fitur Utama
 
-1. **Cek Status Gratifikasi**
-   * Pencarian cepat dan pengelompokan 19 situasi lapangan (*Layanan & Lapangan*, *Internal Kantor*, *Keluarga & Hajatan*, dan *Kegiatan Luar & Umum*).
-   * Perhitungan otomatis batas nilai per pemberi (termasuk skema patungan/urunan untuk kado rekan kerja dan hajatan).
-   * Alur pertanyaan penentu (Ya/Tidak/Ragu) yang mengutamakan prinsip kehati-hatian, dilengkapi langkah taktis di lapangan.
-2. **Buat Formulir Laporan Siap Cetak PDF**
-   * Mengacu pada format Formulir Laporan Gratifikasi KPK (SK Pimpinan KPK No. 1461 Tahun 2020 jo. Perkom KPK 1/2026) untuk laporan penerimaan maupun penolakan.
-   * **Isi Otomatis (*Auto-Fill*):** Hasil pengecekan dari tab pertama dapat langsung ditransfer ke formulir laporan.
-   * Tata letak cetak khusus kertas A4 (2 halaman resmi) yang siap disimpan ke PDF untuk dikirim melalui email `pelaporan.gratifikasi@kpk.go.id` atau diserahkan ke UPG.
-3. **16 Pengecualian Gratifikasi**
-   * Ringkasan 16 jenis penerimaan yang tidak wajib dilaporkan (Pasal 2 ayat 3 huruf a–p) beserta batasan nominalnya.
-4. **Hitung Tenggat 30 & 20 Hari Kerja**
-   * Kalkulator batas akhir pelaporan (30 hari kerja) dan kelengkapan dokumen (20 hari kerja) yang otomatis mengecualikan akhir pekan serta daftar libur nasional/cuti bersama (dapat disesuaikan pengguna).
-5. **Cara Melapor & Linimasa**
-   * Panduan kanal pelaporan resmi KPK dan tahapan tindak lanjut pascapelaporan.
-6. **Privasi Terjaga, Mode Gelap & PWA**
-   * Berjalan 100% di sisi peramban (*client-side*) tanpa mengirim data identitas maupun isi laporan ke server mana pun. Mendukung tema Gelap/Terang serta dapat dipasang (*install*) di layar utama ponsel atau komputer.
+* **Cek Status**
+  * Pencarian cepat dan pengelompokan 19 kondisi lapangan (*Layanan & Lapangan*, *Internal Kantor*, *Keluarga & Hajatan*, dan *Kegiatan Luar & Umum*).
+  * Perhitungan otomatis batas nilai per pemberi (termasuk skema patungan/urunan untuk kado rekan kerja dan hajatan).
+  * Alur pertanyaan penentu (Ya/Tidak/Ragu) yang mengutamakan prinsip kehati-hatian, dilengkapi langkah taktis di lapangan.
+
+* **Aman Diterima**
+  * Ringkasan 16 jenis pemberian yang dikecualikan dari kewajiban lapor (Pasal 2 ayat 3 huruf a–p) beserta batasan nominalnya.
+
+* **Hitung Tenggat**
+  * Kalkulator batas akhir pelaporan (30 hari kerja) dan kelengkapan dokumen (20 hari kerja) yang otomatis mengecualikan akhir pekan serta daftar libur nasional/cuti bersama (dapat disesuaikan pengguna).
+
+* **Cara Melapor & Formulir PDF**
+  * Panduan kanal pelaporan resmi KPK (GOL KPK, Email, UPG Instansi, dan Surat) beserta linimasa tindak lanjut pascapelaporan.
+  * **Formulir Laporan Siap Cetak PDF:** Mengacu pada format Formulir Laporan Gratifikasi KPK (SK Pimpinan KPK No. 1461 Tahun 2020 jo. Perkom KPK 1/2026) yang terintegrasi di bagian bawah halaman ini, lengkap dengan fitur isi otomatis (*auto-fill*) dari hasil pengecekan dan tata letak cetak kertas A4 (2 halaman resmi).
+
+* **Privasi Terjaga, Mode Gelap & PWA**
+  * Berjalan 100% di sisi peramban (*client-side*) tanpa mengirim data identitas maupun isi laporan ke server mana pun. Mendukung tema Gelap/Terang serta dapat dipasang (*install*) di layar utama ponsel atau komputer.
 
 ## Dasar Hukum & Ketentuan
 
@@ -37,7 +38,7 @@ Panduan praktis dan generator formulir pelaporan gratifikasi bagi ASN, Pegawai N
 
 ## Struktur Berkas
 
-```text
+```
 index.html   # Aplikasi web lengkap (HTML, CSS, JS, dan template cetak PDF dalam satu file)
 README.md    # Dokumentasi aplikasi
 ```
