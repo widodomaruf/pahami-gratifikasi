@@ -63,6 +63,7 @@ header.top{background:var(--head-bg);border-bottom:3px solid var(--accent);posit
 .head-actions{display:flex;align-items:center;gap:8px}
 .icon-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:8px;border:1px solid #333;background:#222;color:#fff;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer}
 .icon-btn:hover{border-color:var(--accent)}
+a.icon-btn{text-decoration:none}
 .icon-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .icon-btn.install{background:var(--accent-fill);border-color:var(--accent-fill);color:var(--on-accent)}
 .icon-btn:active{transform:translateY(1px)}
@@ -271,6 +272,10 @@ footer a:hover{text-decoration:underline}
         </div>
       </div>
       <div class="head-actions">
+        <a class="icon-btn" href="https://drive.google.com/drive/folders/1rAWgVEES0AaMG82MINxaFE2T2F58aTk_" target="_blank" rel="noopener" aria-label="Buku Panduan (PDF, membuka Google Drive di tab baru)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2V5z"/><path d="M4 21a2 2 0 012-2h13v2H6a2 2 0 01-2 0z"/><path d="M9 7h6M9 11h6"/></svg>
+          <span>Panduan</span>
+        </a>
         <button class="icon-btn install" id="btn-install" hidden>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
           <span>Pasang Aplikasi</span>
@@ -712,9 +717,11 @@ footer a:hover{text-decoration:underline}
 <footer>
   <div class="wrap">
     <p><b>GratiCek</b> adalah alat bantu edukasi mandiri bagi pelayan publik, bukan layanan resmi KPK. Dasar hukum: Perkom KPK No. 2 Tahun 2019 jo. Perkom KPK No. 1 Tahun 2026.</p>
-    <p>Dikembangkan oleh <b>Muhammad Widodo Ma'ruf</b> (Penyuluh Antikorupsi Utama) sebagai bagian dari gerakan Forum Paksiapi Dana Rakca.</p>
+    <p>Dikembangkan oleh <b>Muhammad Widodo Ma'ruf</b> (Penyuluh Antikorupsi Utama, <span style="white-space:nowrap">PAK.915.3.00005 2024</span>) sebagai bagian dari gerakan Forum Paksiapi Dana Rakca.</p>
     <div class="footer-meta">
       <span class="ver-badge">Versi 1.2</span>
+      <span>Buku panduan: <a href="https://drive.google.com/drive/folders/1rAWgVEES0AaMG82MINxaFE2T2F58aTk_" target="_blank" rel="noopener">unduh PDF di Google Drive</a></span>
+      <span>&bull;</span>
       <span>Saran &amp; masukan: <a href="mailto:hi.widodomaruf@gmail.com">hi.widodomaruf@gmail.com</a></span>
       <span>&bull;</span>
       <span>Instagram: <a href="https://www.instagram.com/widodomaruf/" target="_blank" rel="noopener">@widodomaruf</a></span>

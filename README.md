@@ -6,7 +6,9 @@ GratiCek membantu pengguna menjawab satu pertanyaan saat menerima pemberian: **h
 
 > GratiCek adalah alat bantu edukasi mandiri, bukan layanan resmi KPK. Bila ragu, laporkan melalui GOL KPK (gol.kpk.go.id) atau Unit Pengendali Gratifikasi (UPG) instansi.
 
-Dikembangkan oleh **Muhammad Widodo Ma'ruf** (Penyuluh Antikorupsi Utama) sebagai bagian dari gerakan Forum Paksiapi Dana Rakca.
+Dikembangkan oleh **Muhammad Widodo Ma'ruf** (Penyuluh Antikorupsi Utama, PAK.915.3.00005 2024) sebagai bagian dari gerakan Forum Paksiapi Dana Rakca.
+
+Buku panduan penggunaan (PDF): [Google Drive](https://drive.google.com/drive/folders/1rAWgVEES0AaMG82MINxaFE2T2F58aTk_)
 
 ## Fitur
 
@@ -95,6 +97,7 @@ Yang perlu diperiksa secara berkala:
 
 ## Tautan
 
+- [Buku Panduan Penggunaan GratiCek (PDF)](https://drive.google.com/drive/folders/1rAWgVEES0AaMG82MINxaFE2T2F58aTk_)
 - [GOL KPK](https://gol.kpk.go.id/)
 - [Prosedur Pelaporan Gratifikasi KPK](https://www.kpk.go.id/id/layanan/gratifikasi/prosedur-pelaporan-gratifikasi)
 - [Instagram PERPAKSINAS](https://www.instagram.com/perpaksinas/)
