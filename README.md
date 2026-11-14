@@ -1,57 +1,107 @@
-# GratiCek v1.2
+# GratiCek
 
-Panduan praktis dan generator formulir pelaporan gratifikasi bagi ASN, Pegawai Negeri, dan Penyelenggara Negara. Aplikasi ini membantu mengecek status sebuah pemberian (**Aman Diterima**, **Wajib Lapor KPK**, atau **Wajib Tolak**) serta menyiapkan formulir laporan siap cetak ke PDF berdasarkan Peraturan KPK Nomor 2 Tahun 2019 sebagaimana diubah dengan **Peraturan KPK Nomor 1 Tahun 2026**.
+Panduan dan formulir pelaporan gratifikasi untuk ASN dan pelayan publik, berdasarkan Peraturan KPK Nomor 2 Tahun 2019 tentang Pelaporan Gratifikasi sebagaimana diubah dengan **Peraturan KPK Nomor 1 Tahun 2026**.
 
-> **Catatan:** GratiCek adalah alat bantu edukasi mandiri, bukan layanan resmi KPK. Bila ragu, segera konsultasikan dan laporkan melalui Unit Pengendali Gratifikasi (UPG) instansi atau sistem GOL KPK.
+GratiCek membantu pengguna menjawab satu pertanyaan saat menerima pemberian: **harus ditolak, wajib dilaporkan, atau tidak wajib dilaporkan?** Bila wajib dilaporkan, isian hasil cek bisa langsung dipindahkan ke formulir laporan yang siap dicetak ke PDF.
 
-## Fitur Utama
+> GratiCek adalah alat bantu edukasi mandiri, bukan layanan resmi KPK. Bila ragu, laporkan melalui GOL KPK (gol.kpk.go.id) atau Unit Pengendali Gratifikasi (UPG) instansi.
 
-* **Cek Status**
-  * Pencarian cepat dan pengelompokan 19 kondisi lapangan (*Layanan & Lapangan*, *Internal Kantor*, *Keluarga & Hajatan*, dan *Kegiatan Luar & Umum*).
-  * Perhitungan otomatis batas nilai per pemberi (termasuk skema patungan/urunan untuk kado rekan kerja dan hajatan).
-  * Alur pertanyaan penentu (Ya/Tidak/Ragu) yang mengutamakan prinsip kehati-hatian, dilengkapi langkah taktis di lapangan.
+Dikembangkan oleh **Muhammad Widodo Ma'ruf** (Penyuluh Antikorupsi Utama) sebagai bagian dari gerakan Forum Paksiapi Dana Rakca.
 
-* **Aman Diterima**
-  * Ringkasan 16 jenis pemberian yang dikecualikan dari kewajiban lapor (Pasal 2 ayat 3 huruf a–p) beserta batasan nominalnya.
+## Fitur
 
-* **Hitung Tenggat**
-  * Kalkulator batas akhir pelaporan (30 hari kerja) dan kelengkapan dokumen (20 hari kerja) yang otomatis mengecualikan akhir pekan serta daftar libur nasional/cuti bersama (dapat disesuaikan pengguna).
+### 1. Cek Status
 
-* **Cara Melapor & Formulir PDF**
-  * Panduan kanal pelaporan resmi KPK (GOL KPK, Email, UPG Instansi, dan Surat) beserta linimasa tindak lanjut pascapelaporan.
-  * **Formulir Laporan Siap Cetak PDF:** Mengacu pada format Formulir Laporan Gratifikasi KPK (SK Pimpinan KPK No. 1461 Tahun 2020 jo. Perkom KPK 1/2026) yang terintegrasi di bagian bawah halaman ini, lengkap dengan fitur isi otomatis (*auto-fill*) dari hasil pengecekan dan tata letak cetak kertas A4 (2 halaman resmi).
+- 19 kondisi pemberian yang sering dialami pelayan publik, dikelompokkan dalam empat kategori: Layanan & Lapangan, Internal Kantor & Rekan, Keluarga & Hajatan, serta Kegiatan Luar & Umum.
+- Pencarian kata kunci sehari-hari, misalnya "uang bensin", "amplop nikah", "parsel", atau "ditinggal di meja".
+- Pengguna mengisi bentuk pemberian, nilai, tanggal diterima, lalu menjawab beberapa pertanyaan Ya / Tidak / Ragu.
+- Hasil berupa salah satu dari tiga status, lengkap dengan alasan, dasar pasal, dan langkah berikutnya:
+  - **Wajib Tolak** (Pasal 2 ayat 2)
+  - **Wajib Lapor KPK**, disertai tanggal batas lapor 30 hari kerja
+  - **Tidak Wajib Lapor** (termasuk pengecualian Pasal 2 ayat 3)
+- Jawaban **Ragu** selalu diarahkan ke pilihan yang lebih aman, yaitu lapor atau tolak.
+- **Kado urunan** (pernikahan dan sejenisnya, hadiah rekan kerja) dihitung per pemberi. Contoh: Rp5.000.000 dari 20 orang = Rp250.000 per pemberi. Bila masih dalam batas, hasil tetap disertai catatan untuk melapor bila ragu.
+- Ringkasan hasil bisa disalin untuk disimpan atau dikirim.
 
-* **Privasi Terjaga, Mode Gelap & PWA**
-  * Berjalan 100% di sisi peramban (*client-side*) tanpa mengirim data identitas maupun isi laporan ke server mana pun. Mendukung tema Gelap/Terang serta dapat dipasang (*install*) di layar utama ponsel atau komputer.
+### 2. Tidak Wajib Lapor
 
-## Dasar Hukum & Ketentuan
+Daftar 16 penerimaan yang dikecualikan dari kewajiban lapor (Pasal 2 ayat 3 huruf a sampai p), beserta syarat dan batas nilainya.
 
-| Ketentuan | Ringkasan Aturan | 
-| ----- | ----- | 
-| **Pasal 2 ayat (2)** | Pemberian terkait jabatan dan berlawanan dengan kewajiban/tugas wajib ditolak. | 
-| **Pasal 2 ayat (3) huruf l** | Pemberian acara pernikahan, kelahiran, akikah, khitanan, dan upacara adat/agama maks. Rp1.500.000 per pemberi. | 
-| **Pasal 2 ayat (3) huruf n** | Pemberian sesama rekan kerja (bukan uang/alat tukar) maks. Rp500.000 per pemberian dan Rp1.500.000 per tahun dari pemberi yang sama. | 
-| **Pasal 2 ayat (4)** | Seluruh pengecualian gugur apabila dilarang oleh ketentuan internal instansi. | 
-| **Pasal 4A** | Penolakan gratifikasi dapat dilaporkan melalui kanal pelaporan resmi. | 
-| **Pasal 5 ayat (2)–(3)** | Makanan/minuman mudah rusak dapat langsung disalurkan untuk kemanfaatan sosial dan dilampirkan dokumentasinya. | 
-| **Pasal 9 & 17–19** | Batas melengkapi dokumen ≤ 20 hari kerja; penetapan status KPK ≤ 30 hari kerja; penyampaian SK ≤ 7 hari kerja. | 
+### 3. Hitung Tenggat
 
-## Struktur Berkas
+- Menghitung batas 30 hari kerja untuk melapor, atau 20 hari kerja untuk melengkapi laporan yang dikembalikan (Pasal 9).
+- Sabtu, Minggu, libur nasional, dan cuti bersama tidak dihitung. Daftar libur bisa ditambah atau dihapus langsung di halaman.
+
+### 4. Cara Melapor dan Formulir Laporan
+
+- Kanal resmi: GOL KPK, email pelaporan.gratifikasi@kpk.go.id, UPG instansi, dan surat ke Direktorat Gratifikasi KPK.
+- Alur setelah melapor: verifikasi, kelengkapan dokumen, penetapan status, dan penyampaian SK.
+- **Formulir Laporan Gratifikasi** (penerimaan atau penolakan) mengacu SK Pimpinan KPK Nomor 1461 Tahun 2020, dengan bagian A sampai E: identitas pelapor, data pemberi, data penerimaan, kronologi, dan permohonan kompensasi. Formulir dicetak dua halaman A4 lewat menu cetak peramban, lalu bisa disimpan sebagai PDF.
+
+### Lainnya
+
+- Tampilan menyesuaikan perangkat: menu di atas pada layar lebar, menu di bagian bawah pada HP.
+- Mode terang dan gelap.
+- Bisa dipasang sebagai aplikasi di HP (tombol **Pasang Aplikasi** muncul pada peramban yang mendukung).
+- Logo PERPAKSINAS dan Paksiapi Dana Rakca di bagian atas menaut ke akun Instagram masing-masing.
+
+## Privasi
+
+Semua isian, termasuk data pribadi di formulir laporan, hanya diproses di peramban pengguna. Tidak ada server, akun, atau pengiriman data ke pihak mana pun. Satu-satunya sumber luar yang dimuat adalah huruf Plus Jakarta Sans dari Google Fonts. Pilihan tema disimpan di `localStorage` peramban masing-masing.
+
+## Struktur berkas
 
 ```
-index.html   # Aplikasi web lengkap (HTML, CSS, JS, dan template cetak PDF dalam satu file)
-README.md    # Dokumentasi aplikasi
+index.html                 # seluruh aplikasi: HTML, CSS, JavaScript, dan logo dalam satu berkas
+README.md
+DESIGN.md                  # catatan arah tampilan dan alasannya
+anti-slop/                 # laporan audit tampilan dan aksesibilitas
 ```
 
-## Sumber Referensi
+## Memasang di GitHub Pages
 
-* Peraturan KPK Nomor 1 Tahun 2026 tentang Perubahan atas Peraturan KPK Nomor 2 Tahun 2019 tentang Pelaporan Gratifikasi.
-* Keputusan Pimpinan KPK Nomor 1461 Tahun 2020 tentang Pedoman Pelaporan Gratifikasi.
-* Portal Pelaporan Daring: [GOL KPK](https://gol.kpk.go.id/)
+1. Unggah `index.html` (dan berkas lain bila diinginkan) ke cabang `main` repositori.
+2. Buka **Settings → Pages**, pilih **Deploy from a branch**, cabang `main`, folder `/ (root)`, lalu **Save**.
+3. Situs aktif di `https://<username>.github.io/<nama-repo>/` setelah beberapa menit.
 
-## Penyusun & Kontak
+## Memasang di Vercel
 
-Disusun oleh **Muhammad Widodo Ma'ruf — Penyuluh Antikorupsi Utama**.
+1. Di Vercel, pilih **Add New → Project** dan impor repositori ini.
+2. Framework Preset: **Other**, tanpa build command dan tanpa output directory.
+3. Klik **Deploy**.
 
-* **Saran & Masukan:** [hi.widodomaruf@gmail.com](mailto:hi.widodomaruf@gmail.com)
-* **Instagram:** [@widodomaruf](https://www.instagram.com/widodomaruf/)
+## Memperbarui aturan dan data
+
+Semua data ada di bagian `<script>` dalam `index.html`:
+
+| Konstanta | Isi |
+| --- | --- |
+| `SIT` | Daftar kondisi: judul, kategori, kata kunci pencarian, huruf pengecualian, batas nilai (`limit`, `yearly`), bentuk yang diperbolehkan, pertanyaan syarat, dan tips lapangan |
+| `EXC` | Teks ringkas 16 pengecualian (huruf a sampai p) |
+| `BENTUK` | Pilihan bentuk pemberian |
+| `DEFAULT_HOL` | Libur nasional dan cuti bersama |
+
+Yang perlu diperiksa secara berkala:
+
+- **Daftar libur.** Saat ini berisi tahun 2026. Tambahkan tahun berikutnya setiap terbit SKB 3 Menteri tentang hari libur nasional dan cuti bersama.
+- **Formulir laporan.** Cocokkan isian dengan formulir resmi KPK atau GOL KPK terbaru bila ada perubahan.
+- **Batas nilai.** Bila Perkom KPK diubah, perbarui `limit` dan `yearly` di `SIT` serta teks di `EXC`.
+
+## Dasar hukum
+
+- Undang-Undang Nomor 31 Tahun 1999 jo. Undang-Undang Nomor 20 Tahun 2001 tentang Pemberantasan Tindak Pidana Korupsi, Pasal 12B dan 12C.
+- Peraturan KPK Nomor 2 Tahun 2019 tentang Pelaporan Gratifikasi.
+- Peraturan KPK Nomor 1 Tahun 2026 tentang Perubahan atas Peraturan KPK Nomor 2 Tahun 2019 (ditetapkan 14 Januari 2026, diundangkan 20 Januari 2026, Berita Negara 2026 Nomor 43).
+- Keputusan Pimpinan KPK Nomor 1461 Tahun 2020 (acuan formulir laporan).
+
+## Tautan
+
+- [GOL KPK](https://gol.kpk.go.id/)
+- [Prosedur Pelaporan Gratifikasi KPK](https://www.kpk.go.id/id/layanan/gratifikasi/prosedur-pelaporan-gratifikasi)
+- [Instagram PERPAKSINAS](https://www.instagram.com/perpaksinas/)
+- [Instagram Paksiapi Dana Rakca](https://www.instagram.com/paksiapi.danarakca/)
+
+## Saran dan masukan
+
+- Email: hi.widodomaruf@gmail.com
+- Instagram: [@widodomaruf](https://www.instagram.com/widodomaruf/)
