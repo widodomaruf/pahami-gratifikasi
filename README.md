@@ -55,7 +55,6 @@ Semua isian, termasuk data pribadi di formulir laporan, hanya diproses di peramb
 index.html                 # seluruh aplikasi: HTML, CSS, JavaScript, dan logo dalam satu berkas
 README.md
 DESIGN.md                  # catatan arah tampilan dan alasannya
-anti-slop/                 # laporan audit tampilan dan aksesibilitas
 ```
 
 ## Memasang di GitHub Pages
