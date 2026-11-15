@@ -46,6 +46,8 @@ Daftar 16 penerimaan yang dikecualikan dari kewajiban lapor (Pasal 2 ayat 3 huru
 - Mode terang dan gelap.
 - Bisa dipasang sebagai aplikasi di HP (tombol **Pasang Aplikasi** muncul pada peramban yang mendukung).
 - Logo PERPAKSINAS dan Paksiapi Dana Rakca di bagian atas menaut ke akun Instagram masing-masing.
+- Tombol **Beranda** di kepala halaman membuka s.id/widodomaruf (kumpulan aplikasi pengembang), dan tombol **Panduan** membuka buku panduan PDF.
+- Kartu **Arnitas (Arena Integritas)** di bagian bawah setiap halaman, untuk fasilitator yang ingin mengadakan kuis live dan mini game antikorupsi: [arnitas.vercel.app](https://arnitas.vercel.app).
 
 ## Privasi
 

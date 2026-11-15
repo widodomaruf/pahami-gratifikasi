@@ -189,6 +189,16 @@ footer a:hover{text-decoration:underline}
 .partner-bar a:hover{background:#f3f3f3}
 .partner-bar img{height:40px;width:auto;max-width:100%;display:block}
 @media (max-width:420px){.partner-bar img{height:34px}}
+/* Kartu aplikasi pendamping: Arnitas */
+.promo{margin-top:36px;display:grid;grid-template-columns:auto 1fr auto;gap:14px 18px;align-items:center;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.promo-ico{width:52px;height:52px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.promo-ico svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.promo-txt{min-width:0}
+.promo-for{font-size:.82rem;font-weight:700;color:var(--accent)}
+.promo h2{font-size:1.15rem;margin:2px 0 4px}
+.promo p{color:var(--muted);font-size:.92rem;margin:0}
+.promo .btn{white-space:nowrap;text-decoration:none}
+@media (max-width:640px){.promo{grid-template-columns:auto 1fr}.promo .btn{grid-column:1/-1;justify-content:center}}
 .ver-badge{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-size:.75rem;font-weight:700;color:var(--ink)}
 
 .bottomnav{display:none}
@@ -272,6 +282,10 @@ footer a:hover{text-decoration:underline}
         </div>
       </div>
       <div class="head-actions">
+        <a class="icon-btn" href="https://s.id/widodomaruf" target="_blank" rel="noopener" aria-label="Beranda: semua aplikasi Widodo Ma'ruf (s.id/widodomaruf, membuka tab baru)">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
+          <span>Beranda</span>
+        </a>
         <a class="icon-btn" href="https://drive.google.com/drive/folders/1rAWgVEES0AaMG82MINxaFE2T2F58aTk_" target="_blank" rel="noopener" aria-label="Buku Panduan (PDF, membuka Google Drive di tab baru)">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2V5z"/><path d="M4 21a2 2 0 012-2h13v2H6a2 2 0 01-2 0z"/><path d="M9 7h6M9 11h6"/></svg>
           <span>Panduan</span>
@@ -607,6 +621,16 @@ footer a:hover{text-decoration:underline}
     </form>
   </div>
 </section>
+
+<aside class="promo" aria-labelledby="promo-title">
+  <div class="promo-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8h10a4 4 0 014 4v2a3 3 0 01-5.2 2L14.5 15h-5l-1.3 1A3 3 0 013 14v-2a4 4 0 014-4z"/><path d="M8 11v3M6.5 12.5h3"/><path d="M15.5 12h.01M17.5 13.5h.01"/></svg></div>
+  <div class="promo-txt">
+    <div class="promo-for">Untuk fasilitator dan penyuluh</div>
+    <h2 id="promo-title">Arnitas: Arena Integritas</h2>
+    <p>Sosialisasi gratifikasi jadi lebih hidup dengan kuis live dan mini game antikorupsi. Fasilitator membuka sesi, peserta bergabung dari HP masing-masing.</p>
+  </div>
+  <a class="btn" href="https://arnitas.vercel.app" target="_blank" rel="noopener">Buka Arnitas</a>
+</aside>
 
 </main>
 
