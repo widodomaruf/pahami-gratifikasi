@@ -22,7 +22,7 @@
   --bg:#f5f5f5; --surface:#ffffff; --ink:#1a1a1a; --muted:#5e5e5e; --line:#e2e2e2;
   --accent:#d71920; --accent-soft:#fdeaea; --accent-fill:#d71920; --accent-fill-hover:#b31217; --on-accent:#ffffff; --focus:#d71920;
   --head-bg:#141414; --head-fg:#ffffff; --head-muted:#b8b8b8;
-  --tap-bg:#fff4f4; --tap-bg-hover:#fde4e5; --tap-line:#f0c2c4;
+  --tap-bg:#fff4f4; --tap-bg-hover:#fde4e5; --tap-line:#f0c2c4; --soft-ico:#efefef;
   --tolak:#a3161b; --tolak-soft:#fbe6e6;
   --lapor:#a15c00; --lapor-soft:#fdf0dc;
   --aman:#1d7a3a; --aman-soft:#e3f3e7;
@@ -32,12 +32,12 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#111111; --surface:#1b1b1b; --ink:#ededed; --muted:#a3a3a3; --line:#2e2e2e;
-  --accent:#ff4b52; --accent-soft:#3a1517; --accent-fill:#c8161d; --accent-fill-hover:#a91219; --on-accent:#ffffff; --focus:#ff8a8f; --head-bg:#000000; --head-fg:#ffffff; --head-muted:#9a9a9a; --tap-bg:#241718; --tap-bg-hover:#301b1d; --tap-line:#5c2a2e;
+  --accent:#ff4b52; --accent-soft:#3a1517; --accent-fill:#c8161d; --accent-fill-hover:#a91219; --on-accent:#ffffff; --focus:#ff8a8f; --head-bg:#000000; --head-fg:#ffffff; --head-muted:#9a9a9a; --tap-bg:#241718; --tap-bg-hover:#301b1d; --tap-line:#5c2a2e; --soft-ico:#262626;
   --tolak:#ff8a80; --tolak-soft:#3a1d1b; --lapor:#ffbf5e; --lapor-soft:#3a2a12;
   --aman:#7ad693; --aman-soft:#173323; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#111111; --surface:#1b1b1b; --ink:#ededed; --muted:#a3a3a3; --line:#2e2e2e;
-  --accent:#ff4b52; --accent-soft:#3a1517; --accent-fill:#c8161d; --accent-fill-hover:#a91219; --on-accent:#ffffff; --focus:#ff8a8f; --head-bg:#000000; --head-fg:#ffffff; --head-muted:#9a9a9a; --tap-bg:#241718; --tap-bg-hover:#301b1d; --tap-line:#5c2a2e;
+  --accent:#ff4b52; --accent-soft:#3a1517; --accent-fill:#c8161d; --accent-fill-hover:#a91219; --on-accent:#ffffff; --focus:#ff8a8f; --head-bg:#000000; --head-fg:#ffffff; --head-muted:#9a9a9a; --tap-bg:#241718; --tap-bg-hover:#301b1d; --tap-line:#5c2a2e; --soft-ico:#262626;
   --tolak:#ff8a80; --tolak-soft:#3a1d1b; --lapor:#ffbf5e; --lapor-soft:#3a2a12;
   --aman:#7ad693; --aman-soft:#173323; color-scheme:dark}
 *{box-sizing:border-box}
@@ -200,8 +200,11 @@ dialog.confirm .btnrow{justify-content:flex-end;padding:12px 20px;border-top:1px
 
 /* Other tabs */
 .list-exc{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin-top:16px}
-.exc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
-.exc .letter{font-weight:600;font-size:1.25rem;color:var(--accent)}
+.exc{display:grid;grid-template-columns:48px 1fr;gap:12px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.exc-ico{width:48px;height:48px;border-radius:10px;background:var(--soft-ico);color:var(--ink);display:grid;place-items:center}
+.exc-ico svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.exc-body{min-width:0}
+.exc-body b{font-size:1rem}
 .exc p{font-size:.875rem;margin-top:4px}
 .exc .lim{font-size:.75rem;color:var(--lapor);margin-top:4px;font-weight:600}
 .note{padding:12px 12px;border-radius:10px;background:var(--surface);border:1px solid var(--line);font-size:.875rem}
@@ -997,6 +1000,25 @@ const EXC = [
  ['o','Hidangan atau sajian yang berlaku umum.'],
  ['p','Cendera mata/plakat untuk instansi dalam hubungan kedinasan, tidak untuk individu.']
 ];
+/* Judul singkat dan ikon (garis 24 px) untuk setiap pengecualian, menggantikan tampilan huruf a–p */
+const EXC_UI = {
+  a:['Dari keluarga','<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M14.5 14.5c.8-.3 1.6-.5 2.5-.5 2.8 0 5 2.2 5 5"/>'],
+  b:['Hasil investasi pribadi','<path d="M3 20h18"/><path d="M4 16l5-5 4 3 7-7"/><path d="M15 7h5v5"/>'],
+  c:['Manfaat koperasi pegawai','<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>'],
+  d:['Perlengkapan seminar dinas','<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 012-2h2a2 2 0 012 2v2"/><path d="M3 13h18"/>'],
+  e:['Suvenir promosi berlogo','<path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/>'],
+  f:['Hadiah lomba pribadi','<path d="M8 4h8v5a4 4 0 01-8 0V4z"/><path d="M8 6H4v1a4 4 0 004 4M16 6h4v1a4 4 0 01-4 4"/><path d="M12 13v4M8 21h8M10 17h4v4h-4z"/>'],
+  g:['Penghargaan dari pemerintah','<circle cx="12" cy="9" r="6"/><path d="M8.5 14L7 22l5-3 5 3-1.5-8"/><path d="M12 6.5l.9 1.8 2 .3-1.4 1.4.3 2-1.8-.9-1.8.9.3-2-1.4-1.4 2-.3z"/>'],
+  h:['Diskon, voucher, undian umum','<path d="M3 8a2 2 0 002-2h14a2 2 0 002 2v2a2 2 0 000 4v2a2 2 0 00-2 2H5a2 2 0 00-2-2v-2a2 2 0 000-4V8z"/><path d="M10 6v12" stroke-dasharray="2 2"/>'],
+  i:['Honor profesi di luar dinas','<path d="M4 19.5A2.5 2.5 0 016.5 17H20V3H6.5A2.5 2.5 0 004 5.5v14z"/><path d="M4 19.5A2.5 2.5 0 006.5 22H20v-5"/><path d="M9 8h7M9 12h5"/>'],
+  j:['Honor dan transport dinas','<rect x="3" y="6" width="18" height="11" rx="2"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/><path d="M3 11h18M8 6V4h8v2"/>'],
+  k:['Karangan bunga ucapan','<circle cx="12" cy="8" r="1.8"/><circle cx="12" cy="4.2" r="2.2"/><circle cx="15.6" cy="6.8" r="2.2"/><circle cx="14.2" cy="11" r="2.2"/><circle cx="9.8" cy="11" r="2.2"/><circle cx="8.4" cy="6.8" r="2.2"/><path d="M12 13.2V22M12 18c-1.5-2-3.5-2.5-5-2 1 2 3 2.6 5 2z"/>'],
+  l:['Hajatan dan upacara','<rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 13h18M12 9v12"/><path d="M12 9c-2-4-6-4-6-1.5S10 9 12 9zM12 9c2-4 6-4 6-1.5S14 9 12 9z"/>'],
+  m:['Bantuan musibah','<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/><path d="M12 9v5M9.5 11.5h5"/>'],
+  n:['Dari rekan kerja','<circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6 1.5 0 2.9.6 4 1.5 1.1-.9 2.5-1.5 4-1.5 3.3 0 6 2.7 6 6"/>'],
+  o:['Hidangan untuk umum','<path d="M7 3v8M5 3v5a2 2 0 004 0V3M7 11v10"/><path d="M17 21V3c-2 1-3 4-3 7h3"/>'],
+  p:['Cendera mata untuk instansi','<path d="M4 21h16M6 21V10M10 21V10M14 21V10M18 21V10"/><path d="M3 10l9-6 9 6z"/>']
+};
 
 const BENTUK = [['uang','Uang tunai / transfer'],['voucher','Voucher / e-wallet / alat tukar'],['makanan','Makanan / minuman mudah rusak'],['barang','Barang lainnya']];
 const DEFAULT_HOL = ['2026-01-01','2026-01-16','2026-02-16','2026-02-17','2026-03-18','2026-03-19','2026-03-20','2026-03-23','2026-03-24','2026-04-03','2026-05-01','2026-05-14','2026-05-15','2026-05-27','2026-05-28','2026-06-01','2026-06-16','2026-08-17','2026-08-25','2026-12-24','2026-12-25'];
@@ -1301,7 +1323,7 @@ $('grat-form').addEventListener('input', () => { formDirty = true; });
 window.addEventListener('beforeunload', e => { if (formDirty){ e.preventDefault(); e.returnValue = ''; } });
 
 /* ---------- OTHER TABS INIT ---------- */
-$('exc-list').innerHTML = EXC.map(([l,t,lim]) => `<div class="exc"><div class="letter">${l}</div><p>${t}</p>${lim?'<div class="lim">'+lim+'</div>':''}</div>`).join('');
+$('exc-list').innerHTML = EXC.map(([l,t,lim]) => `<div class="exc"><span class="exc-ico"><svg viewBox="0 0 24 24" aria-hidden="true">${EXC_UI[l][1]}</svg></span><div class="exc-body"><b>${EXC_UI[l][0]}</b><p>${t}</p>${lim?'<div class="lim">'+lim+'</div>':''}</div></div>`).join('');
 $('t-tgl').value = today;
 function renderHol(){ HOL.sort(); $('hol').innerHTML = HOL.map(d => `<button data-d="${d}">${d}</button>`).join(''); }
 function renderTenggat(){
