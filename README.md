@@ -27,7 +27,7 @@ Buku panduan penggunaan (PDF): [Google Drive](https://drive.google.com/drive/fol
 
 ### Uji PROVE IT
 
-Tujuh pertanyaan reflektif yang dirangkum KPK untuk mengenali pemberian yang patut dicurigai: **P**urpose (tujuan), **R**ules (aturan), **O**penness (keterbukaan), **V**alue (nilai), **E**thics (etika), **I**dentity (identitas), dan **T**iming (waktu). Satu jawaban Ya atau Ragu ditandai sebagai tanda bahaya. Dibuka dari tautan **Masih ragu? Uji dengan PROVE IT** di layar Cek Status dan di halaman hasil.
+Tujuh pertanyaan reflektif yang dirangkum KPK untuk mengenali pemberian yang patut dicurigai: **P**urpose (tujuan), **R**ules (aturan), **O**penness (keterbukaan), **V**alue (nilai), **E**thics (etika), **I**dentity (identitas), dan **T**iming (waktu). Satu jawaban Ya atau Ragu ditandai sebagai tanda bahaya. Menjadi menu tersendiri (**Uji PROVE IT**, di HP: **PROVE IT**), dan juga ditautkan dari halaman hasil cek.
 
 ### 2. Tidak Wajib Lapor
 
@@ -47,6 +47,7 @@ Daftar 16 penerimaan yang dikecualikan dari kewajiban lapor (Pasal 2 ayat 3 huru
 ### Lainnya
 
 - Tampilan menyesuaikan perangkat: menu di atas pada layar lebar, menu di bagian bawah pada HP.
+- Kartu yang bisa diketuk berlatar merah muda dengan tanda panah; kartu yang hanya untuk dibaca berlatar putih tanpa panah. Tautan bergaris bawah.
 - Mode terang dan gelap.
 - Bisa dipasang sebagai aplikasi di HP (tombol **Pasang Aplikasi** muncul pada peramban yang mendukung).
 - Logo PERPAKSINAS dan Paksiapi Dana Rakca di bagian atas menaut ke akun Instagram masing-masing.
