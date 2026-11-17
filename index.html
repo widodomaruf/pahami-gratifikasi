@@ -16,7 +16,7 @@
 <link rel="apple-touch-icon" id="link-apple-icon" href="">
 <link rel="manifest" id="link-manifest" href="">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
   --bg:#f5f5f5; --surface:#ffffff; --ink:#1a1a1a; --muted:#5e5e5e; --line:#e2e2e2;
@@ -53,15 +53,19 @@ button:disabled,input:disabled,select:disabled,textarea:disabled{cursor:not-allo
 
 /* Header & Logo Konsep 1 (Perisai Integritas) */
 header.top{background:var(--head-bg);border-bottom:3px solid var(--accent);position:sticky;top:0;z-index:15}
-.brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 6px}
-.brandleft{display:flex;align-items:center;gap:11px}
-.logo-mark{width:38px;height:38px;border-radius:10px;background:#ffffff;display:grid;place-items:center;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.brandbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px 4px}
+.brandleft{display:flex;align-items:center;gap:12px}
+.logo-mark{width:40px;height:40px;border-radius:10px;background:#ffffff;display:grid;place-items:center;flex-shrink:0;border:1px solid rgba(255,255,255,.12)}
 .logo-mark svg{width:30px;height:30px;display:block}
-.brand{font-family:var(--f-display);font-weight:800;font-size:1.35rem;letter-spacing:-.02em;color:var(--head-fg);line-height:1.1}
+.brand{font-family:var(--f-display);font-weight:600;font-size:1.5rem;letter-spacing:-.02em;color:var(--head-fg);line-height:1.1}
 .brand span{color:var(--accent)}
-.reg{font-size:.7rem;color:var(--head-muted);margin-top:2px}
+.reg{font-size:.75rem;color:var(--head-muted);margin-top:4px}
 .head-actions{display:flex;align-items:center;gap:8px}
-.icon-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:8px;border:1px solid #333;background:#222;color:#fff;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer}
+.icon-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:4px;min-height:44px;min-width:44px;padding:8px 12px;border-radius:8px;border:1px solid #333;background:#222;color:#fff;font:inherit;font-size:.875rem;font-weight:600;cursor:pointer}
+/* Tooltip untuk tombol ikon: hanya saat label teks disembunyikan (layar sempit) */
+.icon-btn.icon-only{width:44px;height:44px;padding:0}
+.icon-btn.icon-only:hover::after,.icon-btn.icon-only:focus-visible::after{display:block}
+.icon-btn[data-tip]::after{content:attr(data-tip);position:absolute;top:calc(100% + 8px);right:0;z-index:30;white-space:nowrap;padding:4px 8px;border-radius:6px;background:var(--surface);color:var(--ink);border:1px solid var(--line);font-size:.75rem;font-weight:500;pointer-events:none;display:none}
 .icon-btn:hover{border-color:var(--accent)}
 a.icon-btn{text-decoration:none}
 .icon-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -69,156 +73,168 @@ a.icon-btn{text-decoration:none}
 .icon-btn:active{transform:translateY(1px)}
 
 nav.tabs{display:flex;gap:4px;overflow-x:auto}
-nav.tabs a{padding:10px 14px;color:var(--head-muted);text-decoration:none;font-weight:600;border-bottom:3px solid transparent;white-space:nowrap;font-size:.92rem}
+nav.tabs a{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;color:var(--head-muted);text-decoration:none;font-weight:600;border-bottom:3px solid transparent;white-space:nowrap;font-size:.875rem}
 nav.tabs a[aria-current="page"]{color:var(--head-fg);border-color:var(--accent)}
 
 main{padding-block:24px 60px}
-h1{font-size:clamp(1.45rem,4vw,2rem);font-weight:800;line-height:1.25;margin:0}
-h2{font-size:1.2rem;font-weight:700;margin:0}
-h3{font-size:1.02rem;font-weight:700;margin:0}
+h1{font-size:clamp(1.5rem,4vw,2rem);font-weight:600;line-height:1.25;margin:0}
+h2{font-size:1.25rem;font-weight:600;margin:0}
+h3{font-size:1rem;font-weight:600;margin:0}
 p{margin:0}
+b,strong{font-weight:600}
 .lead{color:var(--muted);max-width:66ch;margin-top:8px}
 .stack{display:flex;flex-direction:column;gap:16px}
 
 /* Steps & Checker */
-.steps{display:flex;gap:6px;margin:20px 0 16px;flex-wrap:wrap;padding:0}
-.steps li{list-style:none;font-size:.8rem;font-weight:600;color:var(--muted);padding:4px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
+.steps{display:flex;gap:4px;margin:20px 0 16px;flex-wrap:wrap;padding:0}
+.steps li{list-style:none;font-size:.75rem;font-weight:600;color:var(--muted);padding:4px 8px;border-radius:99px;background:var(--surface);border:1px solid var(--line)}
 .steps li.on{background:var(--accent-fill);border-color:var(--accent-fill);color:var(--on-accent)}
 .steps li.done{color:var(--accent);border-color:var(--accent)}
-.search{width:100%;padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit}
-.quick-lbl{font-size:.88rem;font-weight:700;color:var(--muted);margin-bottom:8px;display:block}
-.empty{padding:20px;border:1px dashed var(--line);border-radius:12px;background:var(--surface);display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.search{width:100%;padding:12px 16px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit}
+.quick-lbl{font-size:.875rem;font-weight:600;color:var(--muted);margin-bottom:8px;display:block}
+.empty{padding:20px;border:1px dashed var(--line);border-radius:12px;background:var(--surface);display:flex;flex-direction:column;gap:8px;align-items:flex-start}
 .empty b{font-size:1rem}
-.empty p{color:var(--muted);font-size:.9rem}
+.empty p{color:var(--muted);font-size:.875rem}
+.empty .btnrow{margin-top:4px}
 .quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:8px}
-.qcard{display:flex;flex-direction:column;gap:2px;text-align:left;padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
+.qcard{display:flex;flex-direction:column;gap:4px;text-align:left;padding:12px 12px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
 .qcard:hover{border-color:var(--accent)}
-.qcard b{font-size:.9rem}
-.qcard small{font-size:.78rem;color:var(--muted)}
-.cat-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
-.cat-btn{padding:7px 13px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:.83rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.qcard b{font-size:.875rem}
+.qcard small{font-size:.75rem;color:var(--muted)}
+.cat-tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px}
+.cat-btn{min-height:44px;padding:8px 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:.875rem;font-weight:600;cursor:pointer;white-space:nowrap}
 .cat-btn.active{background:var(--ink);color:var(--surface);border-color:var(--ink)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:8px}
-.sit{display:flex;flex-direction:column;gap:5px;text-align:left;padding:15px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin-top:8px}
+.sit{display:flex;flex-direction:column;gap:4px;text-align:left;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:inherit;cursor:pointer}
 .sit:hover{border-color:var(--accent)}
-.sit b{font-size:.95rem;line-height:1.35}
-.sit small{color:var(--muted);font-size:.83rem}
-.sit .tag{font-size:.76rem;color:var(--accent);font-weight:700}
+.sit b{font-size:1rem;line-height:1.5}
+.sit small{color:var(--muted);font-size:.875rem}
+.sit .tag{font-size:.75rem;color:var(--accent);font-weight:600}
 .sit.warn .tag{color:var(--tolak)}
 
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
-.chosen{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 14px;border-radius:10px;background:var(--accent-soft)}
-.linkbtn{background:none;border:0;color:var(--accent);font:inherit;font-weight:600;cursor:pointer;padding:0;text-decoration:underline}
-.field{display:flex;flex-direction:column;gap:6px}
-.field label,.legend{font-weight:600;font-size:.93rem}
-.field .hint{color:var(--muted);font-size:.83rem;font-weight:400}
-.field input[type=text],.field input[type=date],.field input[type=number],.field select,.field textarea{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;width:100%}
+.chosen{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;padding:12px 12px;border-radius:10px;background:var(--accent-soft)}
+.linkbtn{display:inline-flex;align-items:center;min-height:44px;background:none;border:0;color:var(--accent);font:inherit;font-weight:600;cursor:pointer;padding:0;text-decoration:underline}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label,.legend{font-weight:600;font-size:.875rem}
+.field .hint{color:var(--muted);font-size:.875rem;font-weight:400}
+.field input[type=text],.field input[type=email],.field input[type=date],.field input[type=number],.field select,.field textarea{min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit;width:100%}
 .field textarea{min-height:84px;resize:vertical}
 .money{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
-.money span{padding:0 10px;color:var(--muted);font-size:.9rem}
+.money span{padding:0 8px;color:var(--muted);font-size:.875rem}
 .money input{border:0!important;background:transparent!important}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{position:relative}
 .chip input{position:absolute;opacity:0;inset:0}
-.chip span{display:inline-block;padding:8px 12px;border:1px solid var(--line);border-radius:99px;cursor:pointer;background:var(--bg);font-weight:600;font-size:.88rem}
+.chip span{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;border:1px solid var(--line);border-radius:99px;cursor:pointer;background:var(--bg);font-weight:600;font-size:.875rem}
 .chip input:checked+span{background:var(--accent-fill);border-color:var(--accent-fill);color:var(--on-accent)}
 .chip input:focus-visible+span{outline:2px solid var(--focus);outline-offset:2px}
 .chip span:hover{border-color:var(--accent)}
-.check{display:flex;gap:8px;align-items:flex-start;color:var(--ink);font-size:.9rem;cursor:pointer}
-.check input{margin-top:4px;accent-color:var(--accent)}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.check{display:flex;gap:8px;align-items:center;min-height:44px;color:var(--ink);font-size:.875rem;cursor:pointer}
+.check input{margin:0;accent-color:var(--accent)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-@media (max-width:640px){.two,.three{grid-template-columns:1fr}}
-.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.btn{padding:12px 18px;min-height:44px;border-radius:10px;border:1px solid var(--accent-fill);background:var(--accent-fill);color:var(--on-accent);font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+@media (max-width:767.98px){.two,.three{grid-template-columns:1fr}}
+.btnrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{padding:12px 16px;min-height:44px;border-radius:10px;border:1px solid var(--accent-fill);background:var(--accent-fill);color:var(--on-accent);font:inherit;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .btn:hover{background:var(--accent-fill-hover);border-color:var(--accent-fill-hover)}
 .btn:active{transform:translateY(1px)}
 .btn.ghost{background:transparent;color:var(--accent);border-color:var(--accent)}
 .btn.ghost:hover{background:var(--accent-soft)}
+.btn.danger{background:#b91c1c;border-color:#b91c1c;color:#fff}
+.btn.danger:hover{filter:brightness(.92)}
+.btn.neutral{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn.neutral:hover{border-color:var(--ink)}
+/* Baris aksi wizard tetap terlihat saat menggulir */
+.sticky-actions{position:sticky;bottom:0;z-index:5;background:var(--bg);padding-block:12px;border-top:1px solid var(--line)}
+/* Dialog konfirmasi tindakan yang menghapus isian */
+dialog.confirm{border:1px solid var(--line);border-radius:14px;padding:0;max-width:min(440px,calc(100vw - 32px));background:var(--surface);color:var(--ink)}
+dialog.confirm::backdrop{background:rgba(0,0,0,.5)}
+dialog.confirm .c-body{padding:20px;display:flex;flex-direction:column;gap:8px}
+dialog.confirm h2{font-size:1.125rem;line-height:1.25}
+dialog.confirm p{color:var(--muted);font-size:.875rem}
+dialog.confirm .btnrow{justify-content:flex-end;padding:12px 20px;border-top:1px solid var(--line)}
 
-.q{font-size:1.18rem;font-weight:700;line-height:1.35}
-.qmeta{font-size:.76rem;color:var(--muted)}
-.answers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.answers button{padding:14px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-weight:700;cursor:pointer}
+.q{font-size:1.125rem;font-weight:600;line-height:1.25}
+.qmeta{font-size:.75rem;color:var(--muted)}
+.answers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.answers button{padding:12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-weight:600;cursor:pointer}
 .answers button:hover{border-color:var(--accent)}
-.result{border-radius:14px;padding:22px;border:2px solid var(--c);background:var(--cs)}
-.result .stamp{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--c);border:1.5px solid var(--c);padding:3px 9px;border-radius:5px}
-.result h2{font-size:clamp(1.4rem,4vw,1.85rem);font-weight:800;margin-top:10px}
+.result{border-radius:14px;padding:20px;border:2px solid var(--c);background:var(--cs)}
+.result .stamp{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--c);border:1.5px solid var(--c);padding:4px 8px;border-radius:5px}
+.result h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:600;line-height:1.25;margin-top:8px}
 .r-tolak{--c:var(--tolak);--cs:var(--tolak-soft)} .r-lapor{--c:var(--lapor);--cs:var(--lapor-soft)} .r-aman{--c:var(--aman);--cs:var(--aman-soft)}
-.why,.next{margin:14px 0 0;padding-left:20px}
-.why li,.next li{margin:5px 0}
-.deadline,.field-tip{margin-top:16px;padding:14px;border-radius:10px;background:var(--surface)}
-.deadline .d{font-weight:800;font-size:1.3rem}
-.deadline .lbl{font-size:.85rem;color:var(--muted);font-weight:600}
-.field-tip{border-left:4px solid var(--c);font-size:.92rem}
-.pasal{font-size:.78rem;color:var(--muted);margin-top:12px}
+.why,.next{margin:12px 0 0;padding-left:20px}
+.why li,.next li{margin:4px 0}
+.deadline,.field-tip{margin-top:16px;padding:12px;border-radius:10px;background:var(--surface)}
+.deadline .d{font-weight:600;font-size:1.25rem}
+.deadline .lbl{font-size:.875rem;color:var(--muted);font-weight:600}
+.field-tip{border-left:4px solid var(--c);font-size:.875rem}
+.pasal{font-size:.75rem;color:var(--muted);margin-top:12px}
 
 /* Form Generator Section */
-.form-sec-title{background:var(--head-bg);color:#fff;padding:10px 14px;border-radius:8px;font-weight:700;font-size:.95rem;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center}
+.form-sec-title{background:var(--head-bg);color:#fff;padding:8px 12px;border-radius:8px;font-weight:600;font-size:1rem;letter-spacing:.02em;display:flex;justify-content:space-between;align-items:center}
 .form-sec-title span{font-size:.75rem;font-weight:500;color:var(--head-muted)}
 .radio-list{display:flex;flex-direction:column;gap:8px}
-.inline-other{margin-top:6px;margin-left:24px}
+.inline-other{margin-top:4px;margin-left:24px}
 
 /* Other tabs */
-.list-exc{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:16px}
-.exc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px}
-.exc .letter{font-weight:800;font-size:1.25rem;color:var(--accent)}
-.exc p{font-size:.9rem;margin-top:6px}
-.exc .lim{font-size:.76rem;color:var(--lapor);margin-top:6px;font-weight:600}
-.note{padding:12px 14px;border-radius:10px;background:var(--accent-soft);font-size:.92rem}
-.channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:12px}
-.chan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px}
-.chan code{font-size:.8rem;word-break:break-all}
-.chan a{color:var(--accent);font-weight:600}
+.list-exc{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin-top:16px}
+.exc{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.exc .letter{font-weight:600;font-size:1.25rem;color:var(--accent)}
+.exc p{font-size:.875rem;margin-top:4px}
+.exc .lim{font-size:.75rem;color:var(--lapor);margin-top:4px;font-weight:600}
+.note{padding:12px 12px;border-radius:10px;background:var(--accent-soft);font-size:.875rem}
+.channels{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;margin-top:12px}
+.chan{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:4px}
+.chan code{font-size:.75rem;word-break:break-all}
+.chan a,.chan .linkbtn{display:inline-flex;align-items:center;min-height:44px;color:var(--accent);font-weight:600}
 .timeline{list-style:none;padding:0;margin:16px 0 0}
-.timeline li{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:12px 0;border-top:1px solid var(--line)}
-.timeline .when{font-size:.78rem;color:var(--accent);font-weight:700}
-.hol{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.hol button{font-size:.75rem;padding:4px 8px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.timeline li{display:grid;grid-template-columns:110px 1fr;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.timeline .when{font-size:.75rem;color:var(--accent);font-weight:600}
+.hol{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.hol button{min-height:44px;font-size:.875rem;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
 
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--head-bg);color:#fff;padding:12px 18px;border-radius:10px;border:1px solid var(--accent);font-size:.9rem;z-index:50;max-width:90vw;text-align:center}
-footer{border-top:1px solid var(--line);padding-block:24px 36px;color:var(--muted);font-size:.85rem}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--head-bg);color:#fff;padding:12px 16px;border-radius:10px;border:1px solid var(--accent);font-size:.875rem;z-index:50;max-width:90vw;text-align:center}
+footer{border-top:1px solid var(--line);padding-block:24px 36px;color:var(--muted);font-size:.875rem}
 footer p+p{margin-top:8px}
-footer a{color:var(--accent);font-weight:600;text-decoration:none}
+footer a{display:inline-flex;align-items:center;min-height:44px;color:var(--accent);font-weight:600;text-decoration:none}
 footer a:hover{text-decoration:underline}
-.footer-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:10px}
+.footer-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:8px}
 /* Pita logo mitra di atas kepala halaman. Latar selalu putih karena kedua logo berlatar putih. */
 .partner-bar{background:#ffffff;border-bottom:1px solid #e2e2e2}
-.partner-bar .wrap{display:flex;align-items:center;gap:8px 20px;flex-wrap:wrap;padding-block:6px}
+.partner-bar .wrap{display:flex;align-items:center;gap:8px 20px;flex-wrap:wrap;padding-block:4px}
 .partner-bar a{display:flex;align-items:center;min-height:44px;border-radius:8px}
 .partner-bar a:hover{background:#f3f3f3}
 .partner-bar img{height:40px;width:auto;max-width:100%;display:block}
-@media (max-width:420px){.partner-bar img{height:34px}}
+@media (max-width:767.98px){.partner-bar img{height:34px}}
 /* Kartu aplikasi pendamping: Arnitas */
-.promo{margin-top:36px;display:grid;grid-template-columns:auto 1fr auto;gap:14px 18px;align-items:center;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.promo{margin-top:36px;display:grid;grid-template-columns:auto 1fr auto;gap:12px 16px;align-items:center;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
 .promo-ico{width:52px;height:52px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
 .promo-ico svg{width:28px;height:28px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .promo-txt{min-width:0}
-.promo-for{font-size:.82rem;font-weight:700;color:var(--accent)}
-.promo h2{font-size:1.15rem;margin:2px 0 4px}
-.promo p{color:var(--muted);font-size:.92rem;margin:0}
+.promo-for{font-size:.875rem;font-weight:600;color:var(--accent)}
+.promo h2{font-size:1.125rem;margin:4px 0 4px}
+.promo p{color:var(--muted);font-size:.875rem;margin:0}
 .promo .btn{white-space:nowrap;text-decoration:none}
-@media (max-width:640px){.promo{grid-template-columns:auto 1fr}.promo .btn{grid-column:1/-1;justify-content:center}}
-.ver-badge{display:inline-block;padding:2px 8px;border-radius:99px;background:var(--surface);border:1px solid var(--line);font-size:.75rem;font-weight:700;color:var(--ink)}
+@media (max-width:767.98px){.promo{grid-template-columns:auto 1fr}.promo .btn{grid-column:1/-1;justify-content:center}}
+.ver-badge{font-size:.75rem;font-weight:600;color:var(--muted)}
 
 .bottomnav{display:none}
-.bottomnav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;color:var(--head-muted);text-decoration:none;font-size:.7rem;font-weight:600;position:relative}
+.bottomnav a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px 4px;color:var(--head-muted);text-decoration:none;font-size:.75rem;font-weight:600;position:relative}
 .bottomnav a svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .bottomnav a[aria-current="page"]{color:var(--head-fg)}
 .bottomnav a[aria-current="page"] svg{stroke:var(--accent)}
-@media (max-width:760px){
+@media (max-width:767.98px){
   nav.tabs{display:none}
   .bottomnav{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--head-bg);border-top:3px solid var(--accent)}
   footer{padding-bottom:96px}
+  /* Label teks disembunyikan: tombol jadi ikon persegi 44 px dengan tooltip */
   .icon-btn span{display:none}
-  /* target sentuh minimal 44 px di HP */
-  .icon-btn{min-width:44px;min-height:44px;justify-content:center}
-  .cat-btn,.hol button,.linkbtn{min-height:44px}
-  .chan a{display:inline-flex;align-items:center;min-height:44px}
-  .check{min-height:44px;align-items:center}
-  .check input{margin-top:0}
-  .chip span{padding-block:11px}
-  footer a{display:inline-flex;align-items:center;min-height:44px}
+  .icon-btn{width:44px;height:44px;padding:0}
+  .icon-btn[data-tip]:hover::after,.icon-btn[data-tip]:focus-visible::after{display:block}
+  /* Baris aksi wizard menempel di atas menu bawah */
+  .sticky-actions{bottom:64px}
 }
 
 /* ==================== PRINT STYLESHEET (FORMULIR RESMI KPK) ==================== */
@@ -287,22 +303,21 @@ footer a:hover{text-decoration:underline}
         </div>
       </div>
       <div class="head-actions">
-        <a class="icon-btn" href="https://s.id/widodomaruf" target="_blank" rel="noopener" aria-label="Beranda: semua aplikasi Widodo Ma'ruf (s.id/widodomaruf, membuka tab baru)">
+        <a class="icon-btn" href="https://s.id/widodomaruf" target="_blank" rel="noopener" aria-label="Buka beranda s.id/widodomaruf" data-tip="Buka beranda s.id/widodomaruf">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg>
           <span>Beranda</span>
         </a>
-        <a class="icon-btn" href="https://drive.google.com/drive/folders/1rAWgVEES0AaMG82MINxaFE2T2F58aTk_" target="_blank" rel="noopener" aria-label="Buku Panduan (PDF, membuka Google Drive di tab baru)">
+        <a class="icon-btn" href="https://drive.google.com/drive/folders/1rAWgVEES0AaMG82MINxaFE2T2F58aTk_" target="_blank" rel="noopener" aria-label="Buka buku panduan (PDF)" data-tip="Buka buku panduan (PDF)">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5a2 2 0 012-2h13v16H6a2 2 0 00-2 2V5z"/><path d="M4 21a2 2 0 012-2h13v2H6a2 2 0 01-2 0z"/><path d="M9 7h6M9 11h6"/></svg>
           <span>Panduan</span>
         </a>
-        <button class="icon-btn install" id="btn-install" hidden>
+        <button class="icon-btn install" id="btn-install" aria-label="Pasang aplikasi" data-tip="Pasang aplikasi" hidden>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-          <span>Pasang Aplikasi</span>
+          <span>Pasang aplikasi</span>
         </button>
-        <button class="icon-btn" id="btn-theme" aria-label="Ganti ke mode gelap">
+        <button class="icon-btn icon-only" id="btn-theme" aria-label="Ganti ke mode gelap" data-tip="Ganti ke mode gelap">
           <svg id="ico-sun" viewBox="0 0 24 24" aria-hidden="true" hidden><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
           <svg id="ico-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-          <span id="lbl-theme">Gelap</span>
         </button>
       </div>
     </div>
@@ -328,7 +343,7 @@ footer a:hover{text-decoration:underline}
   <div id="s1" class="stack">
     <div class="field">
       <label for="q-search">Cari kondisi pemberian</label>
-      <input class="search" id="q-search" type="search" placeholder="Ketik kata kunci: uang bensin, amplop nikah, parsel, ditinggal di meja, kado teman…">
+      <input class="search" id="q-search" type="search" placeholder="uang bensin, amplop nikah, parsel, kado teman">
     </div>
     <div id="quick-wrap">
       <span class="quick-lbl">Kondisi Paling Sering Dialami Pelayan Publik</span>
@@ -341,11 +356,11 @@ footer a:hover{text-decoration:underline}
     </div>
     <div>
       <div class="cat-tabs" id="cat-tabs">
-        <button class="cat-btn active" data-cat="semua">Semua Kondisi</button>
-        <button class="cat-btn" data-cat="layanan">Layanan &amp; Lapangan</button>
-        <button class="cat-btn" data-cat="kantor">Internal Kantor &amp; Rekan</button>
-        <button class="cat-btn" data-cat="pribadi">Keluarga &amp; Hajatan</button>
-        <button class="cat-btn" data-cat="umum">Kegiatan Luar &amp; Umum</button>
+        <button class="cat-btn active" data-cat="semua">Semua kondisi</button>
+        <button class="cat-btn" data-cat="layanan">Layanan &amp; lapangan</button>
+        <button class="cat-btn" data-cat="kantor">Internal kantor &amp; rekan</button>
+        <button class="cat-btn" data-cat="pribadi">Keluarga &amp; hajatan</button>
+        <button class="cat-btn" data-cat="umum">Kegiatan luar &amp; umum</button>
       </div>
       <div class="grid" id="sit-grid"></div>
     </div>
@@ -382,8 +397,8 @@ footer a:hover{text-decoration:underline}
         <label for="f-total">Total pemberian dari rekan yang sama tahun ini <span class="hint">(jika urunan, isi bagian per orang)</span></label>
         <div class="money"><span>Rp</span><input type="text" inputmode="numeric" id="f-total" placeholder="0"></div>
       </div>
-      <div class="btnrow"><button class="btn" id="to-q">Lanjut</button><span class="hint" id="s2-err" style="color:var(--tolak)"></span></div>
     </div>
+    <div class="btnrow sticky-actions"><button class="btn" id="to-q">Lanjut</button><span class="hint" id="s2-err" role="alert" style="color:var(--tolak)"></span></div>
   </div>
 
   <div id="s3" class="stack" hidden>
@@ -401,7 +416,7 @@ footer a:hover{text-decoration:underline}
   <div id="s4" class="stack" hidden>
     <div id="result"></div>
     <div class="btnrow">
-      <button class="btn" id="btn-to-form">Isi Formulir Laporan &amp; Cetak PDF</button>
+      <button class="btn" id="btn-to-form">Isi formulir laporan &amp; cetak PDF</button>
       <button class="btn ghost" id="restart">Cek pemberian lain</button>
       <button class="btn ghost" id="copy-res">Salin ringkasan</button>
       <span class="hint" id="copy-msg"></span>
@@ -436,10 +451,10 @@ footer a:hover{text-decoration:underline}
       <span class="legend">Libur nasional &amp; cuti bersama tahun 2026 yang dikecualikan</span>
       <span class="hint">Ketuk tanggal untuk menghapus, atau tambahkan tanggal libur baru di bawah.</span>
       <div class="hol" id="hol"></div>
-      <label for="h-add" style="margin-top:6px">Tambah tanggal libur</label>
+      <label for="h-add" style="margin-top:8px">Tambah tanggal libur</label>
       <div class="btnrow">
         <input type="date" id="h-add" style="padding:8px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:inherit">
-        <button class="btn ghost" id="h-btn" style="padding:8px 14px">Tambah libur</button>
+        <button class="btn ghost" id="h-btn" style="padding:8px 12px">Tambah libur</button>
       </div>
     </div>
   </div>
@@ -469,7 +484,7 @@ footer a:hover{text-decoration:underline}
     <h2>Formulir Laporan Gratifikasi (Siap Cetak PDF)</h2>
     <p class="lead">Gunakan formulir di bawah ini jika Anda memilih melapor via email <code>pelaporan.gratifikasi@kpk.go.id</code> atau menyerahkan berkas fisik ke UPG. Mengacu SK Pimpinan KPK No. 1461 Tahun 2020 jo. Perkom KPK 1/2026.</p>
 
-    <div class="note" style="margin-top:14px"><b>Privasi Terjaga:</b> Seluruh isian formulir ini hanya diproses di peramban perangkat Anda dan tidak dikirim ke server mana pun.</div>
+    <div class="note" style="margin-top:16px"><b>Privasi Terjaga:</b> Seluruh isian formulir ini hanya diproses di peramban perangkat Anda dan tidak dikirim ke server mana pun.</div>
 
     <form id="grat-form" class="stack" style="margin-top:20px" onsubmit="return false;">
 
@@ -498,11 +513,11 @@ footer a:hover{text-decoration:underline}
       <div class="panel stack">
         <div class="form-sec-title">A. Identitas Pelapor <span>Seluruhnya wajib diisi</span></div>
         <div class="two">
-          <div class="field"><label for="fa_nama">1. Nama Lengkap (tanpa gelar)</label><input type="text" id="fa_nama" placeholder="Sesuai KTP"></div>
-          <div class="field"><label for="fa_nik">2. Nomor Induk Kependudukan (NIK)</label><input type="text" id="fa_nik" inputmode="numeric" maxlength="16" placeholder="16 digit NIK"></div>
+          <div class="field"><label for="fa_nama">1. Nama Lengkap <span class="hint">(tanpa gelar, sesuai KTP)</span></label><input type="text" id="fa_nama" autocomplete="name"></div>
+          <div class="field"><label for="fa_nik">2. Nomor Induk Kependudukan (NIK)</label><input type="text" id="fa_nik" inputmode="numeric" maxlength="16" placeholder="16 digit, contoh 3603xxxxxxxxxxxx"></div>
         </div>
         <div class="two">
-          <div class="field"><label for="fa_tmplahir">3. Tempat Lahir</label><input type="text" id="fa_tmplahir" placeholder="Kota/Kabupaten kelahiran"></div>
+          <div class="field"><label for="fa_tmplahir">3. Tempat Lahir</label><input type="text" id="fa_tmplahir" placeholder="Contoh: Kudus"></div>
           <div class="field"><label for="fa_tgllahir">4. Tanggal Lahir</label><input type="date" id="fa_tgllahir"></div>
         </div>
         <div class="two">
@@ -510,7 +525,7 @@ footer a:hover{text-decoration:underline}
           <div class="field"><label for="fa_jabatan">6. Jabatan / Pangkat / Golongan</label><input type="text" id="fa_jabatan" placeholder="Contoh: Penyuluh Pajak / Penata / III/c"></div>
         </div>
         <div class="two">
-          <div class="field"><label for="fa_email">7. Alamat Email Penerima</label><input type="text" id="fa_email" placeholder="Dokumen SK KPK akan dikirim ke email ini"></div>
+          <div class="field"><label for="fa_email">7. Alamat Email Penerima <span class="hint">(SK KPK dikirim ke email ini)</span></label><input type="email" id="fa_email" autocomplete="email" placeholder="nama@domain.com"></div>
           <div class="field"><label for="fa_hp">9. Nomor HP / WhatsApp</label><input type="text" id="fa_hp" placeholder="08xxxxxxxxxx"></div>
         </div>
         <div class="field"><label for="fa_alamat">8. Alamat Lengkap Penerima (sesuai KTP)</label><input type="text" id="fa_alamat" placeholder="Jalan, RT/RW, Kelurahan/Desa"></div>
@@ -526,10 +541,10 @@ footer a:hover{text-decoration:underline}
       <div class="panel stack">
         <div class="form-sec-title">B. Data Pemberi Gratifikasi <span>Wajib diisi</span></div>
         <div class="two">
-          <div class="field"><label for="fb_nama">1. Nama Lengkap Pemberi</label><input type="text" id="fb_nama" placeholder="Isi 'Tidak diketahui' jika dikirim anonim"></div>
-          <div class="field"><label for="fb_instansi">2. Instansi / Perusahaan Pemberi</label><input type="text" id="fb_instansi" placeholder="Nama PT/CV/Instansi atau perorangan"></div>
+          <div class="field"><label for="fb_nama">1. Nama Lengkap Pemberi <span class="hint">(isi “Tidak diketahui” bila anonim)</span></label><input type="text" id="fb_nama"></div>
+          <div class="field"><label for="fb_instansi">2. Instansi / Perusahaan Pemberi</label><input type="text" id="fb_instansi" placeholder="Contoh: PT Maju Bersama, atau Perorangan"></div>
         </div>
-        <div class="field"><label for="fb_alamat">3. Alamat Lengkap Pemberi</label><input type="text" id="fb_alamat" placeholder="Alamat kantor atau rumah pemberi (jika diketahui)"></div>
+        <div class="field"><label for="fb_alamat">3. Alamat Lengkap Pemberi <span class="hint">(kantor atau rumah, jika diketahui)</span></label><input type="text" id="fb_alamat"></div>
         <div class="field">
           <span class="legend">4. Hubungan Pemberi - Penerima Gratifikasi (pilih salah satu)</span>
           <div class="radio-list">
@@ -585,7 +600,7 @@ footer a:hover{text-decoration:underline}
         </div>
 
         <div class="two">
-          <div class="field"><label for="fc_uraian">4. Uraian Detail Objek Gratifikasi</label><input type="text" id="fc_uraian" placeholder="Jenis, jumlah, merek, warna, pecahan uang, dll."></div>
+          <div class="field"><label for="fc_uraian">4. Uraian Detail Objek Gratifikasi <span class="hint">(jenis, jumlah, merek, warna, pecahan uang)</span></label><input type="text" id="fc_uraian" placeholder="Contoh: 1 tas kulit cokelat"></div>
           <div class="field"><label for="fc_nilai">5. Nilai Nominal / Taksiran Harga (Rp)</label><input type="text" id="fc_nilai" placeholder="Contoh: Rp1.500.000"></div>
         </div>
       </div>
@@ -600,7 +615,8 @@ footer a:hover{text-decoration:underline}
         </div>
         <div class="field">
           <label for="fd_kronologi">4. Uraian Proses Terjadinya Penerimaan / Penolakan Gratifikasi</label>
-          <textarea id="fd_kronologi" placeholder="Jelaskan secara singkat: kapan, di mana, dengan siapa, bagaimana prosesnya, dan dalam rangka apa pemberian terjadi..."></textarea>
+          <span class="hint" id="fd_kronologi_hint">Jelaskan singkat: kapan, di mana, dengan siapa, bagaimana prosesnya, dan dalam rangka apa pemberian terjadi.</span>
+          <textarea id="fd_kronologi" aria-describedby="fd_kronologi_hint"></textarea>
         </div>
         <div class="field">
           <span class="legend">E. Permohonan Kompensasi Objek Gratifikasi</span>
@@ -621,7 +637,7 @@ footer a:hover{text-decoration:underline}
           <svg style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
           Cetak / Simpan sebagai PDF
         </button>
-        <button type="button" class="btn ghost" id="btn-reset-form">Kosongkan Formulir</button>
+        <button type="button" class="btn ghost" id="btn-reset-form">Kosongkan formulir</button>
       </div>
     </form>
   </div>
@@ -636,6 +652,17 @@ footer a:hover{text-decoration:underline}
   </div>
   <a class="btn" href="https://arnitas.vercel.app" target="_blank" rel="noopener">Buka Arnitas</a>
 </aside>
+
+<dialog class="confirm" id="dlg-reset" aria-labelledby="dlg-reset-title" aria-describedby="dlg-reset-desc">
+  <div class="c-body">
+    <h2 id="dlg-reset-title">Kosongkan formulir “Laporan Gratifikasi”?</h2>
+    <p id="dlg-reset-desc">Semua isian bagian A sampai E akan dihapus dari halaman ini. Isian yang belum disimpan sebagai PDF tidak dapat dikembalikan.</p>
+  </div>
+  <div class="btnrow">
+    <button type="button" class="btn neutral" id="dlg-reset-cancel">Batal</button>
+    <button type="button" class="btn danger" id="dlg-reset-ok">Kosongkan formulir</button>
+  </div>
+</dialog>
 
 </main>
 
@@ -761,7 +788,7 @@ footer a:hover{text-decoration:underline}
 <nav class="bottomnav" aria-label="Menu bawah">
   <a href="#cek" data-tab="cek"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Cek Status</a>
   <a href="#pengecualian" data-tab="pengecualian"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Pengecualian</a>
-  <a href="#tenggat" data-tab="tenggat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Hitung Tenggat</a>
+  <a href="#tenggat" data-tab="tenggat"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>Tenggat</a>
   <a href="#lapor" data-tab="lapor"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/></svg>Cara Melapor</a>
 </nav>
 
@@ -826,8 +853,9 @@ const rootEl = document.documentElement;
 function applyTheme(t){
   if (t==='dark'||t==='light'){ rootEl.setAttribute('data-theme',t); localStorage.setItem('gc-theme',t); }
   const isDark = rootEl.getAttribute('data-theme')==='dark' || (!rootEl.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
-  $('ico-sun').hidden = !isDark; $('ico-moon').hidden = isDark; $('lbl-theme').textContent = isDark ? 'Terang' : 'Gelap';
-  $('btn-theme').setAttribute('aria-label', isDark ? 'Ganti ke mode terang' : 'Ganti ke mode gelap');
+  $('ico-sun').hidden = !isDark; $('ico-moon').hidden = isDark;
+  const themeLbl = isDark ? 'Ganti ke mode terang' : 'Ganti ke mode gelap';
+  $('btn-theme').setAttribute('aria-label', themeLbl); $('btn-theme').dataset.tip = themeLbl;
 }
 applyTheme(localStorage.getItem('gc-theme'));
 $('btn-theme').addEventListener('click', () => {
@@ -965,7 +993,8 @@ function renderGrid(){
   $('quick-wrap').hidden = f.length > 0;
   const filtered = SIT.filter(s => (f.length>0 || st.cat==='semua' || s.cat===st.cat) && (!f || (s.t+' '+s.s+' '+(s.kw||'')).toLowerCase().includes(f)));
   if (!filtered.length){
-    $('sit-grid').innerHTML = `<div class="empty" role="status"><b>Tidak ada kondisi yang cocok dengan “${escapeHtml($('q-search').value.trim())}”.</b><p>Coba kata kunci lain, misalnya “amplop”, “parsel”, atau “honor”. Bila situasi Anda memang tidak ada di daftar, pilih kondisi lain di bawah ini. Langkah paling aman untuk kondisi yang tidak tercantum adalah melapor.</p><button class="btn ghost" type="button" data-id="lain">Pilih “Kondisi lain yang belum tercantum”</button></div>`;
+    $('sit-grid').innerHTML = `<div class="empty" role="status"><b>Tidak ada kondisi yang cocok dengan “${escapeHtml($('q-search').value.trim())}”.</b><p>Coba kata kunci lain, misalnya “amplop”, “parsel”, atau “honor”. Bila situasi Anda memang tidak ada di daftar, pilih kondisi lain; langkah paling aman untuk kondisi yang tidak tercantum adalah melapor.</p><div class="btnrow"><button class="btn" type="button" id="btn-clear-search">Hapus kata kunci</button><button class="btn ghost" type="button" data-id="lain">Pilih kondisi lain</button></div></div>`;
+    $('btn-clear-search').addEventListener('click', () => { $('q-search').value = ''; st.cat = 'semua'; document.querySelectorAll('.cat-btn').forEach(x => x.classList.toggle('active', x.dataset.cat==='semua')); renderGrid(); $('q-search').focus(); });
     return;
   }
   $('sit-grid').innerHTML = filtered.map(s => `<button class="sit${s.warn?' warn':''}" data-id="${s.id}"><span class="tag">${s.warn?'Wajib Tolak · Pasal 2(2)':CAT_LABEL[s.cat]}</span><b>${s.t}</b><small>${s.s}</small></button>`).join('');
@@ -997,7 +1026,12 @@ document.querySelectorAll('[data-back]').forEach(b => b.addEventListener('click'
 
 $('to-q').addEventListener('click', () => {
   const r = document.querySelector('input[name=bentuk]:checked');
-  if (!r){ $('s2-err').textContent = 'Pilih bentuk pemberian dulu.'; return; }
+  if (!r){
+    $('s2-err').textContent = 'Bentuk pemberian belum dipilih. Pilih salah satu bentuk di atas agar hasil cek sesuai aturan.';
+    const first = document.querySelector('input[name=bentuk]');
+    if (first){ first.closest('.field').scrollIntoView({block:'center', behavior:scrollMode()}); first.focus({preventScroll:true}); }
+    return;
+  }
   st.bentuk = r.value; st.unknown = $('f-unknown').checked; st.nilai = st.unknown ? null : parseRp($('f-nilai').value);
   st.tgl = $('f-tgl').value || today; st.item = $('f-item').value.trim(); st.pemberi = st.sit.perGiver ? Math.max(1, parseInt($('f-pemberi').value,10)||1) : 1;
   st.total = st.sit.yearly ? parseRp($('f-total').value) : null;
@@ -1074,7 +1108,7 @@ function showResult(){
     next = ['Tidak perlu dilaporkan. Simpan catatan singkat bila suatu saat ditanya.','Bila masih ragu, Anda tetap boleh melaporkannya. KPK yang akan menetapkan statusnya.'];
   }
   $('result').innerHTML = `<div class="result ${L.cls}"><span class="stamp">${L.stamp}</span><h2>${L.h}</h2><ul class="why">${r.reasons.map(x=>'<li>'+x+'</li>').join('')}</ul>${extra}<ul class="next">${next.map(x=>'<li>'+x+'</li>').join('')}</ul>${st.sit.tip?'<div class="field-tip">'+st.sit.tip+'</div>':''}<p class="pasal">Dasar: Pasal 2 Perkom KPK 2/2019 jo. Perkom KPK 1/2026</p></div>`;
-  $('btn-to-form').textContent = r.status==='aman' ? 'Tetap ingin melapor? Isi formulir' : (r.status==='tolak' ? 'Isi Formulir Laporan Penolakan' : 'Isi Formulir Laporan & Cetak PDF');
+  $('btn-to-form').textContent = r.status==='aman' ? 'Isi formulir laporan' : (r.status==='tolak' ? 'Isi formulir laporan penolakan' : 'Isi formulir laporan & cetak PDF');
   $('btn-to-form').classList.toggle('ghost', r.status==='aman');
   goStep(4);
 }
@@ -1162,9 +1196,28 @@ $('btn-print-pdf').addEventListener('click', () => {
   window.print();
 });
 
+/* Konfirmasi sebelum mengosongkan formulir: Batal mendapat fokus, Escape membatalkan, fokus kembali ke tombol pemicu */
 $('btn-reset-form').addEventListener('click', () => {
-  if (confirm('Kosongkan seluruh isian formulir?')) $('grat-form').reset();
+  const dlg = $('dlg-reset');
+  if (typeof dlg.showModal !== 'function'){ $('grat-form').reset(); formDirty = false; return; }
+  dlg.showModal(); $('dlg-reset-cancel').focus();
 });
+$('dlg-reset-cancel').addEventListener('click', () => $('dlg-reset').close('cancel'));
+$('dlg-reset-ok').addEventListener('click', () => { $('grat-form').reset(); formDirty = false; $('dlg-reset').close('ok'); showToast('Formulir laporan dikosongkan.'); });
+$('dlg-reset').addEventListener('click', e => { if (e.target === $('dlg-reset')) $('dlg-reset').close('cancel'); });
+$('dlg-reset').addEventListener('close', () => $('btn-reset-form').focus());
+$('dlg-reset').addEventListener('keydown', e => {
+  if (e.key !== 'Tab') return;
+  const items = [$('dlg-reset-cancel'), $('dlg-reset-ok')];
+  const i = items.indexOf(document.activeElement);
+  e.preventDefault();
+  items.at(e.shiftKey ? (i <= 0 ? -1 : i - 1) : (i + 1) % items.length).focus();
+});
+
+/* Peringatan sebelum meninggalkan halaman bila formulir laporan sudah diisi */
+let formDirty = false;
+$('grat-form').addEventListener('input', () => { formDirty = true; });
+window.addEventListener('beforeunload', e => { if (formDirty){ e.preventDefault(); e.returnValue = ''; } });
 
 /* ---------- OTHER TABS INIT ---------- */
 $('exc-list').innerHTML = EXC.map(([l,t,lim]) => `<div class="exc"><div class="letter">${l}</div><p>${t}</p>${lim?'<div class="lim">'+lim+'</div>':''}</div>`).join('');
