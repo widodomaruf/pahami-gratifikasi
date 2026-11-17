@@ -101,6 +101,21 @@ b,strong{font-weight:600}
 .qcard:hover{border-color:var(--accent)}
 .qcard b{font-size:.875rem}
 .qcard small{font-size:.75rem;color:var(--muted)}
+#cek-lead{margin-bottom:16px}
+.more-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}
+.prove-link{display:inline-flex;align-items:center;min-height:44px;color:var(--accent);font-weight:600;font-size:.875rem}
+.prove{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-direction:column;gap:8px}
+.prove-item{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.prove-letter{width:48px;height:48px;border-radius:10px;display:grid;place-items:center;background:var(--head-bg);color:#fff;font-size:1.5rem;font-weight:600}
+.prove-body{min-width:0;display:flex;flex-direction:column;gap:8px}
+.prove-name{font-size:.875rem;font-weight:600;color:var(--accent)}
+.prove-out{margin-top:16px}
+.prove-out p{margin-top:8px;font-size:.875rem}
+.prove-out h2{font-size:1.25rem}
+a.btn{text-decoration:none}
+.r-netral{--c:var(--line);--cs:var(--surface)}
+#all-wrap{display:flex;flex-direction:column;gap:8px}
+#all-wrap[hidden]{display:none}
 .cat-tabs{display:flex;gap:4px;overflow-x:auto;padding-bottom:4px}
 .cat-btn{min-height:44px;padding:8px 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font:inherit;font-size:.875rem;font-weight:600;cursor:pointer;white-space:nowrap}
 .cat-btn.active{background:var(--ink);color:var(--surface);border-color:var(--ink)}
@@ -335,8 +350,8 @@ footer a:hover{text-decoration:underline}
 <!-- ===== TAB 1: CEK STATUS ===== -->
 <section id="v-cek" class="view">
   <h1>Dapat pemberian saat bertugas atau di luar jam kantor?</h1>
-  <p class="lead">Panduan praktis bagi ASN dan pelayan publik. Cek status pemberian dalam 1 menit, lalu isi otomatis ke formulir laporan siap cetak jika wajib dilaporkan.</p>
-  <ol class="steps" id="steps">
+  <p class="lead" id="cek-lead">Pilih kondisi yang paling mirip. Hasilnya keluar dalam satu menit.</p>
+  <ol class="steps" id="steps" hidden>
     <li>1 Kondisi</li><li>2 Bentuk &amp; nilai</li><li>3 Pertanyaan</li><li>4 Hasil</li>
   </ol>
 
@@ -354,7 +369,11 @@ footer a:hover{text-decoration:underline}
         <button class="qcard" data-jump="rekan"><b>Kado patungan teman kantor</b><small>Ulang tahun, pisah sambut, promosi</small></button>
       </div>
     </div>
-    <div>
+    <div class="more-row">
+      <button type="button" class="btn ghost" id="btn-all" aria-expanded="false" aria-controls="all-wrap">Lihat semua kondisi (19)</button>
+      <a class="prove-link" href="#uji">Masih ragu? Uji dengan PROVE IT</a>
+    </div>
+    <div id="all-wrap" hidden>
       <div class="cat-tabs" id="cat-tabs">
         <button class="cat-btn active" data-cat="semua">Semua kondisi</button>
         <button class="cat-btn" data-cat="layanan">Layanan &amp; lapangan</button>
@@ -421,7 +440,24 @@ footer a:hover{text-decoration:underline}
       <button class="btn ghost" id="copy-res">Salin ringkasan</button>
       <span class="hint" id="copy-msg"></span>
     </div>
+    <a class="prove-link" href="#uji">Masih ragu dengan hasilnya? Uji dengan PROVE IT</a>
   </div>
+</section>
+
+<!-- ===== UJI PROVE IT (dibuka dari Cek Status) ===== -->
+<section id="v-uji" class="view" hidden>
+  <h1>Masih ragu? Uji dengan PROVE IT</h1>
+  <p class="lead">Tujuh pertanyaan reflektif yang dirangkum KPK untuk mengenali pemberian yang patut dicurigai. Jawab jujur untuk pemberian yang sedang Anda pertimbangkan.</p>
+  <ol class="prove" id="prove-list"></ol>
+  <div class="result prove-out" id="prove-out" aria-live="polite"></div>
+  <div class="btnrow" style="margin-top:16px">
+    <a class="btn" href="#cek">Cek status pemberian</a>
+    <button type="button" class="btn ghost" id="prove-reset">Ulangi jawaban</button>
+  </div>
+  <div class="note" style="margin-top:24px">
+    <b>Satu jawaban “Ya” sudah cukup menjadi tanda bahaya.</b> Bila pemberi sedang berurusan dengan jabatan Anda, tolak. Bila sudah telanjur diterima, laporkan paling lama 30 hari kerja melalui GOL KPK atau UPG instansi.
+  </div>
+  <p class="pasal">Sumber: rangkuman pertanyaan reflektif KPK (PROVE IT: Purpose, Rules, Openness, Value, Ethics, Identity, Timing).</p>
 </section>
 
 <!-- ===== TAB 2: TIDAK WAJIB LAPOR (16 PENGECUALIAN) ===== -->
@@ -972,12 +1008,14 @@ function workDaysBetween(startIso, endIso){
 }
 
 /* ---------- ROUTING ---------- */
-const TABS = ['cek','pengecualian','tenggat','lapor'];
+const TABS = ['cek','pengecualian','tenggat','lapor','uji'];
 function route(){
   const raw = (location.hash||'').slice(1);
   const tab = (raw === 'formulir' || raw === 'form-builder-anchor') ? 'lapor' : (TABS.includes(raw) ? raw : 'cek');
   TABS.forEach(t => { $('v-'+t).hidden = t!==tab; });
-  document.querySelectorAll('a[data-tab]').forEach(a => { if (a.dataset.tab===tab) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  const navTab = tab === 'uji' ? 'cek' : tab;
+  document.querySelectorAll('a[data-tab]').forEach(a => { if (a.dataset.tab===navTab) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  if (tab === 'uji') window.scrollTo(0, 0);
   if (raw === 'formulir' || raw === 'form-builder-anchor'){
     setTimeout(() => { const el = $('form-builder-anchor'); if (el) el.scrollIntoView({behavior:scrollMode()}); }, 60);
   }
@@ -988,9 +1026,17 @@ window.addEventListener('hashchange', route);
 const st = {sit:null, cat:'semua', bentuk:null, nilai:null, unknown:false, tgl:today, total:null, qs:[], qi:0, answers:[]};
 const CAT_LABEL = {layanan:'Layanan & Lapangan', kantor:'Internal Kantor', pribadi:'Keluarga & Hajatan', umum:'Kegiatan Luar & Umum'};
 
+function setAllOpen(open){
+  $('all-wrap').hidden = !open;
+  $('btn-all').setAttribute('aria-expanded', String(open));
+  $('btn-all').textContent = open ? 'Sembunyikan daftar lengkap' : 'Lihat semua kondisi (' + SIT.length + ')';
+}
+$('btn-all').addEventListener('click', () => setAllOpen($('all-wrap').hidden));
 function renderGrid(){
   const f = $('q-search').value.trim().toLowerCase();
   $('quick-wrap').hidden = f.length > 0;
+  $('btn-all').hidden = f.length > 0;
+  if (f.length > 0) $('all-wrap').hidden = false; else setAllOpen($('btn-all').getAttribute('aria-expanded') === 'true');
   const filtered = SIT.filter(s => (f.length>0 || st.cat==='semua' || s.cat===st.cat) && (!f || (s.t+' '+s.s+' '+(s.kw||'')).toLowerCase().includes(f)));
   if (!filtered.length){
     $('sit-grid').innerHTML = `<div class="empty" role="status"><b>Tidak ada kondisi yang cocok dengan “${escapeHtml($('q-search').value.trim())}”.</b><p>Coba kata kunci lain, misalnya “amplop”, “parsel”, atau “honor”. Bila situasi Anda memang tidak ada di daftar, pilih kondisi lain; langkah paling aman untuk kondisi yang tidak tercantum adalah melapor.</p><div class="btnrow"><button class="btn" type="button" id="btn-clear-search">Hapus kata kunci</button><button class="btn ghost" type="button" data-id="lain">Pilih kondisi lain</button></div></div>`;
@@ -1012,6 +1058,7 @@ $('f-unknown').addEventListener('change', e => { $('f-nilai').disabled = e.targe
 
 function goStep(n){
   [1,2,3,4].forEach(i => $('s'+i).hidden = i!==n);
+  $('steps').hidden = n === 1; $('cek-lead').hidden = n !== 1;
   document.querySelectorAll('#steps li').forEach((li,i) => { li.className = i+1===n ? 'on' : (i+1<n ? 'done' : ''); });
   if (n===2){
     $('s2-name').textContent = st.sit.t; $('s2-err').textContent = '';
@@ -1195,6 +1242,36 @@ $('btn-print-pdf').addEventListener('click', () => {
 
   window.print();
 });
+
+/* ---------- UJI PROVE IT (pertanyaan reflektif KPK) ---------- */
+const PROVE = [
+  ['P','Purpose (tujuan)','Apakah pemberian ini berpotensi memengaruhi keputusan, penilaian, atau pelayanan Anda?'],
+  ['R','Rules (aturan)','Apakah pemberian ini bertentangan dengan peraturan perundang-undangan atau aturan instansi Anda?'],
+  ['O','Openness (keterbukaan)','Apakah pemberian ini diberikan diam-diam, atau pemberinya tidak ingin orang lain tahu?'],
+  ['V','Value (nilai)','Apakah nilainya terlalu besar atau melebihi batas yang diatur?'],
+  ['E','Ethics (etika)','Apakah pemberian ini bertentangan dengan kode etik, baik bagi pemberi maupun bagi Anda?'],
+  ['I','Identity (identitas)','Apakah pemberian ini berhubungan dengan jabatan dan kewajiban Anda sebagai pegawai negeri?'],
+  ['T','Timing (waktu)','Apakah pemberian ini berdekatan dengan waktu pengambilan keputusan atau pelayanan untuk pemberi?']
+];
+$('prove-list').innerHTML = PROVE.map(([k,name,q]) => `<li class="prove-item"><span class="prove-letter" aria-hidden="true">${k}</span><div class="prove-body"><span class="prove-name" id="pv-${k}-lbl">${name}</span><p>${q}</p><div class="chips" role="radiogroup" aria-labelledby="pv-${k}-lbl">${['Ya','Tidak','Ragu'].map(a => `<label class="chip"><input type="radio" name="pv-${k}" value="${a}"><span>${a}</span></label>`).join('')}</div></div></li>`).join('');
+function renderProve(){
+  const ans = PROVE.map(([k]) => (document.querySelector(`input[name="pv-${k}"]:checked`)||{}).value);
+  const done = ans.filter(Boolean).length, flags = PROVE.filter((p,i) => ans[i]==='Ya' || ans[i]==='Ragu').map(p => p[1].split(' (')[0]);
+  const out = $('prove-out');
+  if (flags.length){
+    out.className = 'result prove-out r-lapor';
+    out.innerHTML = `<span class="stamp">Ada tanda bahaya</span><h2>${flags.length} dari 7 pertanyaan dijawab Ya atau Ragu</h2><p>${flags.join(', ')}. Jangan diterima bila pemberi berurusan dengan jabatan Anda. Bila sudah diterima, laporkan paling lama 30 hari kerja.</p>`;
+  } else if (done === PROVE.length){
+    out.className = 'result prove-out r-aman';
+    out.innerHTML = `<span class="stamp">Belum ada tanda bahaya</span><h2>Ketujuh pertanyaan dijawab Tidak</h2><p>Pastikan statusnya dengan Cek Status, karena beberapa pemberian tetap punya batas nilai dan syarat.</p>`;
+  } else {
+    out.className = 'result prove-out r-netral';
+    out.innerHTML = `<h2>${done} dari 7 pertanyaan dijawab</h2><p>Jawab semua pertanyaan untuk melihat kesimpulan.</p>`;
+  }
+}
+$('prove-list').addEventListener('change', renderProve);
+$('prove-reset').addEventListener('click', () => { document.querySelectorAll('#prove-list input').forEach(i => { i.checked = false; }); renderProve(); document.querySelector('#prove-list input').focus(); });
+renderProve();
 
 /* Konfirmasi sebelum mengosongkan formulir: Batal mendapat fokus, Escape membatalkan, fokus kembali ke tombol pemicu */
 $('btn-reset-form').addEventListener('click', () => {

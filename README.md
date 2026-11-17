@@ -14,7 +14,7 @@ Buku panduan penggunaan (PDF): [Google Drive](https://drive.google.com/drive/fol
 
 ### 1. Cek Status
 
-- 19 kondisi pemberian yang sering dialami pelayan publik, dikelompokkan dalam empat kategori: Layanan & Lapangan, Internal Kantor & Rekan, Keluarga & Hajatan, serta Kegiatan Luar & Umum.
+- Layar awal ringkas: kotak pencarian dan empat kondisi yang paling sering terjadi. Daftar lengkap 19 kondisi (empat kategori: Layanan & Lapangan, Internal Kantor & Rekan, Keluarga & Hajatan, Kegiatan Luar & Umum) dibuka lewat tombol **Lihat semua kondisi**.
 - Pencarian kata kunci sehari-hari, misalnya "uang bensin", "amplop nikah", "parsel", atau "ditinggal di meja".
 - Pengguna mengisi bentuk pemberian, nilai, tanggal diterima, lalu menjawab beberapa pertanyaan Ya / Tidak / Ragu.
 - Hasil berupa salah satu dari tiga status, lengkap dengan alasan, dasar pasal, dan langkah berikutnya:
@@ -24,6 +24,10 @@ Buku panduan penggunaan (PDF): [Google Drive](https://drive.google.com/drive/fol
 - Jawaban **Ragu** selalu diarahkan ke pilihan yang lebih aman, yaitu lapor atau tolak.
 - **Kado urunan** (pernikahan dan sejenisnya, hadiah rekan kerja) dihitung per pemberi. Contoh: Rp5.000.000 dari 20 orang = Rp250.000 per pemberi. Bila masih dalam batas, hasil tetap disertai catatan untuk melapor bila ragu.
 - Ringkasan hasil bisa disalin untuk disimpan atau dikirim.
+
+### Uji PROVE IT
+
+Tujuh pertanyaan reflektif yang dirangkum KPK untuk mengenali pemberian yang patut dicurigai: **P**urpose (tujuan), **R**ules (aturan), **O**penness (keterbukaan), **V**alue (nilai), **E**thics (etika), **I**dentity (identitas), dan **T**iming (waktu). Satu jawaban Ya atau Ragu ditandai sebagai tanda bahaya. Dibuka dari tautan **Masih ragu? Uji dengan PROVE IT** di layar Cek Status dan di halaman hasil.
 
 ### 2. Tidak Wajib Lapor
 
