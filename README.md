@@ -56,12 +56,16 @@ Daftar 16 penerimaan yang dikecualikan dari kewajiban lapor (Pasal 2 ayat 3 huru
 
 ## Privasi
 
-Semua isian, termasuk data pribadi di formulir laporan, hanya diproses di peramban pengguna. Tidak ada server, akun, atau pengiriman data ke pihak mana pun. Satu-satunya sumber luar yang dimuat adalah huruf Plus Jakarta Sans dari Google Fonts. Pilihan tema disimpan di `localStorage` peramban masing-masing.
+Semua isian, termasuk data pribadi di formulir laporan, hanya diproses di peramban pengguna. Tidak ada server, akun, atau pengiriman data ke pihak mana pun. Satu-satunya sumber luar yang dimuat adalah huruf Plus Jakarta Sans dari Google Fonts. Pustaka animasi (GSAP, Lenis, Motion) disimpan di folder `vendor/`, tidak dimuat dari CDN. Pilihan tema disimpan di `localStorage` peramban masing-masing.
+
+`vercel.json` memasang header keamanan: Content-Security-Policy (skrip hanya dari domain sendiri, data tidak bisa dikirim ke server lain), larangan halaman dibingkai situs lain, `nosniff`, `Referrer-Policy`, dan `Permissions-Policy`.
 
 ## Struktur berkas
 
 ```
 index.html                 # seluruh aplikasi: HTML, CSS, JavaScript, dan logo dalam satu berkas
+vercel.json                # header keamanan (CSP dan lainnya) untuk Vercel
+vendor/                    # GSAP, Lenis, Motion (disalin dari npm, lihat vendor/README.md)
 README.md
 DESIGN.md                  # catatan arah tampilan dan alasannya
 ```
