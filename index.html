@@ -51,6 +51,10 @@ button:disabled,input:disabled,select:disabled,textarea:disabled{cursor:not-allo
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px}
 .vis-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+/* Lenis (gulir halus) */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:clip}
 
 /* Header & Logo Konsep 1 (Perisai Integritas) */
 header.top{background:var(--head-bg);border-bottom:3px solid var(--accent);position:sticky;top:0;z-index:15}
@@ -848,9 +852,21 @@ const longDate = d => d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric'
 const shortDate = d => d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'});
 const today = iso(new Date());
 const scrollMode = () => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+/* Kait animasi: lapisan animasi (GSAP, Motion, Lenis) di akhir halaman mendengarkan event ini. Tanpa pustaka, tidak terjadi apa-apa. */
+const emit = (name, detail) => document.dispatchEvent(new CustomEvent(name, {detail}));
+/* Gulir ke elemen lewat Lenis bila aktif, selain itu pakai gulir bawaan */
+function scrollToEl(el, center){
+  if (!el) return;
+  if (window.__lenis){ window.__lenis.resize(); window.__lenis.scrollTo(el, {offset: center ? -Math.round(innerHeight/3) : -16}); return; }
+  el.scrollIntoView({block: center ? 'center' : 'start', behavior: scrollMode()});
+}
+function scrollToTop(){
+  if (window.__lenis){ window.__lenis.scrollTo(0); return; }
+  window.scrollTo({top:0, behavior:scrollMode()});
+}
 let toastTimer = null;
 function showToast(msg){
-  const t = $('toast'); t.textContent = msg; t.hidden = false;
+  const t = $('toast'); t.textContent = msg; t.hidden = false; emit('gc:toast', t);
   clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2600);
 }
 async function copyText(text, okMsg){
@@ -1042,8 +1058,10 @@ function route(){
   const tab = (raw === 'formulir' || raw === 'form-builder-anchor') ? 'lapor' : (TABS.includes(raw) ? raw : 'cek');
   TABS.forEach(t => { $('v-'+t).hidden = t!==tab; });
   document.querySelectorAll('a[data-tab]').forEach(a => { if (a.dataset.tab===tab) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
+  if (route.last && route.last !== tab) emit('gc:view', $('v-'+tab));
+  route.last = tab;
   if (raw === 'formulir' || raw === 'form-builder-anchor'){
-    setTimeout(() => { const el = $('form-builder-anchor'); if (el) el.scrollIntoView({behavior:scrollMode()}); }, 60);
+    setTimeout(() => scrollToEl($('form-builder-anchor')), 60);
   }
 }
 window.addEventListener('hashchange', route);
@@ -1086,6 +1104,7 @@ function goStep(n){
   [1,2,3,4].forEach(i => $('s'+i).hidden = i!==n);
   $('steps').hidden = n === 1; $('cek-lead').hidden = n !== 1;
   document.querySelectorAll('#steps li').forEach((li,i) => { li.className = i+1===n ? 'on' : (i+1<n ? 'done' : ''); });
+  emit('gc:step', $('s'+n));
   if (n===2){
     $('s2-name').textContent = st.sit.t; $('s2-err').textContent = '';
     $('wrap-total').hidden = !st.sit.yearly; $('wrap-pemberi').hidden = !st.sit.perGiver;
@@ -1102,7 +1121,7 @@ $('to-q').addEventListener('click', () => {
   if (!r){
     $('s2-err').textContent = 'Bentuk pemberian belum dipilih. Pilih salah satu bentuk di atas agar hasil cek sesuai aturan.';
     const first = document.querySelector('input[name=bentuk]');
-    if (first){ first.closest('.field').scrollIntoView({block:'center', behavior:scrollMode()}); first.focus({preventScroll:true}); }
+    if (first){ scrollToEl(first.closest('.field'), true); first.focus({preventScroll:true}); }
     return;
   }
   st.bentuk = r.value; st.unknown = $('f-unknown').checked; st.nilai = st.unknown ? null : parseRp($('f-nilai').value);
@@ -1184,6 +1203,7 @@ function showResult(){
   $('btn-to-form').textContent = r.status==='aman' ? 'Isi formulir laporan' : (r.status==='tolak' ? 'Isi formulir laporan penolakan' : 'Isi formulir laporan & cetak PDF');
   $('btn-to-form').classList.toggle('ghost', r.status==='aman');
   goStep(4);
+  emit('gc:result', $('result'));
 }
 
 $('restart').addEventListener('click', () => {
@@ -1192,7 +1212,7 @@ $('restart').addEventListener('click', () => {
   ['f-item','f-nilai','f-total','q-search'].forEach(id => { $(id).value = ''; });
   $('f-pemberi').value = '1'; $('f-unknown').checked = false; $('f-nilai').disabled = false; $('f-tgl').value = today;
   renderGrid(); goStep(1);
-  window.scrollTo({top:0, behavior:scrollMode()});
+  scrollToTop();
 });
 
 $('copy-res').addEventListener('click', () => {
@@ -1216,7 +1236,7 @@ $('btn-to-form').addEventListener('click', () => {
     $('fd_kronologi').value = 'Pada tanggal ' + shortDate(fromIso(st.tgl)) + ', terjadi peristiwa ' + st.sit.t.toLowerCase() + (st.item ? ' berupa ' + st.item : '') + '.';
   }
   location.hash = '#lapor';
-  setTimeout(() => { const el = $('form-builder-anchor'); if (el) el.scrollIntoView({behavior:scrollMode()}); }, 80);
+  setTimeout(() => scrollToEl($('form-builder-anchor')), 80);
 });
 
 /* ---------- GENERATE & CETAK PDF FORMULIR ---------- */
@@ -1294,6 +1314,7 @@ function renderProve(){
     out.className = 'result prove-out r-netral';
     out.innerHTML = `<h2>${done} dari 7 pertanyaan dijawab</h2><p>Jawab semua pertanyaan untuk melihat kesimpulan.</p>`;
   }
+  emit('gc:prove', out);
 }
 $('prove-list').addEventListener('change', renderProve);
 $('prove-reset').addEventListener('click', () => { document.querySelectorAll('#prove-list input').forEach(i => { i.checked = false; }); renderProve(); document.querySelector('#prove-list input').focus(); });
@@ -1303,12 +1324,12 @@ renderProve();
 $('btn-reset-form').addEventListener('click', () => {
   const dlg = $('dlg-reset');
   if (typeof dlg.showModal !== 'function'){ $('grat-form').reset(); formDirty = false; return; }
-  dlg.showModal(); $('dlg-reset-cancel').focus();
+  dlg.showModal(); $('dlg-reset-cancel').focus(); emit('gc:modal', true);
 });
 $('dlg-reset-cancel').addEventListener('click', () => $('dlg-reset').close('cancel'));
 $('dlg-reset-ok').addEventListener('click', () => { $('grat-form').reset(); formDirty = false; $('dlg-reset').close('ok'); showToast('Formulir laporan dikosongkan.'); });
 $('dlg-reset').addEventListener('click', e => { if (e.target === $('dlg-reset')) $('dlg-reset').close('cancel'); });
-$('dlg-reset').addEventListener('close', () => $('btn-reset-form').focus());
+$('dlg-reset').addEventListener('close', () => { emit('gc:modal', false); $('btn-reset-form').focus(); });
 $('dlg-reset').addEventListener('keydown', e => {
   if (e.key !== 'Tab') return;
   const items = [$('dlg-reset-cancel'), $('dlg-reset-ok')];
@@ -1338,6 +1359,70 @@ $('h-btn').addEventListener('click', () => { const v = $('h-add').value; if (v &
 
 renderGrid(); renderHol(); renderTenggat(); goStep(1); route();
 })();
+</script>
+
+<!-- Lapisan animasi: Lenis (gulir halus), GSAP (masuk halaman, langkah, hasil, notifikasi), Motion (umpan balik saat diketuk).
+     Semua dimatikan bila pengguna memilih "kurangi gerakan". Bila pustaka gagal dimuat, aplikasi tetap berjalan tanpa animasi. -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const G = window.gsap, M = window.Motion, L = window.Lenis;
+
+  /* Lenis: gulir halus dengan roda tetikus; gulir sentuh di HP tetap bawaan */
+  if (L){
+    const lenis = new L({ lerp: 0.12 });
+    window.__lenis = lenis;
+    if (G){ G.ticker.add(t => lenis.raf(t * 1000)); G.ticker.lagSmoothing(0); }
+    else { const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf); }
+    document.addEventListener('gc:modal', e => { e.detail ? lenis.stop() : lenis.start(); });
+  }
+
+  /* GSAP: hanya transform dan opacity, 0,2–0,35 detik, keadaan akhir selalu terlihat */
+  if (G){
+    const ease = 'power2.out';
+    const cardsIn = root => {
+      const items = [...root.querySelectorAll('.qcard,.sit,.exc,.prove-item,.chan,.timeline li')].filter(el => el.offsetParent).slice(0, 12);
+      if (items.length) G.from(items, { y: 12, opacity: 0, duration: 0.3, ease, stagger: 0.035, clearProps: 'transform,opacity' });
+    };
+    document.addEventListener('gc:view', e => {
+      G.fromTo(e.detail, { y: 8, opacity: 0 }, { y: 0, opacity: 1, duration: 0.28, ease, clearProps: 'transform,opacity' });
+      cardsIn(e.detail);
+    });
+    document.addEventListener('gc:step', e => {
+      G.fromTo(e.detail, { x: 12, opacity: 0 }, { x: 0, opacity: 1, duration: 0.26, ease, clearProps: 'transform,opacity' });
+    });
+    document.addEventListener('gc:result', e => {
+      const stamp = e.detail.querySelector('.stamp');
+      if (stamp) G.from(stamp, { scale: 0.8, opacity: 0, duration: 0.35, ease: 'back.out(2)', delay: 0.1, clearProps: 'scale,opacity' });
+    });
+    document.addEventListener('gc:toast', e => {
+      G.fromTo(e.detail, { xPercent: -50, y: 12, opacity: 0 }, { xPercent: -50, y: 0, opacity: 1, duration: 0.22, ease, clearProps: 'transform,opacity' });
+    });
+    const firstView = document.querySelector('.view:not([hidden])');
+    if (firstView) cardsIn(firstView);
+  }
+
+  /* Motion: tekan sedikit mengecil saat diketuk, kembali dengan pegas */
+  if (M){
+    const tappable = '.qcard,.sit,.btn,.cat-btn,.answers button,.chip span,.icon-btn';
+    document.addEventListener('pointerdown', e => {
+      const el = e.target.closest(tappable);
+      if (!el || el.disabled) return;
+      M.animate(el, { scale: 0.97 }, { duration: 0.1 });
+      const release = () => {
+        M.animate(el, { scale: 1 }, { type: 'spring', stiffness: 500, damping: 28 });
+        window.removeEventListener('pointerup', release); window.removeEventListener('pointercancel', release);
+      };
+      window.addEventListener('pointerup', release); window.addEventListener('pointercancel', release);
+    });
+    document.addEventListener('gc:prove', e => {
+      M.animate(e.detail, { opacity: [0.5, 1], y: [6, 0] }, { duration: 0.25, ease: 'easeOut' });
+    });
+  }
+});
 </script>
 </body>
 </html>
