@@ -65,6 +65,7 @@ Semua isian, termasuk data pribadi di formulir laporan, hanya diproses di peramb
 ```
 index.html                 # seluruh aplikasi: HTML, CSS, JavaScript, dan logo dalam satu berkas
 vercel.json                # header keamanan (CSP dan lainnya) untuk Vercel
+SECURITY.md                # catatan keamanan: yang sudah dan belum diperbaiki
 vendor/                    # GSAP, Lenis, Motion (disalin dari npm, lihat vendor/README.md)
 README.md
 DESIGN.md                  # catatan arah tampilan dan alasannya
