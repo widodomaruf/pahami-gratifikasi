@@ -73,7 +73,25 @@ SECURITY.md                # catatan keamanan: yang sudah dan belum diperbaiki
 vendor/                    # GSAP, Lenis, Motion (disalin dari npm, lihat vendor/README.md)
 README.md
 DESIGN.md                  # catatan arah tampilan dan alasannya
+docs/                      # PRD, arsitektur, alur pengguna, kriteria selesai, tugas
+.env.example               # variabel lingkungan (saat ini tidak ada)
 ```
+
+## Dokumen proyek
+
+| Dokumen | Isi |
+| --- | --- |
+| [PRD](docs/PRD.md) | Masalah, pengguna, fitur, dan cakupan |
+| [DESIGN.md](DESIGN.md) | Arah tampilan, gerak, dan aksesibilitas |
+| [Tech stack](docs/TECH_STACK.md) | Bahasa, pustaka, hosting, dan alat |
+| [Arsitektur](docs/ARCHITECTURE.md) | Struktur aplikasi dan alur data |
+| [Skema data](docs/DATABASE_SCHEMA.md) | Bentuk data aturan dan data sesi (tanpa database) |
+| [API](docs/API_DOCUMENTATION.md) | Alamat halaman, berkas statis, dan event internal (tanpa backend) |
+| [Alur pengguna](docs/USER_FLOWS.md) | Alur cek, lapor, PROVE IT, dan tenggat |
+| [Kriteria selesai](docs/ACCEPTANCE_CRITERIA.md) | Syarat sebuah perubahan dianggap selesai |
+| [Tugas](docs/TASKS.md) | Pekerjaan yang sudah dan belum selesai |
+| [SECURITY.md](SECURITY.md) | Catatan keamanan |
+| [.env.example](.env.example) | Variabel lingkungan (saat ini tidak ada) |
 
 ## Memasang di GitHub Pages
 

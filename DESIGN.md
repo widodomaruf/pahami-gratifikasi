@@ -16,12 +16,26 @@ Design Read: alat bantu layanan publik untuk ASN dan pelayan publik, gaya lugas 
 
 - **Satu kolom kerja** dengan lebar maksimal 920 px, karena isinya alur tanya jawab dan formulir yang dibaca berurutan.
 - **Menu atas di PC, menu bawah di HP**, karena pengguna sering membuka dari HP saat baru menerima pemberian.
-- **Kartu dipakai untuk pilihan yang bisa diklik** (kondisi, pengecualian, kanal lapor), bukan untuk hiasan.
 - **Target sentuh minimal 44 px di HP** untuk semua tombol dan pilihan.
+
+## Kartu dan tautan
+
+- **Bisa diketuk:** latar merah muda (`--tap-bg`), garis `--tap-line`, dan tanda panah di kanan.
+- **Hanya dibaca:** latar putih tanpa panah (catatan, daftar pengecualian, kanal lapor).
+- **Tautan** selalu bergaris bawah.
 
 ## Gerak
 
-- Tidak ada animasi dekoratif. Gulir otomatis ke formulir dimatikan bila pengguna memilih kurangi gerakan.
+- Animasi hanya untuk memberi tahu perubahan: menu dan langkah masuk (geser 8 sampai 12 px, sekitar 0,3 detik), kartu muncul bertahap (maks. 12), cap hasil muncul, notifikasi naik, dan kartu sedikit mengecil saat diketuk.
+- Hanya `transform` dan `opacity` yang dianimasikan; keadaan akhir selalu terlihat walau animasi gagal.
+- Gulir halus dengan roda tetikus (Lenis); gulir sentuh di HP tetap bawaan. Kolom kronologi tetap bisa digulir sendiri.
+- Semua animasi dan gulir halus mati bila pengguna memilih kurangi gerakan.
+
+## Aksesibilitas
+
+- Label terlihat di setiap isian; contoh format ditulis sebagai petunjuk di bawah kolom, bukan placeholder.
+- Fokus keyboard terlihat (garis 2 px). Dialog konfirmasi mengunci fokus dan mengembalikannya ke tombol pemicu.
+- Bobot huruf hanya 400, 500, 600. Jarak mengikuti kelipatan 4 px.
 
 ## Logo
 
