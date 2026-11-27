@@ -857,8 +857,10 @@ const emit = (name, detail) => document.dispatchEvent(new CustomEvent(name, {det
 /* Gulir ke elemen lewat Lenis bila aktif, selain itu pakai gulir bawaan */
 function scrollToEl(el, center){
   if (!el) return;
-  if (window.__lenis){ window.__lenis.resize(); window.__lenis.scrollTo(el, {offset: center ? -Math.round(innerHeight/3) : -16}); return; }
-  el.scrollIntoView({block: center ? 'center' : 'start', behavior: scrollMode()});
+  /* kepala halaman menempel di atas, jadi berhenti tepat di bawahnya */
+  const off = center ? Math.round(innerHeight/3) : document.querySelector('header.top').offsetHeight + 16;
+  if (window.__lenis){ window.__lenis.resize(); window.__lenis.scrollTo(el, {offset: -off}); return; }
+  window.scrollTo({top: el.getBoundingClientRect().top + scrollY - off, behavior: scrollMode()});
 }
 function scrollToTop(){
   if (window.__lenis){ window.__lenis.scrollTo(0); return; }
