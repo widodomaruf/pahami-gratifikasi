@@ -10,11 +10,11 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="GratiCek: Cek & Buat Formulir Laporan Gratifikasi">
 <meta property="og:description" content="Cek aturan gratifikasi dalam 1 menit dan buat formulir pelaporan siap cetak ke PDF untuk dikirim via email KPK atau UPG.">
-<meta property="og:image" id="meta-og-img" content="">
+<meta property="og:image" content="https://graticek.vercel.app/icon-512.png">
 
-<link rel="icon" type="image/png" id="link-favicon" href="">
-<link rel="apple-touch-icon" id="link-apple-icon" href="">
-<link rel="manifest" id="link-manifest" href="">
+<link rel="icon" type="image/png" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="manifest" href="/manifest.webmanifest">
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap">
 <style>
@@ -876,54 +876,22 @@ async function copyText(text, okMsg){
   catch(e){ showToast('Tidak bisa menyalin otomatis. Blok teksnya lalu salin manual.'); return false; }
 }
 
-/* ---------- GENERATOR IKON KONSEP 1: PERISAI INTEGRITAS ---------- */
-function generateAppIcons(){
-  function drawLogo(size){
-    const c = document.createElement('canvas'); c.width = size; c.height = size;
-    const ctx = c.getContext('2d'), r = size * 0.22;
-    ctx.fillStyle = '#ffffff';
-    ctx.beginPath(); ctx.moveTo(r,0); ctx.lineTo(size-r,0); ctx.quadraticCurveTo(size,0,size,r);
-    ctx.lineTo(size,size-r); ctx.quadraticCurveTo(size,size,size-r,size); ctx.lineTo(r,size);
-    ctx.quadraticCurveTo(0,size,0,size-r); ctx.lineTo(0,r); ctx.quadraticCurveTo(0,0,r,0); ctx.fill();
-
-    ctx.save(); ctx.scale(size/64, size/64);
-    ctx.fillStyle = '#d71920';
-    ctx.beginPath(); ctx.moveTo(32,6); ctx.lineTo(54,14); ctx.lineTo(54,31);
-    ctx.bezierCurveTo(54,45,44,55,32,60); ctx.bezierCurveTo(20,55,10,45,10,31); ctx.lineTo(10,14); ctx.closePath(); ctx.fill();
-
-    ctx.fillStyle = '#b31217';
-    ctx.beginPath(); ctx.moveTo(32,10); ctx.lineTo(50,17); ctx.lineTo(50,31);
-    ctx.bezierCurveTo(50,42.5,41.5,51.5,32,55.8); ctx.closePath(); ctx.fill();
-
-    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2.5;
-    ctx.beginPath(); ctx.moveTo(32,10); ctx.lineTo(50,17); ctx.lineTo(50,31);
-    ctx.bezierCurveTo(50,42.5,41.5,51.5,32,55.8); ctx.bezierCurveTo(22.5,51.5,14,42.5,14,31); ctx.lineTo(14,17); ctx.closePath(); ctx.stroke();
-
-    ctx.lineWidth = 4.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    ctx.beginPath(); ctx.moveTo(23,32); ctx.lineTo(29.5,38.5); ctx.lineTo(42,25); ctx.stroke();
-    ctx.restore();
-    return c.toDataURL('image/png');
-  }
-  const i192 = drawLogo(192), i512 = drawLogo(512);
-  $('link-favicon').href = i192; $('link-apple-icon').href = i192; $('meta-og-img').content = i512;
-  const manifest = {name:'GratiCek: Panduan & Formulir Gratifikasi', short_name:'GratiCek', start_url:location.href.split('#')[0], display:'standalone', background_color:'#141414', theme_color:'#d71920', icons:[{src:i192,sizes:'192x192',type:'image/png'},{src:i512,sizes:'512x512',type:'image/png'}]};
-  $('link-manifest').href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], {type:'application/manifest+json'}));
-}
-generateAppIcons();
 
 /* ---------- THEME & INSTALL ---------- */
 const rootEl = document.documentElement;
+const isDarkNow = () => rootEl.getAttribute('data-theme')==='dark' || (!rootEl.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+/* localStorage bisa melempar error bila penyimpanan situs diblokir; tema tetap jalan tanpa disimpan */
 function applyTheme(t){
-  if (t==='dark'||t==='light'){ rootEl.setAttribute('data-theme',t); localStorage.setItem('gc-theme',t); }
-  const isDark = rootEl.getAttribute('data-theme')==='dark' || (!rootEl.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+  if (t==='dark'||t==='light'){ rootEl.setAttribute('data-theme',t); try { localStorage.setItem('gc-theme',t); } catch(e){} }
+  const isDark = isDarkNow();
   $('ico-sun').hidden = !isDark; $('ico-moon').hidden = isDark;
   const themeLbl = isDark ? 'Ganti ke mode terang' : 'Ganti ke mode gelap';
   $('btn-theme').setAttribute('aria-label', themeLbl); $('btn-theme').dataset.tip = themeLbl;
 }
-applyTheme(localStorage.getItem('gc-theme'));
+let savedTheme = null; try { savedTheme = localStorage.getItem('gc-theme'); } catch(e){}
+applyTheme(savedTheme);
 $('btn-theme').addEventListener('click', () => {
-  const isDark = rootEl.getAttribute('data-theme')==='dark' || (!rootEl.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
-  applyTheme(isDark ? 'light' : 'dark');
+  applyTheme(isDarkNow() ? 'light' : 'dark');
 });
 
 let deferredPrompt = null;
@@ -1172,7 +1140,7 @@ function evaluate(){
       const rincian = st.pemberi>1
         ? 'Rp'+fmt(st.nilai)+' dari '+st.pemberi+' pemberi = rata-rata Rp'+fmt(per)+' per pemberi.'
         : 'Nilai yang Anda isi: Rp'+fmt(st.nilai)+'.';
-      if (per > s.limit){ status='lapor'; reasons.push(s.why_limit+' '+rincian); }
+      if (st.nilai > s.limit * (st.pemberi||1)){ status='lapor'; reasons.push(s.why_limit+' '+rincian); }
       else if (st.pemberi>1){
         notes.push(rincian+' Masih dalam batas Rp'+fmt(s.limit)+' per pemberi (huruf '+s.huruf+').');
         notes.push('Hitungan per pemberi hanya berlaku bila pemberian ini memang urunan dari orang-orang tersebut. Bila ragu, silakan laporkan melalui GOL KPK atau UPG instansi.');
@@ -1224,6 +1192,7 @@ $('copy-res').addEventListener('click', () => {
 });
 $('copy-mail').addEventListener('click', () => copyText('pelaporan.gratifikasi@kpk.go.id', 'Alamat email KPK tersalin.'));
 
+const autoFill = {};
 /* ---------- AUTO-FILL DARI HASIL CEK KE FORMULIR PDF DI TAB CARA MELAPOR ---------- */
 $('btn-to-form').addEventListener('click', () => {
   if (st.sit) {
@@ -1233,10 +1202,12 @@ $('btn-to-form').addEventListener('click', () => {
     } else {
       document.querySelector('input[name="f_jenis_lap"][value="Laporan Penerimaan"]').checked = true;
     }
-    if (st.item) $('fc_uraian').value = st.item;
-    if (st.nilai !== null) $('fc_nilai').value = 'Rp' + fmt(st.nilai);
+    /* isi otomatis hanya kolom yang kosong atau masih berisi isian otomatis sebelumnya, agar ketikan pengguna tidak tertimpa */
+    const fill = (id, v) => { const el = $(id); if (!el.value || el.value === autoFill[id]) el.value = autoFill[id] = v; };
+    if (st.item) fill('fc_uraian', st.item);
+    if (st.nilai !== null) fill('fc_nilai', 'Rp' + fmt(st.nilai));
     if (st.tgl) $('fd_tgl_terima').value = st.tgl;
-    $('fd_kronologi').value = 'Pada tanggal ' + shortDate(fromIso(st.tgl)) + ', terjadi peristiwa ' + st.sit.t.toLowerCase() + (st.item ? ' berupa ' + st.item : '') + '.';
+    fill('fd_kronologi', 'Pada tanggal ' + shortDate(fromIso(st.tgl)) + ', terjadi peristiwa ' + st.sit.t.toLowerCase() + (st.item ? ' berupa ' + st.item : '') + '.');
   }
   location.hash = '#lapor';
   setTimeout(() => scrollToEl($('form-builder-anchor')), 80);
@@ -1352,8 +1323,8 @@ $('t-tgl').value = today;
 function renderHol(){ HOL.sort(); $('hol').innerHTML = HOL.map(d => `<button data-d="${d}">${d}</button>`).join(''); }
 function renderTenggat(){
   const s = $('t-tgl').value || today, n = Number(document.querySelector('input[name=tmode]:checked').value);
-  const dl = addWorkDays(s, n), sisa = workDaysBetween(today, iso(dl));
-  $('t-out').innerHTML = `<div><div class="lbl">Batas akhir</div><div class="d">${longDate(dl)}</div></div><div class="hint">Sisa ${sisa} hari kerja dari hari ini.</div>`;
+  const dl = addWorkDays(s, n), sisa = workDaysBetween(today, iso(dl)), lewat = fromIso(today) > dl;
+  $('t-out').innerHTML = `<div><div class="lbl">Batas akhir</div><div class="d">${longDate(dl)}</div></div><div class="hint">${lewat ? '<b>Sudah lewat.</b> Tetap laporkan segera; status dapat ditetapkan milik negara (Pasal 17 ayat 3).' : 'Sisa '+sisa+' hari kerja dari hari ini.'}</div>`;
 }
 $('t-tgl').addEventListener('change', renderTenggat);
 document.querySelectorAll('input[name=tmode]').forEach(r => r.addEventListener('change', renderTenggat));

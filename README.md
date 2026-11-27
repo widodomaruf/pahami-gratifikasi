@@ -64,6 +64,10 @@ Semua isian, termasuk data pribadi di formulir laporan, hanya diproses di peramb
 
 ```
 index.html                 # seluruh aplikasi: HTML, CSS, JavaScript, dan logo dalam satu berkas
+icon-192.png, icon-512.png # ikon aplikasi dan gambar pratinjau tautan
+manifest.webmanifest       # data pemasangan sebagai aplikasi di HP
+tests/cek.js               # uji alur utama (lihat bagian Menguji)
+LICENSE                    # Lisensi MIT
 vercel.json                # header keamanan (CSP dan lainnya) untuk Vercel
 SECURITY.md                # catatan keamanan: yang sudah dan belum diperbaiki
 vendor/                    # GSAP, Lenis, Motion (disalin dari npm, lihat vendor/README.md)
@@ -99,6 +103,18 @@ Yang perlu diperiksa secara berkala:
 - **Daftar libur.** Saat ini berisi tahun 2026 dan 2027 (2027 sesuai SKB 3 Menteri No. 1205/2026, 3/2026, dan 2/2026). Tambahkan tahun berikutnya setiap terbit SKB 3 Menteri tentang hari libur nasional dan cuti bersama.
 - **Formulir laporan.** Cocokkan isian dengan formulir resmi KPK atau GOL KPK terbaru bila ada perubahan.
 - **Batas nilai.** Bila Perkom KPK diubah, perbarui `limit` dan `yearly` di `SIT` serta teks di `EXC`.
+
+## Menguji
+
+Uji alur utama berjalan di peramban Chromium lewat Playwright: status hasil cek (termasuk batas per pemberi dan per tahun), kronologi yang tidak tertimpa, tenggat yang sudah lewat, libur 2027, dan aplikasi tetap jalan saat penyimpanan situs diblokir.
+
+```
+npm install --no-save playwright
+npx playwright install chromium
+node tests/cek.js
+```
+
+Jalankan setiap kali `SIT`, batas nilai, atau `DEFAULT_HOL` diubah. Hasil yang benar: `Semua uji lulus.`
 
 ## Dasar hukum
 
