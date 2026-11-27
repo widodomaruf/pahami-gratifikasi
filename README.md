@@ -96,7 +96,7 @@ Semua data ada di bagian `<script>` dalam `index.html`:
 
 Yang perlu diperiksa secara berkala:
 
-- **Daftar libur.** Saat ini berisi tahun 2026. Tambahkan tahun berikutnya setiap terbit SKB 3 Menteri tentang hari libur nasional dan cuti bersama.
+- **Daftar libur.** Saat ini berisi tahun 2026 dan 2027 (2027 sesuai SKB 3 Menteri No. 1205/2026, 3/2026, dan 2/2026). Tambahkan tahun berikutnya setiap terbit SKB 3 Menteri tentang hari libur nasional dan cuti bersama.
 - **Formulir laporan.** Cocokkan isian dengan formulir resmi KPK atau GOL KPK terbaru bila ada perubahan.
 - **Batas nilai.** Bila Perkom KPK diubah, perbarui `limit` dan `yearly` di `SIT` serta teks di `EXC`.
 
@@ -119,3 +119,7 @@ Yang perlu diperiksa secara berkala:
 
 - Email: hi.widodomaruf@gmail.com
 - Instagram: [@widodomaruf](https://www.instagram.com/widodomaruf/)
+
+## Lisensi
+
+Kode GratiCek dirilis dengan [Lisensi MIT](LICENSE). Pustaka di folder `vendor/` mengikuti lisensinya masing-masing (lihat `vendor/README.md`).
